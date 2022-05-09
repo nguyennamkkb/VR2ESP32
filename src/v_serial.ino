@@ -131,7 +131,7 @@ void serial2_test()
 	{       
 		serial2_in = "";
 	} 
-	else if (serial2_in.endsWith("***") && xacthucvantay=1 ) 
+	else if (serial2_in.endsWith("***")) 
 	{
 		serial2_in.remove(serial2_in.length()-3,3);   // remove #
 		if(serial2_in.startsWith("^7"))
@@ -143,7 +143,7 @@ void serial2_test()
 			uart0.println(serial2_in);
 		}
 	}
-	else if (serial2_in.endsWith("#") && xacthucvantay=0 )  
+	else if (serial2_in.endsWith("#") )  
 	{ 
 
 		serial2_in.remove(serial2_in.length()-1,1);   // remove #
