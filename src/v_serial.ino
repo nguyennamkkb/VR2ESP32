@@ -145,7 +145,7 @@ void serial2_test()
 		}
 	}
 
-	else if (serial2_in.endsWith("#") )  
+	else if (serial2_in.endsWith("#") && xacthucvantay==0)  
 	{ 
 
 		serial2_in.remove(serial2_in.length()-1,1);   // remove #
@@ -189,6 +189,7 @@ void serial2_test()
 			else
 			{
 			reset_7462("2xx3");//du dang lam
+			xacthucvantay=1;
 			// reset_7462("2x7");//lenh ghi vào7
 			//gốc
 			// reset_7462("2x3");
