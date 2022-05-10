@@ -94,6 +94,8 @@ udp_rx_header udp_rx;
 udp_tx_header udp_tx;
 int8 n_time[6];
 
+int16 vtlen=0;
+
 struct struct_max{
 	int16 fx;
 	int16 lcd_line;

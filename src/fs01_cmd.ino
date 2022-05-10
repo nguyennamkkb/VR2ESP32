@@ -69,6 +69,7 @@ void cmd_send(int16 cmd,int16 len,int16 page_id){
             if(cmd==Verify_Feature){
                 cmd_tx.data[0]=498;
                 memcpy(char_buf,udp_rx.data,char_buf_len);
+      
             }else if(len){
                 cmd_tx.data[0]=page_id;
             }
@@ -145,8 +146,10 @@ void cmd_switch(){
             led_reset=5;
             break;
         case send_ev2:
-            memcpy(char_buf,udp_rx.data,char_buf_len);
-            char_buf_to_ev2();
+            // memcpy(char_buf,udp_rx.data,char_buf_len);
+            // char_buf_to_ev2();
+            xacthucvantay = 1;
+            reset_7462("2xx3"); // du dang lam
             break;
         case add_ssid:
             // len=0;
