@@ -56,6 +56,11 @@ void UDP_receive()
       pc_ip_cnt=500;
       return;
     }
+    // uart1.println(udp_in_buf);
+    // String aa=udp_in_buf;
+    // uart0.println((uint8_t*)&&udp_in_buf);
+    
+   
     if(udp_rx.pkt_type==PC_01)  cmd_switch();//du lieu tach ntn để xử lí
   }
 }

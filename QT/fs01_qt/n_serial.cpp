@@ -72,7 +72,7 @@ quint8 n8=0;
         }
         s += "#";
         serial2_out=s;
-        qDebug() << s.length();
+        qDebug() <<"len:"<< s.length();
 //        serial2->write(s.toUtf8());
     }
 }
@@ -97,7 +97,7 @@ QString s;
                     }else if(s=="#"){
                         if(serial_in.startsWith("^0")){
                             serial_in.remove(0,2);
-//                            qDebug() << "serial 2" << serial_in.length();
+                            qDebug() << "serial 2" << serial_in.length();
                             ba.clear();
                             if(serial_in.length()==498*2){
                                 while (serial_in.length()){

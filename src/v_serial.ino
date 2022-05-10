@@ -31,6 +31,7 @@ void serial_test()
 			if (n != -1)
 			{
 				rx_buf[rx_cnt++] = n & 0xff;
+				
 				rx_cnt &= rx_max - 1;
 				if (!hd_ok && (rx_cnt >= 2))
 				{
@@ -170,11 +171,10 @@ void serial2_test()
 						vantay += serial2_in;
 						
 						// uart0.println(serial2_in);
-						// if (vtlen == 500)
+						if (vtlen == 500)
 						{
 							
 							vantay.remove(vantay.length() - 2, 2);
-							
 							XTvanTay(vantay);
 							vantay="";
 							xacthucvantay = vtlen = 0;
@@ -422,13 +422,11 @@ void XTvanTay(String strvt)
 		bipok1();
 		for (int i = 0; i < char_buf_len; i++)
 		{
-			char_buf[i] = strvt.charAt(i);
+			char_buf[i] = (int)strvt.charAt(i);
 			
 		}
 		uart0.println("Vao xt vantay:");
-		delay(100);
 		cmd_send(Verify_Feature, 2, 0);
-		delay(100);
 		uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 		led_reset = 5;
 	}
