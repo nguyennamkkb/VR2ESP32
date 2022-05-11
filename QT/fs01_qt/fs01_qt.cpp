@@ -429,6 +429,7 @@ qint16 n=0;
             memset(&u->udp_tx.bcc,0,sizeof(u->udp_tx));
             u->udp_send(set_bip_on,0,0);
             lb[0]->setText(u->bcast_msg);
+
             break;
         case Cancel:
             cmd_send(fs01->FP_Cancel);
