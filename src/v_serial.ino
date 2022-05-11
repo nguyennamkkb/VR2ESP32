@@ -426,8 +426,11 @@ void XTvanTay(String strvt)
 			
 		}
 		uart0.println("Vao xt vantay:");
-		cmd_send(Verify_Feature, 2, 0);
-		uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
+		// cmd_send(Verify_Feature, 2, 0);
+		
+		// uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
+		cmd_send(Verify_Feature, 498, 0);
+		uart1.write(data_tx.prefix, 498 + 8);
 		led_reset = 5;
 	}
 }

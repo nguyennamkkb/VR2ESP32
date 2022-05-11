@@ -126,9 +126,9 @@ void cmd_switch()
     for (int i = 0; i < sizeof(udp_in_buf); i++)
     {
         sss += udp_in_buf[i];
-        uart0.println(sss);
+        
     }
-
+    uart0.println("UDP:"+sss);
     String s = "";
     int16 len = 0;
     // if(cmd_found(udp_rx.cmd)){
@@ -215,3 +215,4 @@ void voice_init()
 void voice_generate(int segment)
 {
 }
+
