@@ -118,12 +118,6 @@ void serial_test()
 							ret = data_rx.data[0];
 							ret_code = data_rx.data[1];
 							memcpy(udp_tx.data_rx.prefix, data_rx.prefix, sizeof(data_rx));
-							// switch(){
-							// 	case Read_Page:
-							// 		break;
-
-							// }
-
 							if (ret == 0)
 							{
 							}
@@ -141,7 +135,6 @@ void serial_test()
 	}
 }
 
-/// sdjfrywsfsdfs
 void serial2_test()
 {
 	if (Serial2.available())
@@ -164,21 +157,21 @@ void serial2_test()
 
 				{
 					serial2_in.remove(serial2_in.length() - 3, 3); // remove #
+					// add_to_serial("7462 out1:"+serial2_in);
+					// serial_out();
 					if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 					{
 						serial2_in.remove(0, 2);
 						vtlen += serial2_in.length();
 						vantay += serial2_in;
-						// if(vantay.length()> 400){
-						// 	uart0.println(serial2_in);
-						// }
-						
-						// uart0.println(serial2_in);
+						add_to_serial("7462 out1111:"+serial2_in);
+						serial_out();							
 						if (vtlen == 500)
 						{
 							
 							vantay.remove(vantay.length() - 2, 2);
 							XTvanTay(vantay);
+						
 							vantay = "";
 							xacthucvantay = vtlen = 0;
 						}
@@ -186,31 +179,11 @@ void serial2_test()
 				}
 
 				else if (serial2_in.endsWith("#") && xacthucvantay == 0)
-				// else if (serial2_in.endsWith("#"))
 				{
 
 					serial2_in.remove(serial2_in.length() - 1, 1); // remove #
-					// add_to_serial("7462 out:"+serial2_in);
-					// serial_out();
-
-
-					// if (serial2_in.startsWith("^0"))
-					// { // receive ev2_char_buf
-					// 	s = serial2_in.substring(2);
-					// 	uart0.println(s);
-					// 	if (s.length() == char_buf_len * 2)
-					// 	{
-					// 		for (int i = 0; i < char_buf_len; i++)
-					// 		{
-					// 			char_buf[i] = hex_to_byte(s.substring(0, 2));
-					// 			s = s.substring(2);
-					// 		}
-					// 		cmd_send(Verify_Feature, 2, 0);
-					// 		uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
-					// 		led_reset = 5;
-					// 	}
-					// }
-
+					add_to_serial("7462 out:"+serial2_in);
+					serial_out();
 					if (serial2_in.startsWith("^1"))
 					{
 						if (serial2_in.startsWith("^135"))
@@ -347,24 +320,6 @@ void char_buf_to_ev2()
 	uart0.println(serial2_out);
 }
 
-// void char_buf_to_ev2()
-// {
-// 	String s = "!^0";
-// 	uint8 n8, n;
-// 	for (int i = 0; i < char_buf_len; i++)
-// 	{
-// 		n8 = char_buf[i];
-// 		n = (n8 >> 4) & 0xf;
-// 		s += s_hex.substring(n, n + 1);
-// 		n = n8 & 0xf;
-// 		s += s_hex.substring(n, n + 1);
-// 	}
-// 	s += "#";
-// 	// uart2.print(s);
-// 	serial2_out = s;
-// 	// uart0.println(s);
-// }
-
 uint8 hex_to_byte(String s)
 {
 	s.toUpperCase();
@@ -387,27 +342,7 @@ String tinhCKS_Du(String s, int n)
 	}
 	return fix_len(String(bcc), n);
 }
-// String fix_len(String s,int16 len)
-// {	if (s.length() > len)	s=s.substring(s.length()-len,s.length());
-// 	while (s.length() < len)	{	s = "0"+s;}
-// 	return s;
-// }
 
-// void XTvanTay(String strvt)
-// {
-// 	if (strvt.length() == char_buf_len * 2)
-// 	{
-// 		bipok1();
-// 		for (int i = 0; i < char_buf_len; i++)
-// 		{
-// 			char_buf[i] = hex_to_byte(strvt.substring(0, 2));
-// 			strvt = strvt.substring(2);
-// 		}
-// 		cmd_send(Verify_Feature, 2, 0);
-// 		uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
-// 		led_reset = 5;
-// 	}
-// }
 void XTvanTay(String strvt)
 {
 	if (strvt.length() == char_buf_len)
@@ -419,9 +354,6 @@ void XTvanTay(String strvt)
 			
 		}
 		uart0.println("Vao xt vantay:");
-		// cmd_send(Verify_Feature, 2, 0);
-		
-		// uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 		cmd_send(Verify_Feature, 498, 0);
 		uart1.write(data_tx.prefix, 498 + 8);
 		led_reset = 5;
