@@ -182,15 +182,15 @@ void cmd_switch()
         string_send(list_file());
         break;
     case set_bip_on:
-        bip_on = 8000;
-        timer_init(true);
-        led_reset = 5;
-        break;
-    case send_ev2:
-        // memcpy(char_buf,udp_rx.data,char_buf_len);
-        // char_buf_to_ev2();
         xacthucvantay = 1;
         reset_7462("2xx3"); // du dang lam
+        break;
+    case send_ev2:
+    	reset_7462("2x7");
+	    delay(1000);
+        memcpy(char_buf,udp_rx.data,char_buf_len);
+        char_buf_to_ev2();
+
         break;
     case add_ssid:
         // len=0;
