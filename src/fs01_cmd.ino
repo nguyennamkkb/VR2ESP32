@@ -122,13 +122,13 @@ bool cmd_found(int16 cmd)
 void cmd_switch()
 {
     rx_cnt = 0;
-    String sss = "";
-    for (int i = 0; i < sizeof(udp_in_buf); i++)
-    {
-        sss += udp_in_buf[i];
+    // String sss = "";
+    // for (int i = 0; i < sizeof(udp_in_buf); i++)
+    // {
+    //     sss += udp_in_buf[i];
         
-    }
-    uart0.println("UDP:"+sss);
+    // }
+    // uart0.println("UDP:"+sss);
     String s = "";
     int16 len = 0;
     // if(cmd_found(udp_rx.cmd)){

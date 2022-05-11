@@ -16,8 +16,6 @@ void showCloseDoor(String s)
 	biper1();
 	// add_to_serial("dong cua1---");
 	// serial_out();
-
-	
 }
 
 void resetDoorStatus()
@@ -25,7 +23,6 @@ void resetDoorStatus()
  		str_door = "";
  		v_stat = fx_waiting;
 }
-
 void xuLyDanhSachThe(String s)
 {
 	if(s.length() > 12)
