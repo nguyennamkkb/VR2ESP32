@@ -148,55 +148,38 @@ void serial2_test()
 			if (n != -1)
 			{
 				serial2_in += (char)(n & 0xff);
-				demvantay++;
-				// bd1
+				// demvantay++;
+				// // bd1
 				if (serial2_in.endsWith("!"))
 				{
-<<<<<<< HEAD
-					// if (xacthucvantay == 1)
-					// {
-					// 	serial2_in += serial2_in;
-					// }
-					// //break;
-					// else serial2_in = "";
-					serial2_in = "";
-
-=======
-					uart0.println("lenserial:"+serial2_in.length());
-					uart0.println("dem:"+demvantay);
-					if (demvantay <= 125 && xacthucvantay == 1)
+					if (serial2_in.startsWith("^7"))
 					{
-						break;	
-					}else{
-						serial2_in = "";
-					}		
-					
->>>>>>> 0e143b58962a665fccfb3561eb8774457e5535e1
+						serial2_in = serial2_in;
+						break;
+					}
+					else{serial2_in = "";}
+					// serial2_in = "";
 				}
 				else if (serial2_in.endsWith("***"))
 				{
-					serial2_in.remove(serial2_in.length() - 3, 3); // remove #
-					// add_to_serial("7462 out1:"+serial2_in);
-					// serial_out();
+					serial2_in.remove(serial2_in.length() - 3, 3); // remove ***
+					demvantay = 0;
+					add_to_serial("7462 out1:" + serial2_in);
+					serial_out();
 					if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 					{
 						serial2_in.remove(0, 2);
 						vtlen += serial2_in.length();
 						vantay += serial2_in;
-<<<<<<< HEAD
-						add_to_serial("7462 out1111:" + serial2_in);
-						serial_out();
+						// add_to_serial("7462 out1111:" + serial2_in);
+						// serial_out();
 						if (vtlen == 500)
-=======
-						
-						// uart0.println(serial2_in);
-						if (vtlen > 498)
->>>>>>> 0e143b58962a665fccfb3561eb8774457e5535e1
 						{
 							vantay.remove(vantay.length() - 2, 2);
 							XTvanTay(vantay);
 							vantay = "";
-							xacthucvantay = vtlen = 0;
+							xacthucvantay = 0;
+							vtlen = 0;
 						}
 					}
 				}
@@ -244,7 +227,6 @@ void serial2_test()
 						String s;
 						demghi++;
 						serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
-						// serial2_out="!^2040D52F2CD7080$114000"+fp_save[demghi]+"$"+ tinhCKS_Du("2040D52F2CD7080$114000"+fp_save[demghi],5)+"#";
 						uart0.println("ghi lan tiep theo" + serial2_out);
 						if (demghi == 4)
 							demghi = 1;
