@@ -164,8 +164,8 @@ void serial2_test()
 				{
 					serial2_in.remove(serial2_in.length() - 3, 3); // remove ***
 					demvantay = 0;
-					add_to_serial("7462 out1:" + serial2_in);
-					serial_out();
+					// add_to_serial("7462 out1:" + serial2_in);
+					// serial_out();
 					if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 					{
 						serial2_in.remove(0, 2);
@@ -184,7 +184,7 @@ void serial2_test()
 					}
 				}
 
-				else if (serial2_in.endsWith("#") && xacthucvantay == 0)
+				else if (serial2_in.endsWith("#") && xacthucvantay != 1)
 				{
 
 					serial2_in.remove(serial2_in.length() - 1, 1); // remove #
