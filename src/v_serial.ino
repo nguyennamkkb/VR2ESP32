@@ -148,9 +148,11 @@ void serial2_test()
 			if (n != -1)
 			{
 				serial2_in += (char)(n & 0xff);
+				demvantay++;
 				// bd1
 				if (serial2_in.endsWith("!"))
 				{
+<<<<<<< HEAD
 					// if (xacthucvantay == 1)
 					// {
 					// 	serial2_in += serial2_in;
@@ -159,6 +161,17 @@ void serial2_test()
 					// else serial2_in = "";
 					serial2_in = "";
 
+=======
+					uart0.println("lenserial:"+serial2_in.length());
+					uart0.println("dem:"+demvantay);
+					if (demvantay <= 125 && xacthucvantay == 1)
+					{
+						break;	
+					}else{
+						serial2_in = "";
+					}		
+					
+>>>>>>> 0e143b58962a665fccfb3561eb8774457e5535e1
 				}
 				else if (serial2_in.endsWith("***"))
 				{
@@ -170,9 +183,15 @@ void serial2_test()
 						serial2_in.remove(0, 2);
 						vtlen += serial2_in.length();
 						vantay += serial2_in;
+<<<<<<< HEAD
 						add_to_serial("7462 out1111:" + serial2_in);
 						serial_out();
 						if (vtlen == 500)
+=======
+						
+						// uart0.println(serial2_in);
+						if (vtlen > 498)
+>>>>>>> 0e143b58962a665fccfb3561eb8774457e5535e1
 						{
 							vantay.remove(vantay.length() - 2, 2);
 							XTvanTay(vantay);
@@ -357,6 +376,8 @@ void XTvanTay(String strvt)
 			char_buf[i] = (int)strvt.charAt(i);
 		}
 		uart0.println("Vao xt vantay:");
+		// cmd_send(Verify_Feature, 2, 0);
+		// uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 		cmd_send(Verify_Feature, 498, 0);
 		uart1.write(data_tx.prefix, 498 + 8);
 		led_reset = 5;
