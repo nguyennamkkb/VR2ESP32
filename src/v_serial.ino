@@ -86,6 +86,7 @@ void serial_test()
 										// fp_auto_off=500;
 										cmd_send(Get_Enroll, 0, 0);
 										uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
+									
 									}
 									break;
 								}
@@ -358,8 +359,6 @@ void XTvanTay(String strvt)
 			char_buf[i] = (int)strvt.charAt(i);
 		}
 		uart0.println("Vao xt vantay:");
-		// cmd_send(Verify_Feature, 2, 0);
-		// uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 		cmd_send(Verify_Feature, 498, 0);
 		uart1.write(data_tx.prefix, 498 + 8);
 		led_reset = 5;

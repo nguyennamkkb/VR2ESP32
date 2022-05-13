@@ -126,7 +126,7 @@ void cmd_switch()
     // for (int i = 0; i < sizeof(udp_in_buf); i++)
     // {
     //     sss += udp_in_buf[i];
-        
+
     // }
     // uart0.println("UDP:"+sss);
     String s = "";
@@ -186,9 +186,9 @@ void cmd_switch()
         reset_7462("2xx3"); // du dang lam
         break;
     case send_ev2:
-    	reset_7462("2x7");
-	    delay(1000);
-        memcpy(char_buf,udp_rx.data,char_buf_len);
+        reset_7462("2x7");
+        delay(1000);
+        memcpy(char_buf, udp_rx.data, char_buf_len);
         char_buf_to_ev2();
 
         break;
@@ -215,4 +215,3 @@ void voice_init()
 void voice_generate(int segment)
 {
 }
-
