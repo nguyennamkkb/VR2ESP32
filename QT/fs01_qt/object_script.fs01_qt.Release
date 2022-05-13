@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\fs01_qt.o
+./release\n_serial.o
+./release\fs_01.o
+./release\udp_thread.o
+./release\ima.o
+./release\moc_fs01_qt.o
+./release\moc_n_serial.o
+./release\moc_fs_01.o
+./release\moc_udp_thread.o
+);

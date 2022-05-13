@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\fs01_qt.o
+./debug\n_serial.o
+./debug\fs_01.o
+./debug\udp_thread.o
+./debug\ima.o
+./debug\moc_fs01_qt.o
+./debug\moc_n_serial.o
+./debug\moc_fs_01.o
+./debug\moc_udp_thread.o
+);
