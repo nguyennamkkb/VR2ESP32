@@ -72,8 +72,8 @@ bool Validate = false;
 bool TrangThaiThanhToan = false;
 bool DichVuMayTram = false;
 bool TrangThaiCacheCard = false;
-bool xacthucvantay = 0;
-int demvantay=0;
+
+int16 demvantay=0;
 
 char ssid_name[32],ssid_pass[32];
 String ds_name[ds_max][sub_ds_max];
@@ -96,6 +96,7 @@ udp_tx_header udp_tx;
 int8 n_time[6];
 
 int16 vtlen=0;
+int xacthucvantay = 0;
 
 struct struct_max{
 	int16 fx;
@@ -181,8 +182,8 @@ void fp_test(){
 	if(fp_detect_cnt > 50){
 		// fp_detect_cnt=0;
 		if(fp_auto_off==0){
-			cmd_send(Identify,0,0);
-		  uart1.write(cmd_tx.prefix,sizeof(cmd_tx));
+		cmd_send(Identify,0,0);
+		uart1.write(cmd_tx.prefix,sizeof(cmd_tx));
 		}
 	}
 }
