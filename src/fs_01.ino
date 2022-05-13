@@ -97,7 +97,8 @@ int8 n_time[6];
 
 int16 vtlen=0;
 int xacthucvantay = 0;
-
+int ghivantay = 0 ;
+int demghivt = 1;
 struct struct_max{
 	int16 fx;
 	int16 lcd_line;

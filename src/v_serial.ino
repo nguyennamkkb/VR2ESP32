@@ -132,7 +132,7 @@ void serial_test()
 							uint8 n8, n;
 							for (int i = 0; i < 498; i++)
 							{
-								rx_buf[i] = rx_buf[i+8];
+								rx_buf[i] = rx_buf[i + 8];
 								// n = (n8 >> 4) & 0xf;
 								// sss += s_hex.substring(n, n + 1);
 								// n = n8 & 0xf;
@@ -140,7 +140,7 @@ void serial_test()
 							}
 							// uart0.println("rx:"+sss);
 							ghivantayvaothe();
-								add_to_serial("rx:" + sss);
+							add_to_serial("rx:" + sss);
 							serial_out();
 						}
 					}
@@ -288,6 +288,24 @@ void serial2_out_test()
 			if (--ms5 == 0)
 			{
 				String s = "";
+
+				if (ghivantay == 1)
+				{
+					while(demghivt < 5){
+						if(demghivt == 5){
+
+							demghivt = 1;
+							ghivantay = 0;
+
+						}
+					// serial2_out = "!^" + snew1 + fp_save[demghivt] + "$" + tinhCKS_Du(snew1 + fp_save[demghivt], 5) + "#";
+					serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghivt] + "$" + tinhCKS_Du("2"+ uid_the + "$114000" + fp_save[demghivt], 5) + "#";
+					// uart0.println(serial2_out);
+					demghivt++;
+					break;
+					}
+
+				}
 				if (serial2_out.length() > 123)
 				{
 					s = serial2_out.substring(0, 124);
@@ -325,7 +343,7 @@ void char_buf_to_ev2()
 
 	reset_7462("2x7");
 	// delay(1000);
-	String s = "", snew, snew1 = "2" + uid_the + "$114000";
+	String s = "", snew, snew1 =  uid_the + "$114000";
 	uint8 n8, n;
 	for (int i = 0; i < char_buf_len; i++)
 	{
@@ -342,9 +360,9 @@ void char_buf_to_ev2()
 		fp_save[i] = s.substring(0, 250);
 		s.remove(0, 250);
 	}
-
-	serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
-	uart0.println(serial2_out);
+		ghivantay = 1;
+	// serial2_out = "!^2" + uid_the + "$114000" + fp_save[1] + "$" + tinhCKS_Du("2"+ uid_the + "$114000" + fp_save[1], 5) + "#";
+	// uart0.println(serial2_out);
 }
 
 ///
@@ -352,7 +370,7 @@ void char_buf_to_ev2()
 void ghivantayvaothe()
 {
 
-	reset_7462("2x7");
+	reset_7462("2x5");
 	// delay(1000);
 	String s = "", snew, snew1 = "2" + uid_the + "$114000";
 	uint8 n8, n;
@@ -365,7 +383,7 @@ void ghivantayvaothe()
 		s += s_hex.substring(n, n + 1);
 	}
 	s += "0000";
-	uart0.println(s);
+	// uart0.println(s);//in ra van tay
 	for (int i = 1; i < 5; i++)
 	{
 		fp_save[i] = s.substring(0, 250);
