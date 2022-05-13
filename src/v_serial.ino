@@ -107,6 +107,7 @@ void serial_test()
 							}
 							hd_ok = rx_cnt = 0;
 							udp_tx.pkt_type = FS01_CMD;
+
 							uni_send(&udp_tx.bcc, sizeof(udp_tx));
 						}
 					}
@@ -127,6 +128,20 @@ void serial_test()
 							hd_ok = rx_cnt = 0;
 							udp_tx.pkt_type = FS01_DATA;
 							uni_send(&udp_tx.bcc, sizeof(udp_tx));
+							String sss = "";
+							uint8 n8, n;
+							for (int i = 0; i < sizeof(rx_buf); i++)
+							{
+								n8 = rx_buf[i];
+								n = (n8 >> 4) & 0xf;
+								sss += s_hex.substring(n, n + 1);
+								n = n8 & 0xf;
+								sss += s_hex.substring(n, n + 1);
+							}
+							// uart0.println("rx:"+sss);
+
+							add_to_serial("rx:" + sss);
+							serial_out();
 						}
 					}
 				}
@@ -148,47 +163,47 @@ void serial2_test()
 			if (n != -1)
 			{
 				serial2_in += (char)(n & 0xff);
-				demvantay++;
-				// bd1
+				// demvantay++;
+				// // bd1
 				if (serial2_in.endsWith("!"))
 				{
-					// if ((demvantay <= 125 && xacthucvantay == 1) || serial2_in.startsWith("^7") )
-					// 	break;
+					if ((demvantay <= 125 && xacthucvantay == 1) || serial2_in.startsWith("^7"))
+						break;
 					// uart0.println("lenserial:"+serial2_in.length());
 					// uart0.println("dem:"+demvantay);
 					serial2_in = "";
 				}
 				else if (serial2_in.endsWith("***"))
-
 				{
 
 					serial2_in.remove(serial2_in.length() - 3, 3); // remove #
-						if(serial2_in.substring(0,1)=="!") serial2_in.remove(0, 1);
-						
-						// add_to_serial("len van serial:" + String(serial2_in.length()) + ",lendemvt:" + String(demvantay));
-						// serial_out();
+					if (serial2_in.substring(0, 1) == "!")
+						serial2_in.remove(0, 1);
 
-						// add_to_serial("7462 nhan" + hextostr(serial2_in));
-						// serial_out();
+					// add_to_serial("len van serial:" + String(serial2_in.length()) + ",lendemvt:" + String(demvantay));
+					// serial_out();
+
+					// add_to_serial("7462 nhan" + hextostr(serial2_in));
+					// serial_out();
 					if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 					{
 						serial2_in.remove(0, 2);
 						vtlen += serial2_in.length();
 						vantay += serial2_in;
-						
+
 						demvantay = 0;
 						serial2_in = "";
 						// uart0.println(serial2_in);
 						// add_to_serial("vlen" + String(vtlen));
 						// serial_out();
-						if (vtlen > 498)
+						if (vtlen == 500)
 						{
 							vantay.remove(vantay.length() - 2, 2);
 							XTvanTay(vantay);
 							vantay = "";
-							xacthucvantay = vtlen = 0;
+							xacthucvantay = 0;
+							vtlen = 0;
 						}
-						
 					}
 				}
 				else if (serial2_in.endsWith("#") && xacthucvantay != 1)
@@ -234,7 +249,6 @@ void serial2_test()
 						String s;
 						demghi++;
 						serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
-						// serial2_out="!^2040D52F2CD7080$114000"+fp_save[demghi]+"$"+ tinhCKS_Du("2040D52F2CD7080$114000"+fp_save[demghi],5)+"#";
 						uart0.println("ghi lan tiep theo" + serial2_out);
 						if (demghi == 4)
 							demghi = 1;
@@ -365,7 +379,7 @@ void XTvanTay(String strvt)
 		{
 			char_buf[i] = (int)strvt.charAt(i);
 		}
-		uart0.println("Vao xt vantay:");
+		// uart0.println("Vao xt vantay:");
 		// cmd_send(Verify_Feature, 2, 0);
 		// uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 		cmd_send(Verify_Feature, 498, 0);
