@@ -140,8 +140,8 @@ void serial_test()
 							}
 							// uart0.println("rx:"+sss);
 							ghivantayvaothe();
-							add_to_serial("rx:" + sss);
-							serial_out();
+							// add_to_serial("rx:" + sss);
+							// serial_out();
 						}
 					}
 				}
@@ -370,7 +370,7 @@ void char_buf_to_ev2()
 void ghivantayvaothe()
 {
 
-	reset_7462("2x5");
+	reset_7462("2x7");
 	// delay(1000);
 	String s = "", snew, snew1 = "2" + uid_the + "$114000";
 	uint8 n8, n;
