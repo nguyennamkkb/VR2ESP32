@@ -321,23 +321,23 @@ void ketthucdocxacthuc(){
 
 void timeout_10s()
 {
-//	dangthuchienlenh=1;
-//	dangtimeout=1;
-//	timetrangthaidoc = 0;
-//	timeout10s=0;
-//	timeout20s=0;
-//	timeout5s=0;
-//	start_ok=0;
-//	Xoa_Dl_Gui();
-//	if(trovebandau==1)
-//	{
-//		Doc2ManHinhCoBan();
-//	}
-//	moi_tap_the();
-//	cmd = IDLE;
-//	trangthaixemthongtinthe=0;
-//	dangthuchienlenh=0;
-//	dangtimeout=0;
+	dangthuchienlenh=1;
+	dangtimeout=1;
+	timetrangthaidoc = 0;
+	timeout10s=0;
+	timeout20s=0;
+	timeout5s=0;
+	start_ok=0;
+	Xoa_Dl_Gui();
+	if(trovebandau==1)
+	{
+		Doc2ManHinhCoBan();
+	}
+	moi_tap_the();
+	cmd = IDLE;
+	trangthaixemthongtinthe=0;
+	dangthuchienlenh=0;
+	dangtimeout=0;
 	return;
 }
 void check_timeout_trangthaidoc(void){
@@ -368,6 +368,7 @@ void process(void)
 	 if(cmd == cholenh ){
 //Thuc hien lenh tong hop
 //tru tien// mo cua // cong tien // thay doi tt1// thay doi tt2//tien thuong // doi app mt keys/doi access
+
 
 		 i=0;
 		char delim[] = "$";
@@ -677,11 +678,9 @@ extern void myrx(void)
 						chedorieng();
 					}
 					else{
-						chedo_cmd();
 						trangthaixacthuc = tinhchecksuminput();
 						if(trangthaixacthuc == 1)
 						{
-							chedo_cmd();
 							process();
 						}
 						else
@@ -2619,14 +2618,6 @@ void docfileloi(void){
 void chedocmd(void){
 
 	uint8_t ghi6k[]="!^2x7#";
-	phhalHif_Transmit((uint8_t *)&ghi6k,6, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
-	phUser_Wait(1000);
-
-}
-
-void chedo_cmd(void){
-
-	uint8_t ghi6k[]="!^cmd#";
 	phhalHif_Transmit((uint8_t *)&ghi6k,6, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
 	phUser_Wait(1000);
 
