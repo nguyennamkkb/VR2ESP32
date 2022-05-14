@@ -126,10 +126,11 @@ void serial_test()
 							{
 							}
 							hd_ok = rx_cnt = 0;
-							udp_tx.pkt_type = FS01_DATA;
-							uni_send(&udp_tx.bcc, sizeof(udp_tx));
+							// udp_tx.pkt_type = FS01_DATA;
+							// uni_send(&udp_tx.bcc, sizeof(udp_tx));
 							String sss = "";
 							uint8 n8, n;
+							reset_7462("2x7");
 							for (int i = 0; i < 498; i++)
 							{
 								rx_buf[i] = rx_buf[i + 8];
@@ -370,7 +371,7 @@ void char_buf_to_ev2()
 void ghivantayvaothe()
 {
 
-	reset_7462("2x7");
+	
 	// delay(1000);
 	String s = "", snew, snew1 = "2" + uid_the + "$114000";
 	uint8 n8, n;

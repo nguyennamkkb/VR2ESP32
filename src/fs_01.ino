@@ -198,9 +198,10 @@ void millis_1(){
 	if(old_millis == new_millis) return;
 	old_millis = new_millis;
 	String s;	
+	
 	serial_test();
 	serial2_test();
-	serial2_out_test();
+	serial2_out_test();	
 	UDP_receive();
 	ms10 &= 0xf;
 	if (++ms10 > 9) // vong lap 10ms
