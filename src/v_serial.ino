@@ -131,6 +131,7 @@ void serial_test()
 							String sss = "";
 							uint8 n8, n;
 							reset_7462("2x7");
+							ghivantay = 1;
 							for (int i = 0; i < 498; i++)
 							{
 								rx_buf[i] = rx_buf[i + 8];
@@ -204,6 +205,7 @@ void serial2_test()
 							vantay = "";
 							xacthucvantay = 0;
 							vtlen = 0;
+							ghivantay = 0;
 						}
 					}
 				}
@@ -292,20 +294,20 @@ void serial2_out_test()
 
 				if (ghivantay == 1)
 				{
-					while(demghivt < 5){
-						if(demghivt == 5){
-
+					while (demghivt < 5)
+					{
+						if (demghivt == 5)
+						{
 							demghivt = 1;
 							ghivantay = 0;
-
+							break;
 						}
-					// serial2_out = "!^" + snew1 + fp_save[demghivt] + "$" + tinhCKS_Du(snew1 + fp_save[demghivt], 5) + "#";
-					serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghivt] + "$" + tinhCKS_Du("2"+ uid_the + "$114000" + fp_save[demghivt], 5) + "#";
-					// uart0.println(serial2_out);
-					demghivt++;
-					break;
+						// serial2_out = "!^" + snew1 + fp_save[demghivt] + "$" + tinhCKS_Du(snew1 + fp_save[demghivt], 5) + "#";
+						serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghivt] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghivt], 5) + "#";
+						// uart0.println(serial2_out);
+						demghivt++;
+						break;
 					}
-
 				}
 				if (serial2_out.length() > 123)
 				{
@@ -344,7 +346,7 @@ void char_buf_to_ev2()
 
 	reset_7462("2x7");
 	// delay(1000);
-	String s = "", snew, snew1 =  uid_the + "$114000";
+	String s = "", snew, snew1 = uid_the + "$114000";
 	uint8 n8, n;
 	for (int i = 0; i < char_buf_len; i++)
 	{
@@ -361,7 +363,7 @@ void char_buf_to_ev2()
 		fp_save[i] = s.substring(0, 250);
 		s.remove(0, 250);
 	}
-		ghivantay = 1;
+	ghivantay = 1;
 	// serial2_out = "!^2" + uid_the + "$114000" + fp_save[1] + "$" + tinhCKS_Du("2"+ uid_the + "$114000" + fp_save[1], 5) + "#";
 	// uart0.println(serial2_out);
 }
@@ -371,7 +373,6 @@ void char_buf_to_ev2()
 void ghivantayvaothe()
 {
 
-	
 	// delay(1000);
 	String s = "", snew, snew1 = "2" + uid_the + "$114000";
 	uint8 n8, n;
@@ -391,8 +392,8 @@ void ghivantayvaothe()
 		s.remove(0, 250);
 	}
 
-	serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
-	uart0.println(serial2_out);
+	// serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
+	// uart0.println(serial2_out);
 }
 
 uint8 hex_to_byte(String s)

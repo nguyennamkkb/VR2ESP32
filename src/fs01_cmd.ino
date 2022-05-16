@@ -195,6 +195,7 @@ void cmd_switch()
         break;
     case set_bip_on:
         xacthucvantay = 1;
+        ghivantay = 0;
         reset_7462("2xx3"); // du dang lam
         break;
     case send_ev2:
