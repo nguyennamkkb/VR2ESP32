@@ -167,113 +167,127 @@ void serial2_test()
 				serial2_in += (char)(n & 0xff);
 				// demvantay++;
 				// // bd1
-				if (serial2_in.endsWith("!"))
+				if (xacthucvantay == 1)
 				{
-					if ((demvantay <= 125 && xacthucvantay == 1) || serial2_in.startsWith("^7"))
-						break;
-					// uart0.println("lenserial:"+serial2_in.length());
-					// uart0.println("dem:"+demvantay);
-					serial2_in = "";
-				}
-				else if (serial2_in.endsWith("***"))
-				{
-
-					serial2_in.remove(serial2_in.length() - 3, 3); // remove #
-					if (serial2_in.substring(0, 1) == "!")
-						serial2_in.remove(0, 1);
-
-					// add_to_serial("len van serial:" + String(serial2_in.length()) + ",lendemvt:" + String(demvantay));
-					// serial_out();
-
-					// add_to_serial("7462 nhan" + hextostr(serial2_in));
-					// serial_out();
-					if (serial2_in.startsWith("^7") && xacthucvantay == 1)
+					if (serial2_in.endsWith("!"))
 					{
-						serial2_in.remove(0, 2);
-						vtlen += serial2_in.length();
-						vantay += serial2_in;
-
-						demvantay = 0;
-						serial2_in = "";
-						// uart0.println(serial2_in);
-						// add_to_serial("vlen" + String(vtlen));
-						// serial_out();
-						if (vtlen == 500)
+						if (serial2_in.startsWith("^7"))
 						{
-							vantay.remove(vantay.length() - 2, 2);
-							XTvanTay(vantay);
-							vantay = "";
-							xacthucvantay = 0;
-							vtlen = 0;
-							ghivantay = 0;
-						}
-					}
-				}
-				else if (serial2_in.endsWith("#") && xacthucvantay != 1)
-				{
-
-					serial2_in.remove(serial2_in.length() - 1, 1); // remove #
-					add_to_serial("7462 out:" + serial2_in);
-					serial_out();
-					if (serial2_in.startsWith("^1"))
-					{
-						if (serial2_in.startsWith("^135"))
-						{
-							uid_the = serial2_in.substring(5, 19);
-							add_to_serial("uid =:" + uid_the);
-							serial_out();
-						}
-						TrangThaiThanhToan = false;
-						magiaodich = "";
-						String s = serial2_in;
-						s.remove(0, 2);
-
-						// add_to_serial(s);  //chuyen ^1 tu 7462 ra cong com
-
-						if (s.startsWith("cfs"))
-						{
-							s.remove(0, 3);
-							if (wifi_on)
-								confirm_service(s);
+							serial2_in = serial2_in;
 						}
 						else
 						{
-							// reset_7462("2xx3"); // du dang lam
-							// xacthucvantay = 1;
-							// reset_7462("2x7");//lenh ghi vào7
-							// gốc
-							// reset_7462("2x3");
-							// delay(1000);
-							// 	if (wifi_on) send_https(s);
+							serial2_in = "";
 						}
 					}
-					else if (serial2_in.startsWith("^6"))
+					else if (serial2_in.endsWith("***"))
 					{
-						String s;
-						demghi++;
-						serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
-						uart0.println("ghi lan tiep theo" + serial2_out);
-						if (demghi == 4)
-							demghi = 1;
-					}
 
-					else if (serial2_in.startsWith("^8"))
-					{
-					}
-					else if (serial2_in.startsWith("^4"))
-					{
-						String sout = "";
-						bipok1();
-						serial2_in.remove(0, 3);
+						serial2_in.remove(serial2_in.length() - 3, 3); // remove #
+						if (serial2_in.substring(0, 1) == "!")
+							serial2_in.remove(0, 1);
 
-						if (duong_ra == ra_udp && hangdoi_Front() != "")
+						// add_to_serial("len van serial:" + String(serial2_in.length()) + ",lendemvt:" + String(demvantay));
+						// serial_out();
+
+						add_to_serial("7462 nhan" + hextostr(serial2_in));
+						serial_out();
+						if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 						{
-
-							udp_out_ip("100" + serial2_in + "#", hangdoi_Front());
+							serial2_in.remove(0, 2);
+							vtlen += serial2_in.length();
+							vantay += serial2_in;
+							demvantay = 0;
+							serial2_in = "";
+							// uart0.println(serial2_in);
+							// add_to_serial("vlen" + String(vtlen));
+							// serial_out();
+							if (vtlen == 500)
+							{
+								vantay.remove(vantay.length() - 2, 2);
+								XTvanTay(vantay);
+								vantay = "";
+								xacthucvantay = 0;
+								vtlen = 0;
+								ghivantay = 0;
+							}
 						}
 					}
-					serial2_in = "";
 				}
+				else
+				{
+					if (serial2_in.endsWith("!"))
+					{
+						serial2_in = "";
+					}
+
+					else if (serial2_in.endsWith("#"))
+					{
+
+						serial2_in.remove(serial2_in.length() - 1, 1); // remove #
+						// add_to_serial("7462 out:" + serial2_in);
+						// serial_out();
+						if (serial2_in.startsWith("^1"))
+						{
+							if (serial2_in.startsWith("^135"))
+							{
+								uid_the = serial2_in.substring(5, 19);
+								add_to_serial("uid =:" + uid_the);
+								serial_out();
+							}
+							TrangThaiThanhToan = false;
+							magiaodich = "";
+							String s = serial2_in;
+							s.remove(0, 2);
+
+							// add_to_serial(s);  //chuyen ^1 tu 7462 ra cong com
+
+							if (s.startsWith("cfs"))
+							{
+								s.remove(0, 3);
+								if (wifi_on)
+									confirm_service(s);
+							}
+							else
+							{
+								// reset_7462("2xx3"); // du dang lam
+								// xacthucvantay = 1;
+								// reset_7462("2x7");//lenh ghi vào7
+								// gốc
+								// reset_7462("2x3");
+								// delay(1000);
+								// 	if (wifi_on) send_https(s);
+							}
+						}
+						else if (serial2_in.startsWith("^6"))
+						{
+							// String s;
+							// demghi++;
+							// serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
+							uart0.println("ghi lan tiep theo" + serial2_out);
+							// if (demghi == 4)
+							// 	demghi = 1;
+						}
+
+						else if (serial2_in.startsWith("^8"))
+						{
+						}
+						else if (serial2_in.startsWith("^4"))
+						{
+							String sout = "";
+							bipok1();
+							serial2_in.remove(0, 3);
+
+							if (duong_ra == ra_udp && hangdoi_Front() != "")
+							{
+
+								udp_out_ip("100" + serial2_in + "#", hangdoi_Front());
+							}
+						}
+						serial2_in = "";
+					}
+				}
+
 				if (serial2_in.length() > rx_max)
 					serial2_in.clear();
 			}
