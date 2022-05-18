@@ -193,14 +193,14 @@ static uint16_t wRxLength;
 
 
 
-#define IDLE	1
-#define DocXacThuc 2
-#define xemttthe  3
-#define RD   	4
-#define LenhMoRong	    5
-#define LenhTongHop  6
-#define Thoat  7
-#define cholenh  8
+#define IDLE	100
+#define DocXacThuc 36
+#define xemttthe  36
+#define RD   	13
+#define LenhMoRong	    27
+#define LenhTongHop  33
+#define Thoat  34
+#define cholenh  35
 
 
 #define AT24C32 0x57
@@ -321,23 +321,23 @@ void ketthucdocxacthuc(){
 
 void timeout_10s()
 {
-//	dangthuchienlenh=1;
-//	dangtimeout=1;
-//	timetrangthaidoc = 0;
-//	timeout10s=0;
-//	timeout20s=0;
-//	timeout5s=0;
-//	start_ok=0;
-//	Xoa_Dl_Gui();
-//	if(trovebandau==1)
-//	{
-//		Doc2ManHinhCoBan();
-//	}
-//	moi_tap_the();
-//	cmd = IDLE;
-//	trangthaixemthongtinthe=0;
-//	dangthuchienlenh=0;
-//	dangtimeout=0;
+	dangthuchienlenh=1;
+	dangtimeout=1;
+	timetrangthaidoc = 0;
+	timeout10s=0;
+	timeout20s=0;
+	timeout5s=0;
+	start_ok=0;
+	Xoa_Dl_Gui();
+	if(trovebandau==1)
+	{
+		Doc2ManHinhCoBan();
+	}
+	moi_tap_the();
+	cmd = IDLE;
+	trangthaixemthongtinthe=0;
+	dangthuchienlenh=0;
+	dangtimeout=0;
 	return;
 }
 void check_timeout_trangthaidoc(void){
@@ -368,6 +368,7 @@ void process(void)
 	 if(cmd == cholenh ){
 //Thuc hien lenh tong hop
 //tru tien// mo cua // cong tien // thay doi tt1// thay doi tt2//tien thuong // doi app mt keys/doi access
+
 
 		 i=0;
 		char delim[] = "$";
@@ -677,27 +678,7 @@ extern void myrx(void)
 						chedorieng();
 					}
 					else{
-
 						trangthaixacthuc = tinhchecksuminput();
-						switch (cmd) {
-							case IDLE:
-								chedo_cmd(cmd);
-								break;
-							case cholenh:
-								chedo_cmd(cmd);
-								break;
-							case LenhTongHop:
-								chedo_cmd(cmd);
-								break;
-							case Thoat:
-								chedo_cmd(cmd);
-								break;
-							case LenhMoRong:
-								chedo_cmd(cmd);
-								break;
-
-						}
-
 						if(trangthaixacthuc == 1)
 						{
 							process();
@@ -2051,8 +2032,8 @@ int tinhchecksuminput()
 	if(checksuminput == CKSMayTinhGui && cksuidvao == cksvidthe ) trangthai= 1;
 	else trangthai=0;
 
-//	return trangthai;
-	return 1;
+	return trangthai;
+
 }
 int TinhCheckSumMK(char hexValSV[], char hexValCard[], int step)
 {
@@ -2641,16 +2622,6 @@ void chedocmd(void){
 	phUser_Wait(1000);
 
 }
-
-void chedo_cmd(int a){
-	uint8_t sss1[10]="0123456789";
-	uint8_t ghi6k[]="!^cmd #";
-	ghi6k[5]=sss1[a];
-	phhalHif_Transmit((uint8_t *)&ghi6k,7, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
-	phUser_Wait(1000);
-
-}
-
 //file 05 khuôn mặt
 #endif
 //ghi van tay vao file7 xong
