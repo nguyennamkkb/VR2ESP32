@@ -66,7 +66,6 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
     case Identify:
     case Enroll_3:
     case Enroll_1:
-    case Set_Security:
     case Get_Feature:
     case Verify_Feature:
     case Enroll_RAM:
@@ -97,17 +96,6 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
         get_tx_cks(len);
     case 14:
         break;
-    // case 16:
-    //     data_tx.prefix[0] = data_prefix & 0xff;
-    //     data_tx.prefix[1] = (data_prefix >> 8) & 0xff;
-    //     data_tx.cmd = cmd;
-    //     data_tx.len = len;
-    //     data_tx.data[0]=2;
-    //     for (int i = 0; i < 15; i++)  data_tx.data[i]=0;
-        
-    //     // memcpy(data_tx.data, char_buf, char_buf_len);
-    //     get_tx_cks(len);
-    //     break;
     case 498:
         data_tx.prefix[0] = data_prefix & 0xff;
         data_tx.prefix[1] = (data_prefix >> 8) & 0xff;
@@ -138,7 +126,7 @@ void cmd_switch()
     // for (int i = 0; i < sizeof(udp_in_buf); i++)
     // {
     //     sss += udp_in_buf[i];
-
+        
     // }
     // uart0.println("UDP:"+sss);
     String s = "";
@@ -195,13 +183,12 @@ void cmd_switch()
         break;
     case set_bip_on:
         xacthucvantay = 1;
-        ghivantay = 0;
         reset_7462("2xx3"); // du dang lam
         break;
     case send_ev2:
-        reset_7462("2x7");
-        delay(1000);
-        memcpy(char_buf, udp_rx.data, char_buf_len);
+    	reset_7462("2x7");
+	    delay(1000);
+        memcpy(char_buf,udp_rx.data,char_buf_len);
         char_buf_to_ev2();
 
         break;
@@ -228,3 +215,4 @@ void voice_init()
 void voice_generate(int segment)
 {
 }
+

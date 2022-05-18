@@ -92,7 +92,6 @@ const String s_hex="0123456789ABCDEF";
 
 #define pwm_pin 12      // 34
 #define fp_detect_pin 4 //36
-// #define fp_detect_pin 2 //36
 #define master_in 36
 
 // #define PCBA1

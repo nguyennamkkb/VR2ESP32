@@ -50,6 +50,8 @@ String my_mac,serial_rs485,dulieughixacthuc="",dau_dlxacthuc="";
 String iplocal[1];
 String fp_save[5];
 int trangthailenhtumaytinh = 0;
+int ghivantay = 0;
+// int demghivt = 0;
 String uid_the="";//uid cua the
 // == ip may chu mang noi bo
 String tbttid[1];
@@ -59,6 +61,7 @@ String idDelayConfirm[1];
 String dataServices[1];
 uint8 datavantay[500];
 uint8 rx_buf[rx_max];
+// uint8 datavantay[rx_max];
 String serial_in,params_str,serial2_out,serial2_in,vantay="";
 int16 page_id;
 int16 hd_ok=0,rx_pkt_len,rx_cnt=0,pkt_type,check_sum,check_sum_ok;
@@ -72,9 +75,8 @@ bool Validate = false;
 bool TrangThaiThanhToan = false;
 bool DichVuMayTram = false;
 bool TrangThaiCacheCard = false;
-
-int16 demvantay=0;
-
+bool xacthucvantay = 0;
+int demghivt =1;
 char ssid_name[32],ssid_pass[32];
 String ds_name[ds_max][sub_ds_max];
 String str_name[4],str_pass[4];
@@ -96,9 +98,7 @@ udp_tx_header udp_tx;
 int8 n_time[6];
 
 int16 vtlen=0;
-int xacthucvantay = 0;
-int ghivantay = 0 ;
-int demghivt = 1;
+
 struct struct_max{
 	int16 fx;
 	int16 lcd_line;
@@ -183,8 +183,8 @@ void fp_test(){
 	if(fp_detect_cnt > 50){
 		// fp_detect_cnt=0;
 		if(fp_auto_off==0){
-		cmd_send(Identify,0,0);
-		uart1.write(cmd_tx.prefix,sizeof(cmd_tx));
+			cmd_send(Identify,0,0);
+		  uart1.write(cmd_tx.prefix,sizeof(cmd_tx));
 		}
 	}
 }
@@ -198,10 +198,9 @@ void millis_1(){
 	if(old_millis == new_millis) return;
 	old_millis = new_millis;
 	String s;	
-	
 	serial_test();
 	serial2_test();
-	serial2_out_test();	
+	serial2_out_test();
 	UDP_receive();
 	ms10 &= 0xf;
 	if (++ms10 > 9) // vong lap 10ms
