@@ -102,7 +102,6 @@
                 "C:/Users/dungo/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                 "C:/Users/dungo/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
                 "C:/Users/dungo/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
-                "C:/Users/dungo/.platformio/packages/tool-unity",
                 ""
             ],
             "browse": {
@@ -202,12 +201,11 @@
                     "C:/Users/dungo/.platformio/packages/framework-arduinoespressif32/libraries/WebServer/src",
                     "C:/Users/dungo/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
                     "C:/Users/dungo/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
-                    "C:/Users/dungo/.platformio/packages/tool-unity",
                     ""
                 ]
             },
             "defines": [
-                "PLATFORMIO=50205",
+                "PLATFORMIO=60001",
                 "ARDUINO_ESP32_DEV",
                 "ESP32",
                 "ESP_PLATFORM",

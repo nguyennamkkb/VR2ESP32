@@ -261,7 +261,11 @@ void serial2_test()
 							serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
 							uart0.println("ghi lan tiep theo,"+ String(demghi)+"," + serial2_out);
 							if (demghi == 4)
+							{
 								demghi = 1;
+								uid_the = "";
+							}
+							
 						}
 
 						else if (serial2_in.startsWith("^8"))
@@ -301,22 +305,7 @@ void serial2_out_test()
 			if (--ms5 == 0)
 			{
 				String s = "";
-				// if (ghivantay == 1)
-				// {
-				// 	if (demghivt > 0 && demghivt < 5 )
-				// 	{
-				// 		serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghivt] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghivt], 5) + "#";						
-				// 		uart0.println(serial2_out);
-				// 		fp_save[demghivt]="";
-				// 		demghivt++;
-				// 		if (demghivt == 5)
-				// 		{
-				// 			demghivt = 0;
-				// 			ghivantay = 0;
-							
-				// 		}
-				// 	}
-				// }
+
 				if (serial2_out.length() > 123)
 				{
 					s = serial2_out.substring(0, 124);
