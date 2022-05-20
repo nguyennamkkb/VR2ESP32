@@ -81,9 +81,8 @@ void serial_test()
 								case Read_Page:
 									break;
 								case Enroll_RAM:
-
-									// ghivantay=1;//du them
-
+									// ghivantay=1;//du them  								
+									// uart0.println("layvantay");
 									if (ret_code == 0)
 									{
 										// fp_auto_off=500;
@@ -91,6 +90,7 @@ void serial_test()
 										uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 									}
 									break;
+																		
 								}
 							}
 							else
@@ -124,28 +124,30 @@ void serial_test()
 
 							if (ret > 0)
 							{
-								uart0.println("ret:0");
+								// uart0.println("ret:0");
 								String sss = "";
 								uint8 n8, n;
-								for (int i = 0; i < 498 + 8; i++)
+								for (int i = 0; i < 498; i++)
 								{
 									// datavantay[i] = rx_buf[i + 8];
-									n8 = rx_buf[i];
+									n8 = rx_buf[i+8];
 									n = (n8 >> 4) & 0xf;
 									sss += s_hex.substring(n, n + 1);
 									n = n8 & 0xf;
 									sss += s_hex.substring(n, n + 1);
 								}
-								uart0.println("vt:" + sss);
+								uart0.println("bat dau ghi vt:");
+								//hamghivantayvaothe
+								ghivantay = 1;
+								ghivantayvaothe(sss);
 							}
 							else
 							{
-								uart0.println("ret:!=0");
+								// uart0.println("ret:!=0");
 							}
 							hd_ok = rx_cnt = 0;
 							udp_tx.pkt_type = FS01_DATA;
 							uni_send(&udp_tx.bcc, sizeof(udp_tx));
-							// uart0.println("bat dau ghi vt");
 						}
 					}
 				}
@@ -257,7 +259,7 @@ void serial2_test()
 							String s;
 							demghi++;
 							serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
-							uart0.println("ghi lan tiep theo" + serial2_out);
+							// uart0.println("ghi lan tiep theo,"+ String(demghi)+"," + serial2_out);
 							if (demghi == 4)
 								demghi = 1;
 						}
@@ -299,9 +301,26 @@ void serial2_out_test()
 			if (--ms5 == 0)
 			{
 				String s = "";
+				// if (ghivantay == 1)
+				// {
+				// 	if (demghivt > 0 && demghivt < 5 )
+				// 	{
+				// 		serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghivt] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghivt], 5) + "#";						
+				// 		uart0.println(serial2_out);
+				// 		fp_save[demghivt]="";
+				// 		demghivt++;
+				// 		if (demghivt == 5)
+				// 		{
+				// 			demghivt = 0;
+				// 			ghivantay = 0;
+							
+				// 		}
+				// 	}
+				// }
 				if (serial2_out.length() > 123)
 				{
 					s = serial2_out.substring(0, 124);
+					
 					serial2_out.remove(0, 124);
 				}
 				else if (serial2_out.length())
@@ -352,7 +371,7 @@ void char_buf_to_ev2()
 	}
 
 	serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
-	uart0.println(serial2_out);
+	// uart0.println(serial2_out);
 }
 
 uint8 hex_to_byte(String s)
@@ -407,4 +426,20 @@ String hextostr(String s1)
 		s += s_hex.substring(n, n + 1);
 	}
 	return s;
+}
+
+void ghivantayvaothe(String vantay)
+{
+	reset_7462("2x3");
+	delay(1000);
+	String s = "", snew1 = "2" + uid_the + "$114000";
+	vantay += "0000";
+	for (int i = 1; i < 5; i++)
+	{
+		fp_save[i] = vantay.substring(0, 250);
+		vantay.remove(0, 250);
+	}
+	demghivt=1;
+	serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
+	// uart0.println(serial2_out);
 }

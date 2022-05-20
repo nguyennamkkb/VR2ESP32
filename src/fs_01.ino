@@ -51,6 +51,7 @@ String iplocal[1];
 String fp_save[5];
 int trangthailenhtumaytinh = 0;
 int ghivantay = 0;
+// int demghivt = 0;
 String uid_the="";//uid cua the
 // == ip may chu mang noi bo
 String tbttid[1];
@@ -75,7 +76,7 @@ bool TrangThaiThanhToan = false;
 bool DichVuMayTram = false;
 bool TrangThaiCacheCard = false;
 bool xacthucvantay = 0;
-
+int demghivt =1;
 char ssid_name[32],ssid_pass[32];
 String ds_name[ds_max][sub_ds_max];
 String str_name[4],str_pass[4];

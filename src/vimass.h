@@ -109,7 +109,27 @@ const String s_hex="0123456789ABCDEF";
 #define buzze_on digitalWrite(buzze_ctrl,1)
 #define buzze_off digitalWrite(buzze_ctrl,0)
 
+
+/* coi thong bao
+1. chạm thẻ
+2. nhấc thẻ
+3. chạm vân tay
+4. Thành công
+5. lỗi.
+#define Cham_the 1
+#define Nhac_the 2
+#define Cham_van_tay 3
+#define Thanh_Cong 4
+#define Loi 5
+*/
+#define Cham_the 1
+#define Nhac_the 2
+#define Cham_van_tay 3
+#define Thanh_Cong 4
+#define Loi 5
 #endif
+
+
 // iiik^.....ssss#
 // iii id : 0-999
 // k : key_code (1-20) = ascii(k) - 0x40
