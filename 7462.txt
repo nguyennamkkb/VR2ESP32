@@ -87,7 +87,8 @@ void DocTTMH2_ok();
 int TinhCheckSumMK(char hexValSV[], char hexValCard[], int step);
 void timeout_10s();
 void check_timeout_trangthaidoc();
-
+void trangthaixacthuc1(int a);
+void laygiatriuid(char s[]);
 /* *****************************************************************************************************************
  * Type Definitions
  * ***************************************************************************************************************** */
@@ -193,14 +194,14 @@ static uint16_t wRxLength;
 
 
 
-#define IDLE	100
-#define DocXacThuc 36
-#define xemttthe  36
-#define RD   	13
-#define LenhMoRong	    27
-#define LenhTongHop  33
-#define Thoat  34
-#define cholenh  35
+#define IDLE	1
+#define DocXacThuc 2
+#define xemttthe  3
+#define RD   	4
+#define LenhMoRong	    5
+#define LenhTongHop  6
+#define Thoat  7
+#define cholenh  8
 
 
 #define AT24C32 0x57
@@ -598,6 +599,7 @@ void chedorieng()
 	else if(rxbuf.msg8[1]=='2' && rxbuf.msg8[2]=='x' && rxbuf.msg8[3]=='5')
 	{
 		//2x5 reset dong ho cho cham the
+		ghi = 1;
 		cmd=IDLE;
 		return;
 	}
@@ -611,6 +613,7 @@ void chedorieng()
 	{
 		//2x7
 		cmd=cholenh; // ghi du lieu xac thuc
+//		ghi = 1;
 		chedocmd();
 		return;
 	}
@@ -673,7 +676,7 @@ extern void myrx(void)
 
 				if(b8 == 35)
 				{
-
+//					chedocmd_int(cmd);
 					if(rxbuf.msg8[2]== 120){
 						chedorieng();
 					}
@@ -916,9 +919,6 @@ phStatus_t phExMfCrypto_MfDfCrypto_Auth(phacDiscLoop_Sw_DataParams_t *psDiscLoop
 				//				thanhnt- neu vao day ko lam j ca
 				break;
 			}
-
-
-
 		LOG_TXT("Master Application of Desfire Card Selected, \n");
 		uID[0]= psDiscLoopParams->sTypeATargetInfo.aTypeA_I3P3[0].aUid[0];
 		uID[1]= psDiscLoopParams->sTypeATargetInfo.aTypeA_I3P3[0].aUid[1];
@@ -1282,11 +1282,13 @@ void LenhTongHopDai(void){
 						else
 						{
 							ghifile_07();
+
 						}
 //						ghi=3;
 		}
 		if(ghi == 0)
 		{
+			cmd = cholenh;
 			Ghi_ketthuc();
 			DocTT_ok();
 			moi_tap_the();
@@ -1427,8 +1429,6 @@ void LenhGhiThongTinData4(void){
 	);
 	if(status != PH_ERR_SUCCESS)
 	{
-//		char maloi[3]="111";
-//		Ghi_Loi(maloi);
 	}else{
 		for(i=0;i<datalen4;i++){
 			DuLieuDuaVao[i]=Lenh11[i+6];
@@ -1528,10 +1528,11 @@ void Xoa_Dl_Gui(void){
 }
 void moi_tap_the(void)
 {
+	Cho_2s();
 	cmd=IDLE;
 	trovebandau=0;
 	start_ok=0;
-	Cho_2s();
+
 
 }
 void chuyenchuuid(){
@@ -1647,8 +1648,6 @@ void LayBytecuoi(int so){
 	}else if(so1==0){
 		textoffset2='0';
 	}
-
-
 }
 int hexadecimalToDecimal(char hexVal[])
 {
@@ -1665,12 +1664,9 @@ int hexadecimalToDecimal(char hexVal[])
         else if (hexVal[i]>='A' && hexVal[i]<='F')
         {
             dec_val += (hexVal[i] - 55)*base;
-
-            // incrementing base by power
             base = base*16;
         }
     }
-
     return dec_val;
 }
 void Ghi_ThanhCong(char maloi[3]){
@@ -2010,7 +2006,7 @@ void setSotienhientai(char hex[])
 }
 int tinhchecksuminput()
 {
-
+	uint8_t aaa[14],aaa1[14];
 	CKSMayTinhGui=0;
 	int a = 10000, trangthai=0;
 	for(int i = 0; i < 5;i++)
@@ -2027,10 +2023,21 @@ int tinhchecksuminput()
 	{
 		cksuidvao += rxbuf.msg8[i+2];
 		cksvidthe += Uidbangchu[i];
-	}
+		aaa[i] = rxbuf.msg8[i+2];
+		aaa1[i] = Uidbangchu[i];
 
+	}
+	if (checksuminput == CKSMayTinhGui ) trangthaixacthuc1(8);
+	else  trangthaixacthuc1(0);
+	if ( cksuidvao == cksvidthe ) trangthaixacthuc1(9);
+	else  trangthaixacthuc1(0);
+
+//	laygiatriuid(aaa[14]);
+//	laygiatriuid(aaa1[14]);
 	if(checksuminput == CKSMayTinhGui && cksuidvao == cksvidthe ) trangthai= 1;
 	else trangthai=0;
+
+//	trangthaixacthuc1(trangthai);
 
 	return trangthai;
 
@@ -2242,7 +2249,7 @@ void ghifile_07(){
 	}
 
 
-	pOffset7[0] = ghi*125;
+	pOffset7[0] = (ghi - 1)*125;
 	pOffset7[1] = 0;
 	pOffset7[2] = 0;
 
@@ -2250,7 +2257,7 @@ void ghifile_07(){
 	SoLuongKyTu[1]=0;
 	SoLuongKyTu[2]=0;
 
-	if(ghi == 3){
+	if(ghi == 4){
 		pOffset7[0] = 119;
 		pOffset7[1] = 1;
 		pOffset7[2] = 0;
@@ -2268,10 +2275,10 @@ void ghifile_07(){
 		return;
 	}
 	ghi++;
-	if(ghi < 4){
+	if(ghi < 5){
 		ghitieptuc();
 	}
-	if(ghi == 4) ghi=0;
+	if(ghi == 5) ghi=0;
 
 	cmd = cholenh;
 
@@ -2426,71 +2433,6 @@ void docfile_07(void)
 
 
 }
-//docf7_2 lan
-//void xacthucfile7(void)
-//{
-//	uint8_t docf7 = 0;
-//	status = phalMfdf_AuthenticateAES	(	&salMfdf,
-//								PHAL_MFDF_NO_DIVERSIFICATION,
-//													0x02,
-//													0x00,
-//													0x09,
-//													NULL,
-//													0x00
-//		);
-//		if(status != PH_ERR_SUCCESS)
-//		{
-//			return;
-//		}
-//		else
-//		{
-//			xacthucfile();
-//			Lenh114[0]='!';
-//			Lenh114[1]='^';
-//			Lenh114[2]='7';
-//
-//			for (docf7=0; docf7<2; docf7++)
-//			{
-//
-//					uint8_t bReadLen114[3]= {125, 0, 0};
-//					uint8_t Offset114[3]={125*docf7, 0, 0};
-//					if(docf7==3){
-//						Offset114[0] = 119;
-//						Offset114[1] = 1;
-//						Offset114[2] = 0;
-//					}
-//					status = phalMfdf_ReadData(&salMfdf,
-//												PHAL_MFDF_COMMUNICATION_ENC,
-//												0x07,
-//												Offset114,//doc tu dau
-//												bReadLen114,
-//												&bRxDaTa,
-//												&wRxLength
-//												);
-//
-//					if(status != PH_ERR_SUCCESS)
-//					{
-//						docfileloi();
-//						return;
-//					}
-//					else
-//					{
-//
-//						for(int i=0; i < 125 ;i++){
-//							Lenh114[i+3+docf7*125] = bRxDaTa[i];
-//						}
-//					}
-//
-//
-//			}
-//			Lenh114[253]='#';
-//			phhalHif_Transmit((uint8_t *)&Lenh114,254, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
-//			phUser_Wait(200000);
-//
-//
-//		}
-//}
-
 
 //dang cmt doc f7 4 lan
 void xacthucfile7(void)
@@ -2516,8 +2458,6 @@ void xacthucfile7(void)
 					Lenh114[0]='!';
 					Lenh114[1]='^';
 					Lenh114[2]='7';
-
-				//	uint8_t bReadLen114[3]= {125*docf7, 0, 0};
 					uint8_t bReadLen114[3]= {125, 0, 0};
 					uint8_t Offset114[3]={125*docf7, 0, 0};
 					if(docf7==3){
@@ -2553,15 +2493,9 @@ void xacthucfile7(void)
 					phhalHif_Transmit((uint8_t *)&Lenh114,131, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
 					phUser_Wait(200000);
 			}
-
-
-
 		}
 }
 void HamDocXacThuc(){
-//	batdaughi();
-
-
 	if (xt5 == 1) {
 		docfile_05();
 	}else if(xt6 == 1){
@@ -2616,11 +2550,35 @@ void docfileloi(void){
 }
 
 void chedocmd(void){
-
 	uint8_t ghi6k[]="!^2x7#";
 	phhalHif_Transmit((uint8_t *)&ghi6k,6, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
 	phUser_Wait(1000);
+}
+void chedocmd_int(int a){
+	uint8_t aaa[10]="0123456789";
+	uint8_t ghi6k[]="!^2x7 #";
+	ghi6k[5]=aaa[a];
+	phhalHif_Transmit((uint8_t *)&ghi6k,7, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
+	phUser_Wait(1000);
+}
 
+void trangthaixacthuc1(int a){
+	uint8_t aaa[10]="0123456789";
+	uint8_t ghi6k[]="!^aaa #";
+	ghi6k[5]=aaa[a];
+	phhalHif_Transmit((uint8_t *)&ghi6k,7, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
+	phUser_Wait(1000);
+}
+
+void laygiatriuid(char s[])
+{
+	uint8_t s1[]="!^uid              #";
+	for(int i = 0;i<14;i++)
+	{
+		s1[i+5] = s[i];
+	}
+	phhalHif_Transmit((uint8_t *)&s1,21, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
+	phUser_Wait(1000);
 }
 //file 05 khuôn mặt
 #endif

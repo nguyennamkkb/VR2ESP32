@@ -309,6 +309,7 @@ void serial2_out_test()
 				if (serial2_out.length() > 123)
 				{
 					s = serial2_out.substring(0, 124);
+					
 					serial2_out.remove(0, 124);
 				}
 				else if (serial2_out.length())
@@ -359,7 +360,7 @@ void char_buf_to_ev2()
 	}
 
 	serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
-	uart0.println(serial2_out);
+	// uart0.println(serial2_out);
 }
 
 uint8 hex_to_byte(String s)
@@ -418,11 +419,10 @@ String hextostr(String s1)
 
 void ghivantayvaothe(String vantay)
 {
-	reset_7462("2x7");
-	// delay(1000);
+	reset_7462("2x5");
+	delay(1000);
 	String s = "", snew1 = "2" + uid_the + "$114000";
 	vantay += "0000";
-	uart0.println(vantay);
 	for (int i = 1; i < 5; i++)
 	{
 		fp_save[i] = vantay.substring(0, 250);
@@ -430,5 +430,5 @@ void ghivantayvaothe(String vantay)
 	}
 	demghivt=1;
 	serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
-	uart0.println(serial2_out);
+	// uart0.println(serial2_out);
 }
