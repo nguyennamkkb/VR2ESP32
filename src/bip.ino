@@ -21,16 +21,16 @@ void setbip(int n)
         bip(1, 2);
         break;
     case Nhac_the:
-        bip(1, 1);
+        bip(2, 1);
         break;
     case Cham_van_tay:
-        bip(1, 1);
+        bip(1, 3);
         break;
     case Thanh_Cong:
-        bip(1, 1);
+        bip(2, 1);
         break;
     case Loi:
-        bip(1, 1);
+        bip(3, 1);
         break;
     }
 }
