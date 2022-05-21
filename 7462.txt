@@ -230,7 +230,7 @@ static int datalen120,datalen1,datalen2,datalen4,datalen5,datalen6,datalen7;
 static uint8_t DuLieuGuiMayTinh[150];
 static int CKS=0,trovebandau=1,checksumdata1=0,checksumdata02=0,checksumtien=0,checksummatkhau=0,checksumdata01=0,checksumlogtien=0,checksumdata03=0,checksumdata04=0;
 static int checksuminput,CKSMayTinhGui,trangthaixacthuc = 0,cksuidvao=0,cksvidthe=0;;
-static int timeout10s=0,timeout5s=0,timeout2s=0,timeout20s=0,timetrangthaidoc=0,aaabbb=0;
+static int timeout10s=0,timeout5s=0,timeout2s=0,timeout20s=0,timetrangthaidoc=0,aaabbb=0,timeoutghi=0;
 static uint16_t i;
 //////////////////
 
@@ -306,12 +306,13 @@ void DocTTMH2_ok(void){
 extern void check_timeout(void)
 {
 	if((timeout2s > 0) && (timeout2s <100)) timeout2s++;
+//	if((timeoutghi > 0) && (timeoutghi <100)) timeoutghi++;
 	if((timeout10s > 0) && (timeout10s <100)) timeout10s++;
 	if((timeout20s > 0) && (timeout20s <200)) timeout20s++;
 	if((timetrangthaidoc > 0) && (timetrangthaidoc <200)) timetrangthaidoc++;
-	if((timeout5s > 0) && (timeout5s <30)) timeout5s++;
+	if((timeout5s > 0) && (timeout5s <50)) timeout5s++;
 
-	if(timeout10s >= 100 || timeout20s >= 200 || timeout5s >= 70  ) timeout_10s();
+	if(timeout10s >= 100 || timeout20s >= 200 || timeout5s >= 50  ) timeout_10s();
 	if(timeout2s >= 20) ketthucdocxacthuc();
 	if(timetrangthaidoc >= 200 ) check_timeout_trangthaidoc();
 
@@ -329,6 +330,7 @@ void timeout_10s()
 	timeout20s=0;
 	timeout5s=0;
 	start_ok=0;
+//	timeoutghi = 0;
 	Xoa_Dl_Gui();
 //	if(trovebandau==1)
 //	{
@@ -2503,9 +2505,12 @@ void HamDocXacThuc(){
 	}
 	else if(xt7 == 1){
 		docfile_07();
+
 	}
 	xt5 =  xt6 = xt7 = 0;
-	moi_tap_the();//du them
+	cmd = cholenh;
+	timeout10s=1;
+//	moi_tap_the();//du them
 }
 
 
