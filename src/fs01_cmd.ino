@@ -186,7 +186,7 @@ void cmd_switch()
         reset_7462("2xx3"); // du dang lam
         break;
     case send_ev2:
-    	reset_7462("2x7");
+    	// reset_7462("2x7");
 	    delay(1000);
         memcpy(char_buf,udp_rx.data,char_buf_len);
         char_buf_to_ev2();

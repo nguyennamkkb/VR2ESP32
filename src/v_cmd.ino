@@ -193,5 +193,5 @@ void khoitao_ghixacthuc(String s){
 	dulieughixacthuc = s;
 	s="";
 	trangthailenhtumaytinh = 1;
-	reset_7462("2x7");// bat dau ghi xac thuc	
+	// reset_7462("2x7");// bat dau ghi xac thuc	
 }

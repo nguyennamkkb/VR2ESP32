@@ -30,7 +30,7 @@ int16 ms10,pc_on,wifi_status,string_valid_cnt,ms2;
 int16 timer_1ms,udp_time = 0;
 int16 wifi_on,file_ok,udp_on=0,serial_on=0;
 int16 new_millis,old_millis,rx2_time_out;
-int8 demghi=1;
+int8 demghi=0;
 int64_t ms64_0,ms64,delta64;
 int16 v_stat=0,msg_type;
 uint8 udp_in_buf[1400];

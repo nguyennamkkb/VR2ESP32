@@ -86,7 +86,7 @@ void serial_test()
 									if (ret_code == 0)
 									{
 										// fp_auto_off=500;
-										reset_7462("2x5");
+										reset_7462("2x7");
 										cmd_send(Get_Enroll, 0, 0);
 										uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 									}
@@ -257,15 +257,17 @@ void serial2_test()
 						else if (serial2_in.startsWith("^6"))
 						{
 							String s;
-							demghi++;
+
+							if(demghi == 0) break;
 							serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
 							uart0.println("ghi lan tiep theo,"+ String(demghi)+"," + serial2_out);
-							
-							if (demghi == 4)
+							demghi++;
+							if (demghi > 4)
 							{
-								demghi = 1;
+								demghi = 0;
 								uid_the = "";
 							}
+							
 							
 						}
 
@@ -434,7 +436,7 @@ String hextostr(String s1)
 
 void ghivantayvaothe(String vantay)
 {
-	
+	// reset_7462("2x7");// bat dau ghi xac thuc	
 	setbip(Cham_the);
 	delay(1000);
 	String s = "", snew1 = "2" + uid_the + "$114000";
@@ -445,7 +447,7 @@ void ghivantayvaothe(String vantay)
 		fp_save[i] = vantay.substring(0, 250);
 		vantay.remove(0, 250);
 	}
-	serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
+	// serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
 	demghi=1;
-	uart0.println(serial2_out);
+	// uart0.println(serial2_out);
 }
