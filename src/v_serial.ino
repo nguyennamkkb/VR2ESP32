@@ -260,10 +260,7 @@ void serial2_test()
 							demghi++;
 							serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
 							uart0.println("ghi lan tiep theo,"+ String(demghi)+"," + serial2_out);
-<<<<<<< HEAD
-=======
 							
->>>>>>> 4f92b267561eb923140563da405ba2bdc235d592
 							if (demghi == 4)
 							{
 								demghi = 1;
@@ -308,9 +305,6 @@ void serial2_out_test()
 			if (--ms5 == 0)
 			{
 				String s = "";
-<<<<<<< HEAD
-
-=======
 				// if (ghivantay == 1)
 				// {
 				// 	if (demghivt > 0 && demghivt < 5 )
@@ -327,7 +321,6 @@ void serial2_out_test()
 				// 		}
 				// 	}
 				// }
->>>>>>> 4f92b267561eb923140563da405ba2bdc235d592
 				if (serial2_out.length() > 123)
 				{
 					s = serial2_out.substring(0, 124);
@@ -441,12 +434,8 @@ String hextostr(String s1)
 
 void ghivantayvaothe(String vantay)
 {
-<<<<<<< HEAD
-	reset_7462("2x5");
-=======
 	
 	setbip(Cham_the);
->>>>>>> 4f92b267561eb923140563da405ba2bdc235d592
 	delay(1000);
 	String s = "", snew1 = "2" + uid_the + "$114000";
 	vantay += "0000";

@@ -330,10 +330,10 @@ void timeout_10s()
 	timeout5s=0;
 	start_ok=0;
 	Xoa_Dl_Gui();
-	if(trovebandau==1)
-	{
-		Doc2ManHinhCoBan();
-	}
+//	if(trovebandau==1)
+//	{
+//		Doc2ManHinhCoBan();
+//	}
 	moi_tap_the();
 	cmd = IDLE;
 	trangthaixemthongtinthe=0;
@@ -2505,6 +2505,7 @@ void HamDocXacThuc(){
 		docfile_07();
 	}
 	xt5 =  xt6 = xt7 = 0;
+	moi_tap_the();//du them
 }
 
 
