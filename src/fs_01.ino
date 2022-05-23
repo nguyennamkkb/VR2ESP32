@@ -76,7 +76,7 @@ bool TrangThaiThanhToan = false;
 bool DichVuMayTram = false;
 bool TrangThaiCacheCard = false;
 bool xacthucvantay = 0;
-int demghivt =1;
+// int demghivt =1;
 char ssid_name[32],ssid_pass[32];
 String ds_name[ds_max][sub_ds_max];
 String str_name[4],str_pass[4];

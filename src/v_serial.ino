@@ -138,7 +138,7 @@ void serial_test()
 								}
 								uart0.println("bat dau ghi vt:");
 								// hamghivantayvaothe
-								ghivantay = 1;
+								// ghivantay = 1;
 								ghivantayvaothe(sss);
 							}
 							else
@@ -189,8 +189,8 @@ void serial2_test()
 						serial2_in.remove(serial2_in.length() - 3, 3); // remove #
 						if (serial2_in.substring(0, 1) == "!")
 							serial2_in.remove(0, 1);
-						add_to_serial("7462 nhan" + hextostr(serial2_in));
-						serial_out();
+						// add_to_serial("7462 nhan" + hextostr(serial2_in));
+						// serial_out();
 						if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 						{
 							serial2_in.remove(0, 2);
@@ -204,7 +204,7 @@ void serial2_test()
 								vantay = "";
 								xacthucvantay = 0;
 								vtlen = 0;
-								ghivantay = 0;
+								// ghivantay = 0;
 							}
 						}
 					}
@@ -257,7 +257,6 @@ void serial2_test()
 						else if (serial2_in.startsWith("^6"))
 						{
 							String s;
-
 							if(demghi == 0) break;
 							serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghi] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghi], 5) + "#";
 							uart0.println("ghi lan tiep theo,"+ String(demghi)+"," + serial2_out);
@@ -265,7 +264,7 @@ void serial2_test()
 							if (demghi > 4)
 							{
 								demghi = 0;
-								uid_the = "";
+								// uid_the = "";
 							}
 							
 							
@@ -307,22 +306,6 @@ void serial2_out_test()
 			if (--ms5 == 0)
 			{
 				String s = "";
-				// if (ghivantay == 1)
-				// {
-				// 	if (demghivt > 0 && demghivt < 5 )
-				// 	{
-				// 		serial2_out = "!^2" + uid_the + "$114000" + fp_save[demghivt] + "$" + tinhCKS_Du("2" + uid_the + "$114000" + fp_save[demghivt], 5) + "#";
-				// 		uart0.println(serial2_out);
-				// 		fp_save[demghivt]="";
-				// 		demghivt++;
-				// 		if (demghivt == 5)
-				// 		{
-				// 			demghivt = 0;
-				// 			ghivantay = 0;
-
-				// 		}
-				// 	}
-				// }
 				if (serial2_out.length() > 123)
 				{
 					s = serial2_out.substring(0, 124);
@@ -447,7 +430,5 @@ void ghivantayvaothe(String vantay)
 		fp_save[i] = vantay.substring(0, 250);
 		vantay.remove(0, 250);
 	}
-	// serial2_out = "!^" + snew1 + fp_save[1] + "$" + tinhCKS_Du(snew1 + fp_save[1], 5) + "#";
 	demghi=1;
-	// uart0.println(serial2_out);
 }
