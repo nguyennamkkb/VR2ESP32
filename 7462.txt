@@ -202,6 +202,7 @@ static uint16_t wRxLength;
 #define LenhTongHop  6
 #define Thoat  7
 #define cholenh  8
+#define ghivantay 9
 
 
 #define AT24C32 0x57
@@ -601,7 +602,7 @@ void chedorieng()
 	else if(rxbuf.msg8[1]=='2' && rxbuf.msg8[2]=='x' && rxbuf.msg8[3]=='5')
 	{
 		//2x5 reset dong ho cho cham the
-		ghi = 1;
+//		ghi = 1;
 		cmd=IDLE;
 		return;
 	}
@@ -614,9 +615,12 @@ void chedorieng()
 	else if(rxbuf.msg8[1]=='2' && rxbuf.msg8[2]=='x' && rxbuf.msg8[3]=='7')
 	{
 		//2x7
-		cmd=cholenh; // ghi du lieu xac thuc
+//		cmd =cholenh; // ghi du lieu xac thuc
+		ghi = 1;
+		cmd = ghivantay;
+		timeout5s = 0;
 //		ghi = 1;
-		chedocmd();
+//		chedocmd();
 		return;
 	}
 	else if(rxbuf.msg8[1]=='2' && rxbuf.msg8[2]=='x' && rxbuf.msg8[3]=='8')
@@ -956,6 +960,10 @@ phStatus_t phExMfCrypto_MfDfCrypto_Auth(phacDiscLoop_Sw_DataParams_t *psDiscLoop
 		if(cmd == LenhTongHop){
 			HamLenhTonghop();
 			break;
+		}
+		if(cmd == ghivantay){
+			ghitieptuc();
+			cmd = cholenh;
 		}
 
 
@@ -2590,3 +2598,4 @@ void laygiatriuid(char s[])
 #endif
 //ghi van tay vao file7 xong
 //doc van tay ra
+//235
