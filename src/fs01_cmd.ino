@@ -69,6 +69,8 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
     case Get_Feature:
     case Verify_Feature:
     case Enroll_RAM:
+    // case Set_Security:
+    // case Get_Security:
     case Identify_Feature:
         fp_auto_off = 500;
         break;
@@ -88,6 +90,17 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
         {
             cmd_tx.data[0] = 498;
             memcpy(char_buf, udp_rx.data, char_buf_len);
+        }else if (cmd == Set_Security)
+        {
+            cmd_tx.data[0] = 1;
+            cmd_tx.data[1] = 0;
+            // memset(cmd_tx.data, 0, sizeof(cmd_tx.data));
+        }
+        else if (cmd == Get_Security)
+        {
+            cmd_tx.data[0] = 0;
+            cmd_tx.data[1] = 0;
+            // memset(cmd_tx.data, 0, sizeof(cmd_tx.data));
         }
         else if (len)
         {
