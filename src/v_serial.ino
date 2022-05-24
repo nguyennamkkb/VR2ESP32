@@ -110,19 +110,6 @@ void serial_test()
 							}
 							hd_ok = rx_cnt = 0;
 							udp_tx.pkt_type = FS01_CMD;
-							String sss = "";
-							uint8 n8, n;
-							for (int i = 0; i < sizeof(rx_buf); i++)
-							{
-								// datavantay[i] = rx_buf[i + 8];
-								n8 = rx_buf[i];
-								n = (n8 >> 4) & 0xf;
-								sss += s_hex.substring(n, n + 1);
-								n = n8 & 0xf;
-								sss += s_hex.substring(n, n + 1);
-							}
-							add_to_serial("7462 nhan" + sss);
-							serial_out();
 							uni_send(&udp_tx.bcc, sizeof(udp_tx));
 						}
 					}
@@ -151,7 +138,7 @@ void serial_test()
 								}
 								uart0.println("bat dau ghi vt:");
 								// hamghivantayvaothe
-								// ghivantay = 1;
+								ghivantay = 1;
 								ghivantayvaothe(sss);
 							}
 							else
@@ -198,6 +185,7 @@ void serial2_test()
 					}
 					else if (serial2_in.endsWith("***"))
 					{
+
 						serial2_in.remove(serial2_in.length() - 3, 3); // remove #
 						if (serial2_in.substring(0, 1) == "!")
 							serial2_in.remove(0, 1);
@@ -236,11 +224,9 @@ void serial2_test()
 						serial_out();
 						if (serial2_in.startsWith("^1"))
 						{
-							// if (demghi == 1)
-							// {
-							// 	reset_7462("2x7");//lenh ghi vào7
-							// }
-							
+							if(ghivantay == 1){
+								reset_7462("2x7");
+							}
 							if (serial2_in.startsWith("^135"))
 							{
 								uid_the = serial2_in.substring(5, 19);
@@ -293,6 +279,7 @@ void serial2_test()
 						else if (serial2_in.startsWith("^4"))
 						{
 							String sout = "";
+							ghivantay = 0;
 							setbip(Thanh_Cong);
 							setbip(Thanh_Cong);
 							serial2_in.remove(0, 3);
@@ -441,7 +428,7 @@ void ghivantayvaothe(String vantay)
 	delay(1000);
 	String s = "", snew1 = "2" + uid_the + "$114000";
 	vantay += "0000";
-	// uart0.println(vantay);
+	uart0.println(vantay);
 	for (int i = 1; i < 5; i++)
 	{
 		fp_save[i] = vantay.substring(0, 250);

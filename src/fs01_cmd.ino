@@ -142,6 +142,7 @@ void cmd_switch()
     switch (udp_rx.cmd)
     {
     case voice_download:
+    uart0.println("dangtaixuong");
         if (udp_rx.seg_type == seg_save)
         {
             len = udp_rx.seg_len;
@@ -171,6 +172,7 @@ void cmd_switch()
         uni_send(&udp_tx.bcc, sizeof(udp_tx));
         break;
     case voice_play:
+    uart0.println("dangphatnhac");
         if (read_buf("/a_" + String(udp_rx.page_id & 0xf) + ".wav"))
         {
             voice_init();
