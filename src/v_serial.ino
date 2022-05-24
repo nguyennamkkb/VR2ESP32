@@ -138,7 +138,7 @@ void serial_test()
 								}
 								uart0.println("bat dau ghi vt:");
 								// hamghivantayvaothe
-								// ghivantay = 1;
+								ghivantay = 1;
 								ghivantayvaothe(sss);
 							}
 							else
@@ -185,6 +185,7 @@ void serial2_test()
 					}
 					else if (serial2_in.endsWith("***"))
 					{
+
 						serial2_in.remove(serial2_in.length() - 3, 3); // remove #
 						if (serial2_in.substring(0, 1) == "!")
 							serial2_in.remove(0, 1);
@@ -223,11 +224,17 @@ void serial2_test()
 						serial_out();
 						if (serial2_in.startsWith("^1"))
 						{
+<<<<<<< HEAD
+							if(ghivantay == 1){
+								reset_7462("2x7");
+							}
+=======
 							// if (demghi == 1)
 							// {
 							// 	reset_7462("2x7");//lenh ghi vào7
 							// }
 
+>>>>>>> 48ff25e74e570f1face50c1f02edc84304ed2fd3
 							if (serial2_in.startsWith("^135"))
 							{
 								uid_the = serial2_in.substring(5, 19);
@@ -279,6 +286,7 @@ void serial2_test()
 						else if (serial2_in.startsWith("^4"))
 						{
 							String sout = "";
+							ghivantay = 0;
 							setbip(Thanh_Cong);
 							setbip(Thanh_Cong);
 							serial2_in.remove(0, 3);
@@ -427,7 +435,7 @@ void ghivantayvaothe(String vantay)
 	delay(1000);
 	String s = "", snew1 = "2" + uid_the + "$114000";
 	vantay += "0000";
-	// uart0.println(vantay);
+	uart0.println(vantay);
 	for (int i = 1; i < 5; i++)
 	{
 		fp_save[i] = vantay.substring(0, 250);

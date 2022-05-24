@@ -2598,4 +2598,4 @@ void laygiatriuid(char s[])
 #endif
 //ghi van tay vao file7 xong
 //doc van tay ra
-//235
+//ban gan nhu wNoOfKeyEntries
