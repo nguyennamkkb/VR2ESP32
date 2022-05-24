@@ -141,10 +141,11 @@ void cmd_switch()
     //     sss += udp_in_buf[i];
         
     // }
-    // uart0.println("UDP:"+sss);
+    // uart0.println("udp_rx.cmd:"+String(udp_rx.cmd));
     String s = "";
     int16 len = 0;
     // if(cmd_found(udp_rx.cmd)){
+
     if ((udp_rx.cmd > 0x100) && (udp_rx.cmd < 0x151))
     {
         cmd_send(udp_rx.cmd, udp_rx.len, udp_rx.page_id);
