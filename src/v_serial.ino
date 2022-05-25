@@ -224,17 +224,9 @@ void serial2_test()
 						serial_out();
 						if (serial2_in.startsWith("^1"))
 						{
-<<<<<<< HEAD
 							if(ghivantay == 1){
 								reset_7462("2x7");
 							}
-=======
-							// if (demghi == 1)
-							// {
-							// 	reset_7462("2x7");//lenh ghi vào7
-							// }
-
->>>>>>> 48ff25e74e570f1face50c1f02edc84304ed2fd3
 							if (serial2_in.startsWith("^135"))
 							{
 								uid_the = serial2_in.substring(5, 19);
@@ -288,7 +280,7 @@ void serial2_test()
 							String sout = "";
 							ghivantay = 0;
 							setbip(Thanh_Cong);
-							setbip(Thanh_Cong);
+							Play_voice(VT_OK);
 							serial2_in.remove(0, 3);
 							if (duong_ra == ra_udp && hangdoi_Front() != "")
 							{

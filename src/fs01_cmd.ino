@@ -90,7 +90,8 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
         {
             cmd_tx.data[0] = 498;
             memcpy(char_buf, udp_rx.data, char_buf_len);
-        }else if (cmd == Set_Security)
+        }
+        else if (cmd == Set_Security)
         {
             cmd_tx.data[0] = 1;
             cmd_tx.data[1] = 0;
@@ -139,7 +140,7 @@ void cmd_switch()
     // for (int i = 0; i < sizeof(udp_in_buf); i++)
     // {
     //     sss += udp_in_buf[i];
-        
+
     // }
     // uart0.println("udp_rx.cmd:"+String(udp_rx.cmd));
     String s = "";
@@ -156,7 +157,6 @@ void cmd_switch()
     switch (udp_rx.cmd)
     {
     case voice_download:
-    uart0.println("dangtaixuong");
         if (udp_rx.seg_type == seg_save)
         {
             len = udp_rx.seg_len;
@@ -186,7 +186,6 @@ void cmd_switch()
         uni_send(&udp_tx.bcc, sizeof(udp_tx));
         break;
     case voice_play:
-    uart0.println("dangphatnhac");
         if (read_buf("/a_" + String(udp_rx.page_id & 0xf) + ".wav"))
         {
             voice_init();
@@ -200,11 +199,12 @@ void cmd_switch()
     case set_bip_on:
         xacthucvantay = 1;
         reset_7462("2xx3"); // du dang lam
+        
         break;
     case send_ev2:
-    	// reset_7462("2x7");
-	    delay(1000);
-        memcpy(char_buf,udp_rx.data,char_buf_len);
+        // reset_7462("2x7");
+        delay(1000);
+        memcpy(char_buf, udp_rx.data, char_buf_len);
         char_buf_to_ev2();
 
         break;
@@ -231,4 +231,3 @@ void voice_init()
 void voice_generate(int segment)
 {
 }
-

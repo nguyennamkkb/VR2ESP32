@@ -83,7 +83,7 @@ const int16 cmd_len[]={
     Identify_Free,0, Set_Psw,14, Verify_Psw,14, Get_Enroll_Count,0, Change_Page,2,
     FP_Cancel,0, Test_Connection,0, Incorrect_Command,0
 };
-
+enum play_code{Dat_VT, VT_OK, VT_ER, XT_OK, XT_ER, VT_1, VT_1_1, VT_2, VT_2_2, Dat_Lai_VT };
 enum {  seg_begin,seg_append,seg_save};
 enum {  voice_download, voice_play, file_rename, file_list, set_bip_on, send_ev2, add_ssid};
 
