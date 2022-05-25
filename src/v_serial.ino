@@ -48,6 +48,7 @@ void serial_test()
 				}
 				if (hd_ok)
 				{
+
 					if (rx_cnt >= 6)
 					{
 						if (rx_pkt_len == -1)
@@ -57,9 +58,12 @@ void serial_test()
 					}
 					if (n_prefix == cmd_response_prefix)
 					{
+						
 						if (rx_cnt == 24)
 						{
+							FS01_RES("FS01_cmd");
 							memcpy(cmd_rx.prefix, rx_buf, sizeof(cmd_rx));
+
 							ret = cmd_rx.data[0];
 							ret_code = cmd_rx.data[1];
 							memcpy(udp_tx.cmd_rx.prefix, cmd_rx.prefix, sizeof(cmd_rx));
@@ -115,8 +119,10 @@ void serial_test()
 					}
 					else if (n_prefix == data_response_prefix)
 					{
+						
 						if (rx_cnt == (6 + rx_pkt_len + 2))
 						{
+							FS01_RES("FS01_data");
 							memcpy(data_rx.prefix, rx_buf, sizeof(data_rx));
 							ret = rx_buf[9];
 							ret_code = data_rx.data[1];
@@ -136,7 +142,7 @@ void serial_test()
 									n = n8 & 0xf;
 									sss += s_hex.substring(n, n + 1);
 								}
-								uart0.println("bat dau ghi vt:");
+								// uart0.println("bat dau ghi vt:"); // Thông báo đặt thẻ ghi vân tay
 								// hamghivantayvaothe
 								ghivantay = 1;
 								ghivantayvaothe(sss);
@@ -224,7 +230,8 @@ void serial2_test()
 						serial_out();
 						if (serial2_in.startsWith("^1"))
 						{
-							if(ghivantay == 1){
+							if (ghivantay == 1)
+							{
 								reset_7462("2x7");
 							}
 							if (serial2_in.startsWith("^135"))
@@ -280,7 +287,7 @@ void serial2_test()
 							String sout = "";
 							ghivantay = 0;
 							setbip(Thanh_Cong);
-							Play_voice(VT_OK);
+							Play_voice(Moi_dat_van_tay); // mời nhấc thẻ
 							serial2_in.remove(0, 3);
 							if (duong_ra == ra_udp && hangdoi_Front() != "")
 							{
@@ -434,4 +441,20 @@ void ghivantayvaothe(String vantay)
 		vantay.remove(0, 250);
 	}
 	demghi = 1;
+}
+
+void FS01_RES(String s1)
+{
+	String sss = "";
+	uint8 n8, n;
+	for (int i = 0; i < rx_cnt; i++)
+	{
+		// datavantay[i] = rx_buf[i + 8];
+		n8 = cmd_rx.prefix[i];
+		n = (n8 >> 4) & 0xf;
+		sss += s_hex.substring(n, n + 1);
+		n = n8 & 0xf;
+		sss += s_hex.substring(n, n + 1);
+	}
+	uart0.println(s1 + sss); // Thông báo đặt thẻ ghi vân tay
 }

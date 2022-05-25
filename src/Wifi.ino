@@ -88,16 +88,16 @@ void UDP_receive()
       sss += s_hex.substring(n, n + 1);
     }
 
-    add_to_serial("UDP res:" + sss+"\n");
-    serial_out();
+    // add_to_serial("UDP res:" + sss+"\n");
+    // serial_out();
 
-    uart0.println("udp_rx.bcc:" + String(udp_rx.bcc));
-    uart0.println("udp_rx.pkt_type:" + String(udp_rx.pkt_type));
-    uart0.println("udp_rx.app_id:" + String(udp_rx.app_id));
+    // uart0.println("udp_rx.bcc:" + String(udp_rx.bcc));
+    // uart0.println("udp_rx.pkt_type:" + String(udp_rx.pkt_type));
+    // uart0.println("udp_rx.app_id:" + String(udp_rx.app_id));
 
-    uart0.println("udp_rx.cmd:" + String(udp_rx.cmd));
-    uart0.println("udp_rx.len:" + String(udp_rx.len));
-    uart0.println("udp_rx.pageid:" + String(udp_rx.page_id));
+    // uart0.println("udp_rx.cmd:" + String(udp_rx.cmd));
+    // uart0.println("udp_rx.len:" + String(udp_rx.len));
+    // uart0.println("udp_rx.pageid:" + String(udp_rx.page_id));
 
     if (udp_rx.pkt_type == PC_01)
       cmd_switch(); // du lieu tach ntn để xử lí
