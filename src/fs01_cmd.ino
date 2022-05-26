@@ -157,6 +157,7 @@ void cmd_switch()
     switch (udp_rx.cmd)
     {
     case voice_download:
+    uart0.println("dang tai xuong");
         if (udp_rx.seg_type == seg_save)
         {
             len = udp_rx.seg_len;
@@ -200,11 +201,9 @@ void cmd_switch()
         string_send(list_file());
         break;
     case set_bip_on:
-        // Play_voice(Moi_dat_van_tay); // mời nhấc thẻ
-        // Play_voice(Van_tay_hop_le);
-        xacthucvantay = 1;
+        xacthucvantay = 1; 
         reset_7462("2xx3"); // du dang lam
-
+        
         break;
     case send_ev2:
         // reset_7462("2x7");
@@ -214,21 +213,18 @@ void cmd_switch()
     // remove("/a_" + String(udp_rx.page_id & 0xf) + ".wav");//xoa file
         break;
     case add_ssid:
-    String f1;
-    for(int i = 0; i < 10; i++){
-        f1="/a_"+String(i)+".wav";
-        if(remove(f1))
-        uart0.println("xoa oke");
-        else
-        uart0.println("xoa khong oke");
-    }
-        // len=0;
-        // while(len < udp_rx.len){
-        //     n = udp_rx.data[n];
-        //     if(len & 1) n >>= 8;
-        //     s += (char)(n & 0xff);
-        // }
-        // save_ssid(s);
+        String fl ;
+ 
+        for (int i = 0; i < 10; i++)
+        {
+            fl = "/a_"+String(i)+".wav";
+            if (remove(fl))
+            {
+                uart0.println("Xoa"+fl+" thanh cong");
+            }else{
+                uart0.println("Xoa "+fl+"  khong thanh cong");
+            }
+        }
         break;
     }
 }
@@ -239,8 +235,4 @@ void voice_init()
     ima_buf_cnt = 0;
     ima_haft = 0;
     timer_init(true);
-}
-
-void voice_generate(int segment)
-{
 }

@@ -26,21 +26,10 @@ bool read_buf(String f_name)
   }
   return false;
 }
-
-
-// bool deleteFile(int i){
-//    Serial.printf("Deleting file: %s\r\n", "/a_" + String(i) + ".wav");
-//    if(fs.remove("/a_" + String(i) + ".wav")){
-//       Serial.println("− file deleted");
-//    } else {
-//       Serial.println("− delete failed");
-//    }
-// }
 bool rename(String s_src, String s_dst)
 {
   return SPIFFS.rename(s_src, s_dst);
 }
-
 bool remove(String fname)
 {
   return SPIFFS.remove(fname);

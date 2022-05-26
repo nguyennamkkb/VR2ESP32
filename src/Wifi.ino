@@ -85,8 +85,8 @@ void UDP_receive()
       sss += s_hex.substring(n, n + 1);
     }
 
-    // add_to_serial("UDP res:" + sss+"\n");
-    // serial_out();
+    add_to_serial("UDP res:" + sss+"\n");
+    serial_out();
 
     // uart0.println("udp_rx.bcc:" + String(udp_rx.bcc));
     // uart0.println("udp_rx.pkt_type:" + String(udp_rx.pkt_type));
