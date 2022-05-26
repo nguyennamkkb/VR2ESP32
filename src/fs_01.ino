@@ -165,7 +165,7 @@ void setup()
 	uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 	// cmd_send(Get_Security, 2, 0);
 	// uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
-	
+
 	send_https("56_" + tbttid[0]);
 	read_iplocal();
 	timeClient.begin();
@@ -378,3 +378,12 @@ void biper2()
 	biper1();
 	biper1();
 }
+
+void Play_voice(int code)
+{
+	if (read_buf("/a_" + String(code) + ".wav"))
+	{
+		voice_init();
+	}
+}
+

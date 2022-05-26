@@ -16,15 +16,9 @@ void wifi_setup()
       wifiMulti.addAP(ssid_name, ssid_pass);
     }
   }
-<<<<<<< HEAD
-  wifiMulti.addAP("The_Daudoc", "hoianhnam");
-  // wifiMulti.addAP("VimassPhonghop","vimass8888");
-  // wifiMulti.addAP("FPT_Telecom","bat4gdiban");
-=======
 // wifiMulti.addAP("The_Daudoc","hoianhnam");
 // wifiMulti.addAP("VimassPhonghop","vimass8888");
 wifiMulti.addAP("FPT_Telecom","bat4gdiban");
->>>>>>> 6e170148d587d6a8d1281027dd1fa881d17f3d25
   WiFi.setAutoReconnect(true);
   uint8 sec_cnt = 0;
   wifi_on = 0;
@@ -67,9 +61,6 @@ void UDP_receive()
   if (n)
   {
     myUDP.read(udp_in_buf, sizeof(udp_in_buf));
-
-    //
-
     if (n != sizeof(udp_rx))
       return;
     if (get_bcc(udp_in_buf, n) != 0x55)
@@ -94,16 +85,16 @@ void UDP_receive()
       sss += s_hex.substring(n, n + 1);
     }
 
-    add_to_serial("UDP res:" + sss+"\n");
-    serial_out();
+    // add_to_serial("UDP res:" + sss+"\n");
+    // serial_out();
 
-    uart0.println("udp_rx.bcc:" + String(udp_rx.bcc));
-    uart0.println("udp_rx.pkt_type:" + String(udp_rx.pkt_type));
-    uart0.println("udp_rx.app_id:" + String(udp_rx.app_id));
+    // uart0.println("udp_rx.bcc:" + String(udp_rx.bcc));
+    // uart0.println("udp_rx.pkt_type:" + String(udp_rx.pkt_type));
+    // uart0.println("udp_rx.app_id:" + String(udp_rx.app_id));
 
-    uart0.println("udp_rx.cmd:" + String(udp_rx.cmd));
-    uart0.println("udp_rx.len:" + String(udp_rx.len));
-    uart0.println("udp_rx.pageid:" + String(udp_rx.page_id));
+    // uart0.println("udp_rx.cmd:" + String(udp_rx.cmd));
+    // uart0.println("udp_rx.len:" + String(udp_rx.len));
+    // uart0.println("udp_rx.pageid:" + String(udp_rx.page_id));
 
     if (udp_rx.pkt_type == PC_01)
       cmd_switch(); // du lieu tach ntn để xử lí
