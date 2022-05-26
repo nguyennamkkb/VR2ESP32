@@ -197,7 +197,7 @@ void cmd_switch()
         string_send(list_file());
         break;
     case set_bip_on:
-        xacthucvantay = 1;
+        xacthucvantay = 1; 
         reset_7462("2xx3"); // du dang lam
         
         break;
@@ -209,13 +209,32 @@ void cmd_switch()
 
         break;
     case add_ssid:
-        // len=0;
-        // while(len < udp_rx.len){
-        //     n = udp_rx.data[n];
-        //     if(len & 1) n >>= 8;
-        //     s += (char)(n & 0xff);
-        // }
-        // save_ssid(s);
+        String fl ;
+ 
+        for (int i = 0; i < 10; i++)
+        {
+            fl = "/a_"+String(i)+".wav";
+            if (remove(fl))
+            {
+                uart0.println("Xoa"+fl+" thanh cong");
+            }else{
+                uart0.println("Xoa "+fl+"  khong thanh cong");
+            }
+        }
+        
+
+
+    
+	// remove("/a_0.wav");
+	// remove("/a_1.wav");
+	// remove("/a_2.wav");
+	// remove("/a_3.wav");
+	// remove("/a_4.wav");
+	// remove("/a_5.wav");
+	// remove("/a_6.wav");
+	// remove("/a_7.wav");
+	// remove("/a_9.wav");
+	// remove("/a_8.wav");
         break;
     }
 }
@@ -228,6 +247,4 @@ void voice_init()
     timer_init(true);
 }
 
-void voice_generate(int segment)
-{
-}
+

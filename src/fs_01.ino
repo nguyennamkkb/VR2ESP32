@@ -171,6 +171,8 @@ void setup()
 	timeClient.begin();
 	timeClient.setTimeOffset(+7 * 60 * 60);
 	bipok1();
+
+
 }
 void IRAM_ATTR fp_isr()
 {
