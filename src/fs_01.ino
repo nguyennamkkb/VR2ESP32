@@ -68,7 +68,7 @@ int16 hd_ok = 0, rx_pkt_len, rx_cnt = 0, pkt_type, check_sum, check_sum_ok;
 uint8 ima_buf[ima_buf_max];
 int16 voice_len, pwm_val, pwm_on = 0, ima_buf_cnt = 0, sin_cnt = 0, ima_haft = 0, pwm_send = 0;
 uint8 pwm_tmp;
-int16 n_prefix, response, ret, ret_code, door_cnt = 0;
+int16 n_prefix, response, ret, ret_code, door_cnt, fp_index = 0;
 int16 bip_on = 0, fs01_on = 0, fp_auto_off, fp_on_duration, fp_on_max;
 // bool TrangThaiThanhToanDich
 bool Validate = false;

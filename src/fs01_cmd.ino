@@ -222,19 +222,6 @@ void cmd_switch()
             }
         }
         
-
-
-    
-	// remove("/a_0.wav");
-	// remove("/a_1.wav");
-	// remove("/a_2.wav");
-	// remove("/a_3.wav");
-	// remove("/a_4.wav");
-	// remove("/a_5.wav");
-	// remove("/a_6.wav");
-	// remove("/a_7.wav");
-	// remove("/a_9.wav");
-	// remove("/a_8.wav");
         break;
     }
 }
