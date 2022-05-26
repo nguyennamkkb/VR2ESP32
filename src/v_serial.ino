@@ -66,6 +66,7 @@ void serial_test()
 
 							ret = cmd_rx.data[0];
 							ret_code = cmd_rx.data[1];
+							fp_index = cmd_rx.data[1];
 							memcpy(udp_tx.cmd_rx.prefix, cmd_rx.prefix, sizeof(cmd_rx));
 							if (ret == 0)
 							{
@@ -74,15 +75,20 @@ void serial_test()
 								case Test_Connection:
 									fs01_on = 1;
 									break;
-								case Identify:
-									// fp_auto_off=500;
-									break;
 								case Verify_Feature:
 									// fp_auto_off=500;
 									cmd_send(Verify_Feature, 498, 0);
 									uart1.write(data_tx.prefix, 498 + 8);
 									break;
 								case Read_Page:
+									break;
+
+								case Identify:
+									uart0.println("index FP"+ String(fp_index)); 
+									if (fp_index>0)
+									{
+										Play_voice(Xin_cam_on);
+									}
 									break;
 								case Enroll_RAM:
 									// ghivantay=1;//du them
@@ -99,18 +105,18 @@ void serial_test()
 							}
 							else
 							{
-								if (ret == 0)
-								{
-									switch (cmd_rx.rcm)
-									{
-									case Identify:
-										fp_auto_off = 0;
-										break;
-									case Verify_Feature:
-										// fp_auto_off=500;
-										break;
-									}
-								}
+								// if (ret == 0)
+								// {
+								// 	switch (cmd_rx.rcm)
+								// 	{
+								// 	case Identify:
+								// 		fp_auto_off = 0;
+								// 		break;
+								// 	case Verify_Feature:
+								// 		// fp_auto_off=500;
+								// 		break;
+								// 	}
+								// }
 							}
 							hd_ok = rx_cnt = 0;
 							udp_tx.pkt_type = FS01_CMD;

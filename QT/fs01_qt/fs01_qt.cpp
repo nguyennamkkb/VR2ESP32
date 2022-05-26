@@ -516,7 +516,9 @@ quint8 buf8[1024];
     ba.resize(sizeof(u->udp_tx));
     memcpy(ba.data(),&u->udp_tx.bcc,ba.size());
     u->socket_send(ba);
+    txt_append(ba.data());
     qDebug() << "wav sending " << len << seg << voice_ba.size();
+
 }
 
 qint16 fs01_qt::string_to_int(QString s){

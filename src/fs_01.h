@@ -83,7 +83,7 @@ const int16 cmd_len[]={
     Identify_Free,0, Set_Psw,14, Verify_Psw,14, Get_Enroll_Count,0, Change_Page,2,
     FP_Cancel,0, Test_Connection,0, Incorrect_Command,0
 };
-enum {  Moi_dat_van_tay, Van_tay_hop_le, Van_tay_khong_hop_le, Xac_thuc_thanh_cong, Xac_thuc_khong_thanh_cong, Moi_dat_the};
+enum {  Moi_dat_van_tay, Xin_cam_on, Moi_dat_the, Thanh_cong, Khong_thanh_cong};
 enum {  seg_begin,seg_append,seg_save};
 enum {  voice_download, voice_play, file_rename, file_list, set_bip_on, send_ev2, add_ssid};
 

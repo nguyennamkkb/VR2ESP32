@@ -225,6 +225,7 @@ void cmd_switch()
                 uart0.println("Xoa "+fl+"  khong thanh cong");
             }
         }
+        
         break;
     }
 }
