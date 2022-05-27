@@ -59,7 +59,7 @@ void Udp_thread::bcast_out(){
     if(udp_on){
             ba=get_bcc(ba,0x55);
             wifi_socket->writeDatagram(ba,QHostAddress(bcast_ip),5000);
-            qDebug() << "udp out" << fs01->ba_to_string(ba);
+//            qDebug() << "udp out" << fs01->ba_to_string(ba);
     }
 }
 
@@ -68,7 +68,7 @@ void Udp_thread::socket_send(QByteArray ba)
         ba=get_bcc(ba,0x55);
         if(!esp_ip.endsWith("255")){
             wifi_socket->writeDatagram(ba,QHostAddress(esp_ip),5000);
-            qDebug() << "udp out" << fs01->ba_to_string(ba);
+//            qDebug() << "udp out" << fs01->ba_to_string(ba);
         }
     }
 }

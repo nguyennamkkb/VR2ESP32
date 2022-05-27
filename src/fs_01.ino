@@ -51,6 +51,7 @@ String iplocal[1];
 String fp_save[5];
 int trangthailenhtumaytinh = 0;
 int ghivantay = 0;
+int play_index= -1;
 // int demghivt = 0;
 String uid_the = ""; // uid cua the
 // == ip may chu mang noi bo
@@ -383,9 +384,13 @@ void biper2()
 
 void Play_voice(int code)
 {
-	if (read_buf("/a_" + String(code) + ".wav"))
+	// uart0.println("play void:"+ String(code)+", play_index:"+play_index); 
+	if (play_index !=  code)
 	{
-		voice_init();
+		read_buf("/a_" + String(code) + ".wav");
 	}
+	play_index =  code;
+	voice_init();
+	
 }
 

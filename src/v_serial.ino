@@ -61,12 +61,14 @@ void serial_test()
 						
 						if (rx_cnt == 24)
 						{
-							FS01_RES("FS01_cmd");
+							// FS01_RES("FS01_cmd");
 							memcpy(cmd_rx.prefix, rx_buf, sizeof(cmd_rx));
-
+			
 							ret = cmd_rx.data[0];
 							ret_code = cmd_rx.data[1];
-							fp_index = cmd_rx.data[1];
+							// uart0.println("cmd_rx.data[0]"+ String(cmd_rx.data[0])); 
+							// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1])); 
+							// uart0.println("cmd_rx.data[2]"+ String(cmd_rx.data[2])); 
 							memcpy(udp_tx.cmd_rx.prefix, cmd_rx.prefix, sizeof(cmd_rx));
 							if (ret == 0)
 							{
@@ -85,7 +87,8 @@ void serial_test()
 
 								case Identify:
 									// uart0.println("index FP"+ String(fp_index)); 
-									if (fp_index>0)
+									if (ret_code == -12) break;									
+									if (ret_code>0)
 									{
 										Play_voice(Xin_cam_on);
 									}
@@ -93,6 +96,14 @@ void serial_test()
 								case Enroll_RAM:
 									// ghivantay=1;//du them
 									// uart0.println("layvantay");
+									// uart0.println("cmd_rx.data[0]"+ String(cmd_rx.data[0])); 
+									// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1])); 
+									// uart0.println("cmd_rx.data[2]"+ String(cmd_rx.data[2])); 
+									
+									if (ret_code == -15 || ret_code == -13) {
+										delay(1000);
+										Play_voice(Moi_dat_van_tay);
+									}
 									if (ret_code == 0)
 									{
 										// fp_auto_off=500;
@@ -101,22 +112,40 @@ void serial_test()
 										uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
 									}
 									break;
+								case Enroll_1:
+									if (ret_code == -12) break;		
+									Play_voice(Thanh_cong);
+									break;
 								}
 							}
 							else
 							{
-								// if (ret == 0)
-								// {
-								// 	switch (cmd_rx.rcm)
-								// 	{
-								// 	case Identify:
-								// 		fp_auto_off = 0;
-								// 		break;
-								// 	case Verify_Feature:
-								// 		// fp_auto_off=500;
-								// 		break;
-								// 	}
-								// }
+
+								// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1])); 	
+								switch (cmd_rx.rcm)
+								{
+								case Test_Connection:
+									fs01_on = 1;
+									break;
+								case Verify_Feature:
+									
+									break;
+								case Read_Page:
+									break;
+
+								case Identify:
+									
+									break;
+								case Enroll_RAM:
+									
+									break;
+								
+								case Enroll_1:
+									if (cmd_rx.data[1] > 1) break;
+									Play_voice(Khong_thanh_cong);
+									break;
+								}
+        						
 							}
 							hd_ok = rx_cnt = 0;
 							udp_tx.pkt_type = FS01_CMD;
@@ -128,7 +157,7 @@ void serial_test()
 						
 						if (rx_cnt == (6 + rx_pkt_len + 2))
 						{
-							FS01_RES("FS01_data");
+							// FS01_RES("FS01_data");
 							memcpy(data_rx.prefix, rx_buf, sizeof(data_rx));
 							ret = rx_buf[9];
 							ret_code = data_rx.data[1];
@@ -150,6 +179,7 @@ void serial_test()
 								}
 								// uart0.println("bat dau ghi vt:"); // Thông báo đặt thẻ ghi vân tay
 								// hamghivantayvaothe
+
 								ghivantay = 1;
 								ghivantayvaothe(sss);
 							}
@@ -293,8 +323,8 @@ void serial2_test()
 							String sout = "";
 							ghivantay = 0;
 							setbip(Thanh_Cong);
-							Play_voice(Moi_dat_van_tay); // mời nhấc thẻ
-							Play_voice(Van_tay_hop_le);
+							// Play_voice(Moi_dat_van_tay); // mời nhấc thẻ
+							// Play_voice(Van_tay_hop_le);
 							serial2_in.remove(0, 3);
 							if (duong_ra == ra_udp && hangdoi_Front() != "")
 							{
@@ -438,8 +468,9 @@ String hextostr(String s1)
 void ghivantayvaothe(String vantay)
 {
 	// reset_7462("2x7");// bat dau ghi xac thuc
-	setbip(Cham_the);
-	delay(1000);
+	// setbip(Cham_the);
+	// delay(1000);
+	Play_voice(Moi_dat_the);
 	String s = "", snew1 = "2" + uid_the + "$114000";
 	vantay += "0000";
 	uart0.println(vantay);

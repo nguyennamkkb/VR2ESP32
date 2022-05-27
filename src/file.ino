@@ -16,6 +16,7 @@ bool write_buf(String f_name, uint8 *buf, int16 len)
 bool read_buf(String f_name)
 {
   // timer_init(false);
+  
   File f = SPIFFS.open(f_name, "r");
   while (f.available())
   {

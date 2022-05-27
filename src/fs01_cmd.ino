@@ -119,6 +119,11 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
         get_tx_cks(len);
         break;
     }
+      if (cmd ==  Enroll_1)
+      {delay(1000);
+        Play_voice(Moi_dat_van_tay);
+        delay(1000);
+      }
 }
 bool cmd_found(int16 cmd)
 {
@@ -157,7 +162,7 @@ void cmd_switch()
     switch (udp_rx.cmd)
     {
     case voice_download:
-    uart0.println("dang tai xuong");
+    // uart0.println("dang tai xuong");
         if (udp_rx.seg_type == seg_save)
         {
             len = udp_rx.seg_len;
@@ -165,6 +170,7 @@ void cmd_switch()
                 len = ima_seg_len;
             memcpy(&ima_buf[voice_len], udp_rx.data, len);
             voice_len += len;
+
             if (write_buf("/a_" + String(udp_rx.page_id & 0xf) + ".wav", ima_buf, voice_len))
                 led_reset = 10;
         }
