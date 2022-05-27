@@ -84,7 +84,7 @@ void serial_test()
 									break;
 
 								case Identify:
-									uart0.println("index FP"+ String(fp_index)); 
+									// uart0.println("index FP"+ String(fp_index)); 
 									if (fp_index>0)
 									{
 										Play_voice(Xin_cam_on);
