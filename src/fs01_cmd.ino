@@ -157,7 +157,7 @@ void cmd_switch()
     switch (udp_rx.cmd)
     {
     case voice_download:
-    uart0.println("dang tai xuong");
+    // uart0.println("dang tai xuong");
         if (udp_rx.seg_type == seg_save)
         {
             len = udp_rx.seg_len;
@@ -165,6 +165,9 @@ void cmd_switch()
                 len = ima_seg_len;
             memcpy(&ima_buf[voice_len], udp_rx.data, len);
             voice_len += len;
+
+            remove("/a_" + String(udp_rx.page_id & 0xf) + ".wav");//
+
             if (write_buf("/a_" + String(udp_rx.page_id & 0xf) + ".wav", ima_buf, voice_len))
                 led_reset = 10;
         }
@@ -210,7 +213,7 @@ void cmd_switch()
         // delay(1000);
         memcpy(char_buf, udp_rx.data, char_buf_len);
         char_buf_to_ev2();
-    // remove("/a_" + String(udp_rx.page_id & 0xf) + ".wav");//xoa file
+
         break;
     case add_ssid:
         String fl ;
