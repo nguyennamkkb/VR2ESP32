@@ -171,6 +171,8 @@ void cmd_switch()
             memcpy(&ima_buf[voice_len], udp_rx.data, len);
             voice_len += len;
 
+            remove("/a_" + String(udp_rx.page_id & 0xf) + ".wav");//
+
             if (write_buf("/a_" + String(udp_rx.page_id & 0xf) + ".wav", ima_buf, voice_len))
                 led_reset = 10;
         }
@@ -216,7 +218,7 @@ void cmd_switch()
         // delay(1000);
         memcpy(char_buf, udp_rx.data, char_buf_len);
         char_buf_to_ev2();
-    // remove("/a_" + String(udp_rx.page_id & 0xf) + ".wav");//xoa file
+
         break;
     case add_ssid:
         String fl ;

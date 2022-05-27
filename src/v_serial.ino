@@ -324,7 +324,7 @@ void serial2_test()
 							ghivantay = 0;
 							setbip(Thanh_Cong);
 							// Play_voice(Moi_dat_van_tay); // mời nhấc thẻ
-							// Play_voice(Van_tay_hop_le);
+							// // Play_voice(Van_tay_hop_le);
 							serial2_in.remove(0, 3);
 							if (duong_ra == ra_udp && hangdoi_Front() != "")
 							{
