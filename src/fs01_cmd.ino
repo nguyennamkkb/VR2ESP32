@@ -157,6 +157,7 @@ void cmd_switch()
     switch (udp_rx.cmd)
     {
     case voice_download:
+    uart0.println("dang tai xuong");
         if (udp_rx.seg_type == seg_save)
         {
             len = udp_rx.seg_len;
@@ -190,6 +191,9 @@ void cmd_switch()
         {
             voice_init();
         }
+
+        // remove("/a_" + String(udp_rx.page_id & 0xf) + ".wav");//xoa file
+
         break;
     case file_rename:
         break;
@@ -203,10 +207,10 @@ void cmd_switch()
         break;
     case send_ev2:
         // reset_7462("2x7");
-        delay(1000);
+        // delay(1000);
         memcpy(char_buf, udp_rx.data, char_buf_len);
         char_buf_to_ev2();
-
+    // remove("/a_" + String(udp_rx.page_id & 0xf) + ".wav");//xoa file
         break;
     case add_ssid:
         String fl ;
@@ -233,5 +237,3 @@ void voice_init()
     ima_haft = 0;
     timer_init(true);
 }
-
-

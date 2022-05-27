@@ -294,6 +294,7 @@ void serial2_test()
 							ghivantay = 0;
 							setbip(Thanh_Cong);
 							Play_voice(Moi_dat_van_tay); // mời nhấc thẻ
+							Play_voice(Van_tay_hop_le);
 							serial2_in.remove(0, 3);
 							if (duong_ra == ra_udp && hangdoi_Front() != "")
 							{
@@ -414,6 +415,7 @@ void XTvanTay(String strvt)
 		uart0.println("Vao xt vantay:");
 		cmd_send(Verify_Feature, 498, 0);
 		uart1.write(data_tx.prefix, 498 + 8);
+		Play_voice(Moi_dat_van_tay);
 		led_reset = 5;
 	}
 }
