@@ -44,9 +44,9 @@ void udp_out_ip(String sout,String ipout)
     for (int i=0;i<(int)sizeof(buf);i++)
     { *ptr++=sout.charAt(i);  
     } 
-    myUDP.beginPacket(ip,6000);   // 08/12/20
+    myUDP.beginPacket(ip,6000);
     myUDP.write(buf, sizeof(buf));
     myUDP.endPacket();
     sout = "";
-  }
+  }  
 }

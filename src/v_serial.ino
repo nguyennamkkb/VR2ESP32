@@ -91,6 +91,7 @@ void serial_test()
 									if (ret_code>0)
 									{
 										Play_voice(Xin_cam_on);
+										mocua();
 									}
 									break;
 								case Enroll_RAM:

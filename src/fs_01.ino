@@ -129,17 +129,20 @@ struct cfg_struct
 	int16 page_delay[4];
 };
 cfg_struct v_cfg;
-
-// WiFiUDP ntpUDP;
-// NTPClient timeClient(ntpUDP);
 void setup()
 {
 	pinMode(LED1, OUTPUT);
 	pinMode(LED2, OUTPUT);
 	pinMode(COI, OUTPUT);
+	pinMode(rs485_ctrl, OUTPUT);
+	pinMode(door_gate, OUTPUT);
 	pinMode(fp_detect_pin, INPUT_PULLDOWN);
 	coi_off;
 	off_led2;
+
+	Serial.begin(115200, SERIAL_8N1);
+	Serial2.begin(115200, SERIAL_8N1);
+	Serial1.begin(115200, SERIAL_8N1, pin_rx1, pin_tx1);
 	file_ok = (SPIFFS.begin(true)) ? 1 : 0;
 	my_mac = WiFi.macAddress();
 	ms64 = millis();
@@ -147,33 +150,20 @@ void setup()
 	delay(1000);
 	digitalWrite(12, 0);
 	delay(1000);
-	pinMode(rs485_ctrl, OUTPUT);
-	pinMode(door_gate, OUTPUT);
 	rs485_out;
-	Serial.begin(115200, SERIAL_8N1);
-	Serial2.begin(115200, SERIAL_8N1);
-	Serial1.begin(115200, SERIAL_8N1, pin_rx1, pin_tx1);
 	wifi_setup();
 	ota_init();
 	s_log = SPIFFS.begin(true) ? "FS Ok" : "FS fail";
 	s_log += " size= " + String(SPIFFS.totalBytes() >> 10);
 	s_log += " used= " + String(SPIFFS.usedBytes() >> 10);
 	pwm_init();
-	// cmd_send(Test_Connection, 0, 0);
-	// uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
-	// delay(100);
 	cmd_send(Set_Security, 2, 0);
 	uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
-	// cmd_send(Get_Security, 2, 0);
-	// uart1.write(cmd_tx.prefix, sizeof(cmd_tx));
-
 	send_https("56_" + tbttid[0]);
 	read_iplocal();
 	timeClient.begin();
 	timeClient.setTimeOffset(+7 * 60 * 60);
 	bipok1();
-
-
 }
 void IRAM_ATTR fp_isr()
 {
@@ -227,6 +217,7 @@ void millis_1()
 	serial_test();
 	serial2_test();
 	serial2_out_test();
+    digitalWrite(door_gate,1);//cua dong
 	UDP_receive();
 	ms10 &= 0xf;
 	if (++ms10 > 9) // vong lap 10ms
@@ -394,3 +385,15 @@ void Play_voice(int code)
 	
 }
 
+void dongcua(){
+	bipok2();
+	digitalWrite(door_gate,1);
+	Serial.println("cua dong\n");
+	delay(1000);
+}
+void mocua(){
+	bipok1();
+	digitalWrite(door_gate,0);
+	Serial.println("cua mo\n");
+	delay(1000);
+}

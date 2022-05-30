@@ -93,13 +93,6 @@ void resetServicesStatus()
 	solannhapmk=0;
 }
 
-void mocua(){
-	door_open;
-	bipok1();
-	//add_to_serial("cua2---");
-	// serial_out();
-}
-
 void ram_rd(String s)
 {	for(int i=0;i<v_fx.dv_index_max;i++)
 	{	if (s.length() < 3500)	s += "dv"+n_fix_len(i,2)+dv_td[i]+"_";

@@ -1,8 +1,6 @@
 #ifndef V_H_
 #define V_H_
-// #include <Enum.h>
 #include "fs_01.h"
-
 #define rx_max 1024
 #define fx_waiting 0
 #define dv_selecting 1
@@ -35,34 +33,25 @@
 #define FS01_CMD                     0x2
 #define FS01_DATA                    0x3
 #define FS01_02                      0x4
-
 #define PC_BCAST                     0x10
 #define PC_01                        0x11
 #define PC_02                        0x12
-
 #define FS02_STRING                  0x20
 #define FS02_BCAST                   0x21
 #define FS02_CMD                     0x22
 #define FS02_DATA                    0x23
 #define FS02_01                      0x24
-
-//Out1 14, Out2 12 In1 18 In2 19
-//Buzz 23 led 26 Door 33 RS485 32
 #define nfc_to_pc 0x31
 #define pc_to_nfc 0x32
 #define pc_to_lcd 0x33
 #define nfc_to_lcd 0x34
 #define esp_to_pc 0x35
 #define pc_to_esp 0x36
-
 #define pc_to_https 0x37
 #define rs485_query 0x38
 #define wifi_reset 0x39
-
 #define ram_write 0x41
 #define wifi_write 0x42
-
-
 #define pwm_ch 0
 #define freq  78125
 #define pwm_bit  9
@@ -86,28 +75,19 @@ const String s_hex="0123456789ABCDEF";
 #define pin_tx1   27
 #define pin_rx1   14
 
-#define buzze_ctrl 23
+// #define buzze_ctrl 23
 #define rs485_ctrl 32
-#define door_gate 33
+#define door_gate 25
 
 #define pwm_pin 26      // 34
 #define fp_detect_pin 4 //36
 #define master_in 36
-
-// #define PCBA1
-// #ifdef PCBA1
-//         #define LED1 26
-// #else
-//         #define LED1 13
-// #endif
 #define door_open digitalWrite(door_gate,1)
 #define door_close digitalWrite(door_gate,0)
-#define off_led1 digitalWrite(LED1, 1)
-#define on_led1 digitalWrite(LED1, 0)
 #define rs485_out digitalWrite(rs485_ctrl,1)
 #define rs485_in digitalWrite(rs485_ctrl,0)
-#define buzze_on digitalWrite(buzze_ctrl,1)
-#define buzze_off digitalWrite(buzze_ctrl,0)
+// #define buzze_on digitalWrite(buzze_ctrl,1)
+// #define buzze_off digitalWrite(buzze_ctrl,0)
 
 
 /* coi thong bao
