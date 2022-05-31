@@ -182,6 +182,7 @@ void serial_test()
 								// hamghivantayvaothe
 
 								ghivantay = 1;
+								// Play_voice(Moi_dat_the);
 								ghivantayvaothe(sss);
 							}
 							else
@@ -492,8 +493,7 @@ void ghivantayvaothe(String vantay)
 void FS01_RES(String s1)
 {
 	String sss = "";
-	uint8 n8, n;
-	for (int i = 0; i < rx_cnt; i++)
+	uint8 n8, n;s 
 	{
 		// datavantay[i] = rx_buf[i + 8];
 		n8 = cmd_rx.prefix[i];
