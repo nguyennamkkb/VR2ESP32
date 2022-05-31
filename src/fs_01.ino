@@ -53,7 +53,7 @@ int trangthailenhtumaytinh = 0;
 int ghivantay = 0;
 int play_index= -1;
 // int demghivt = 0;
-String uid_the = ""; // uid cua the
+String uid_the = "",vid_the ="",ma_tbi="",data_chamcong=""; // uid cua the
 // == ip may chu mang noi bo
 String tbttid[1];
 // ======tham so confirm
@@ -396,4 +396,18 @@ void mocua(){
 	digitalWrite(door_gate,0);
 	Serial.println("cua mo\n");
 	delay(1000);
+}
+
+void bip4_no_internet(){
+  coi_on;
+  delay(300);
+  coi_off;
+  delay(300);
+  coi_on;
+  delay(300);
+  coi_off;
+  delay(300);
+  coi_on;
+  delay(300);
+
 }

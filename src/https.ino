@@ -313,3 +313,42 @@ void payment_confirmation(String s)
 	idDelayConfirm[0] = "";
 	httpMC.end();   //Close connection
 }
+
+
+void getms(String data){
+		String uid1 = "1";
+		if(WiFi.status()== WL_CONNECTED){
+			httpMC.setReuse(true);
+			data = https_encode(data);
+			httpMC.begin("http://192.168.100.201:8080/doorservices/services/v1/openthedoor?param="+data );
+			Serial.println(data);
+			
+			int httpCode = httpMC.GET();  
+			httpMC.setConnectTimeout(5000);
+
+			if (httpCode > 0)
+			{ //Check the returning code
+				String sout = httpMC.getString();   //Get the request response payload
+				Serial.println("http out:"+sout);
+				if(sout.equals(uid1) == 1){
+					mocua();
+				}
+				else
+				{
+					if (sout.equals("err4")){
+						mocua();
+					}else{
+						dongcua();
+					}
+				}
+			}else{
+				mocua();
+			}
+			httpMC.end();
+	}else{
+		bip4_no_internet();
+		mocua(); 
+        wifi_setup();
+         
+	}
+}

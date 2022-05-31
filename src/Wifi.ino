@@ -16,8 +16,8 @@ void wifi_setup()
       wifiMulti.addAP(ssid_name, ssid_pass);
     }
   }
-wifiMulti.addAP("The_Daudoc","hoianhnam");
-// wifiMulti.addAP("VimassPhonghop","vimass8888");
+// wifiMulti.addAP("The_Daudoc","hoianhnam");
+wifiMulti.addAP("VimassPhongHop","vimass8888");
 // wifiMulti.addAP("FPT_Telecom","bat4gdiban");
   WiFi.setAutoReconnect(true);
   uint8 sec_cnt = 0;

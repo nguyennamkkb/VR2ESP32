@@ -274,8 +274,12 @@ void serial2_test()
 							if (serial2_in.startsWith("^135"))
 							{
 								uid_the = serial2_in.substring(5, 19);
-								add_to_serial("uid =:" + uid_the);
-								serial_out();
+								vid_the = serial2_in.substring(76, 83);
+								ma_tbi = serial2_in.substring(20, 53);
+								data_chamcong = "010202010307"+vid_the+"0414"+uid_the+"0532"+ma_tbi;
+								getms(data_chamcong);
+								// add_to_serial("data_chamcong:" + data_chamcong);
+								// serial_out();
 							}
 							TrangThaiThanhToan = false;
 							magiaodich = "";
@@ -312,6 +316,7 @@ void serial2_test()
 							if (demghi > 4)
 							{
 								demghi = 0;
+								ghivantay = 0;
 								// uid_the = "";
 							}
 						}
@@ -322,7 +327,7 @@ void serial2_test()
 						else if (serial2_in.startsWith("^4"))
 						{
 							String sout = "";
-							ghivantay = 0;
+							// ghivantay = 0;
 							setbip(Thanh_Cong);
 							// Play_voice(Moi_dat_van_tay); // mời nhấc thẻ
 							// // Play_voice(Van_tay_hop_le);
@@ -469,9 +474,10 @@ String hextostr(String s1)
 void ghivantayvaothe(String vantay)
 {
 	// reset_7462("2x7");// bat dau ghi xac thuc
-	// setbip(Cham_the);
+	setbip(Cham_the);
 	// delay(1000);
-	Play_voice(Moi_dat_the);
+	// Play_voice(Moi_dat_the);
+	// delay(500);
 	String s = "", snew1 = "2" + uid_the + "$114000";
 	vantay += "0000";
 	uart0.println(vantay);
