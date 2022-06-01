@@ -297,7 +297,7 @@ void serial2_test()
 							}
 							else
 							{
-								// reset_7462("2xx3"); // du dang lam
+								// reset_7462("2xx1"); // du dang lam
 								// xacthucvantay = 1;
 								// reset_7462("2x7");//lenh ghi vào7
 								// gốc
@@ -305,6 +305,10 @@ void serial2_test()
 								// delay(1000);
 								// 	if (wifi_on) send_https(s);
 							}
+						}
+						else if (serial2_in.startsWith("^5"))
+						{
+
 						}
 						else if (serial2_in.startsWith("^6"))
 						{
