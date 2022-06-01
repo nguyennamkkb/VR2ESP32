@@ -493,7 +493,8 @@ void ghivantayvaothe(String vantay)
 void FS01_RES(String s1)
 {
 	String sss = "";
-	uint8 n8, n;s 
+	uint8 n8, n;
+	for (int i = 0; i < rx_cnt; i++)
 	{
 		// datavantay[i] = rx_buf[i + 8];
 		n8 = cmd_rx.prefix[i];

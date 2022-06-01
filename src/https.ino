@@ -331,6 +331,7 @@ void getms(String data){
 				String sout = httpMC.getString();   //Get the request response payload
 				Serial.println("http out:"+sout);
 				if(sout.equals(uid1) == 1){
+					Play_voice(Xin_cam_on);
 					mocua();
 				}
 				else

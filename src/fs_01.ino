@@ -392,7 +392,7 @@ void dongcua(){
 	delay(1000);
 }
 void mocua(){
-	bipok1();
+	// bipok1();
 	digitalWrite(door_gate,0);
 	Serial.println("cua mo\n");
 	delay(1000);
