@@ -316,8 +316,8 @@ void serial2_test()
 							}
 							else
 							{
-								reset_7462("2xx1"); // du dang lam
-								xacthuckhuonmat = 1;
+								// reset_7462("2xx1"); // du dang lam
+								// xacthuckhuonmat = 1;
 								// reset_7462("2x7");//lenh ghi vào7
 								// gốc
 								// reset_7462("2x3");
