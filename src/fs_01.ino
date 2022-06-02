@@ -63,7 +63,7 @@ String dataServices[1];
 uint8 datavantay[500];
 uint8 rx_buf[rx_max];
 // uint8 datavantay[rx_max];
-String serial_in, params_str, serial2_out, serial2_in, vantay = "";
+String serial_in, params_str, serial2_out, serial2_in, vantay = "",khuonmat="";
 int16 page_id;
 int16 hd_ok = 0, rx_pkt_len, rx_cnt = 0, pkt_type, check_sum, check_sum_ok;
 uint8 ima_buf[ima_buf_max];
@@ -76,7 +76,7 @@ bool Validate = false;
 bool TrangThaiThanhToan = false;
 bool DichVuMayTram = false;
 bool TrangThaiCacheCard = false;
-bool xacthucvantay = 0;
+bool xacthucvantay = 0,xacthuckhuonmat = 0, xacthutiengnoi = 0;
 // int demghivt =1;
 char ssid_name[32], ssid_pass[32];
 String ds_name[ds_max][sub_ds_max];
@@ -98,7 +98,7 @@ udp_rx_header udp_rx;
 udp_tx_header udp_tx;
 int8 n_time[6];
 
-int16 vtlen = 0;
+int16 vtlen = 0,kmlen = 0;
 
 struct struct_max
 {

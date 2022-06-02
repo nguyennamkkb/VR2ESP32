@@ -214,11 +214,11 @@ void serial2_test()
 			{
 				serial2_in += (char)(n & 0xff);
 				// bd1
-				if (xacthucvantay == 1)
+				if (xacthucvantay == 1 || xacthuckhuonmat == 1 || xacthutiengnoi == 1)
 				{
 					if (serial2_in.endsWith("!"))
 					{
-						if (serial2_in.startsWith("^7"))
+						if (serial2_in.startsWith("^5") ||serial2_in.startsWith("^6") ||serial2_in.startsWith("^7"))
 						{
 							serial2_in = serial2_in;
 						}
@@ -233,8 +233,8 @@ void serial2_test()
 						serial2_in.remove(serial2_in.length() - 3, 3); // remove #
 						if (serial2_in.substring(0, 1) == "!")
 							serial2_in.remove(0, 1);
-						// add_to_serial("7462 nhan" + hextostr(serial2_in));
-						// serial_out();
+						add_to_serial("7462 nhan" + hextostr(serial2_in));
+						serial_out();
 						if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 						{
 							serial2_in.remove(0, 2);
@@ -251,6 +251,23 @@ void serial2_test()
 								// ghivantay = 0;
 							}
 						}
+						else if (serial2_in.startsWith("^5") && xacthuckhuonmat == 1)
+						{
+							serial2_in.remove(0, 2);
+							kmlen += serial2_in.length();
+							khuonmat += serial2_in;
+							serial2_in = "";
+							// if (kmlen == 512)
+							// {
+							// 	khuonmat.remove(khuonmat.length() - 2, 2);
+							// 	khuonmat = "";
+							// 	xacthuckhuonmat = 0;
+							// 	kmlen = 0;
+							// 	// ghivantay = 0;
+							// }
+						}
+						
+
 					}
 				}
 				else
@@ -264,7 +281,9 @@ void serial2_test()
 					{
 
 						serial2_in.remove(serial2_in.length() - 1, 1); // remove #
-						add_to_serial("7462 out: " + serial2_in);
+						// add_to_serial("7462 out: " + serial2_in);
+						// serial_out();
+						add_to_serial("7462 nhan#" + hextostr(serial2_in));
 						serial_out();
 						if (serial2_in.startsWith("^1"))
 						{
@@ -278,7 +297,7 @@ void serial2_test()
 								vid_the = serial2_in.substring(76, 83);
 								ma_tbi = serial2_in.substring(20, 53);
 								data_chamcong = "010202010307"+vid_the+"0414"+uid_the+"0532"+ma_tbi;
-								getms(data_chamcong);
+								// getms(data_chamcong);//chamcong, đang tạm cmt
 								// add_to_serial("data_chamcong:" + data_chamcong);
 								// serial_out();
 							}
@@ -297,8 +316,8 @@ void serial2_test()
 							}
 							else
 							{
-								// reset_7462("2xx1"); // du dang lam
-								// xacthucvantay = 1;
+								reset_7462("2xx1"); // du dang lam
+								xacthuckhuonmat = 1;
 								// reset_7462("2x7");//lenh ghi vào7
 								// gốc
 								// reset_7462("2x3");
@@ -308,7 +327,8 @@ void serial2_test()
 						}
 						else if (serial2_in.startsWith("^5"))
 						{
-
+						// add_to_serial("7462 nhan" + hextostr(serial2_in));
+						// serial_out();
 						}
 						else if (serial2_in.startsWith("^6"))
 						{
