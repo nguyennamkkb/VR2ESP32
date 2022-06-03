@@ -251,7 +251,7 @@ void serial2_test()
 								// ghivantay = 0;
 							}
 						}
-						else if (serial2_in.startsWith("^5") && xacthuckhuonmat == 1)
+						else if (serial2_in.startsWith("^5") && xacthutiengnoi == 1)
 						{
 							serial2_in.remove(0, 2);
 							kmlen += serial2_in.length();
@@ -266,7 +266,10 @@ void serial2_test()
 							// 	// ghivantay = 0;
 							// }
 						}
-						
+						else if (serial2_in.startsWith("^9") && xacthuckhuonmat == 1)
+						{
+
+						}						
 
 					}
 				}
@@ -297,7 +300,7 @@ void serial2_test()
 								vid_the = serial2_in.substring(76, 83);
 								ma_tbi = serial2_in.substring(20, 53);
 								data_chamcong = "010202010307"+vid_the+"0414"+uid_the+"0532"+ma_tbi;
-								// getms(data_chamcong);//chamcong, đang tạm cmt
+								getms(data_chamcong);//chamcong, đang tạm cmt
 								// add_to_serial("data_chamcong:" + data_chamcong);
 								// serial_out();
 							}
@@ -316,8 +319,8 @@ void serial2_test()
 							}
 							else
 							{
-								// reset_7462("2xx1"); // du dang lam
-								// xacthuckhuonmat = 1;
+								reset_7462("2xx2"); // du dang lam
+								xacthuckhuonmat = 1;
 								// reset_7462("2x7");//lenh ghi vào7
 								// gốc
 								// reset_7462("2x3");
@@ -362,6 +365,9 @@ void serial2_test()
 								udp_out_ip("100" + serial2_in + "#", hangdoi_Front());
 							}
 						}
+						else if (serial2_in.startsWith("^9"))
+						{
+						}						
 						serial2_in = "";
 					}
 				}
