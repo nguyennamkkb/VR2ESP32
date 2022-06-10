@@ -2294,7 +2294,7 @@ void ghifile_07(){
 
 }
 void docfile_05(void){
-	decodekey(k7);
+	decodekey(k6);
 	uint16_t wKeyNo = 0x02;
 	uint16_t wKeyVer = 0x00;
 	uint16_t wKeyStoreKeyType = PH_KEYSTORE_KEY_TYPE_AES128;
@@ -2303,67 +2303,14 @@ void docfile_05(void){
 	status = phExMfCrypto_KeySet(wKeyNo, wKeyVer, wKeyStoreKeyType, gkphExMfCrypto_pNewKey);
 	if(status != PH_ERR_SUCCESS)
 	{
+
 		return;
 	}
-	else{
-		xacthucfile5();
-	}
-}
-//docfile_05 1 lần
-//void xacthucfile5(void){
-//	int dautien=0,offs=0,lendoc=0,lendoc1 = 128,jj=0;
-//	status = phalMfdf_AuthenticateAES	(	&salMfdf,
-//							PHAL_MFDF_NO_DIVERSIFICATION,
-//													0x02,
-//													0x00,
-//													0x07,
-//													NULL,
-//													0x00
-//	);
-//	if(status != PH_ERR_SUCCESS)
-//	{
-//		return;
-//	}
-//	else{
-//		xacthucfile();
-//		Lenh112[0]='!';
-//		Lenh112[1]='^';
-//		Lenh112[2]='5';
-//
-//		uint8_t bReadLen111[3]= {0x80, 0x00, 0x00};
-//		uint8_t Offset111[3]={0x00, 0x00, 0x00};
-//		status = phalMfdf_ReadData(&salMfdf,
-//				PHAL_MFDF_COMMUNICATION_ENC,
-//									0x05,
-//									Offset111,
-//									bReadLen111,
-//									&bRxDaTa,
-//									&wRxLength
-//									);
-//		if(status != PH_ERR_SUCCESS)
-//		{
-//			docfileloi();
-//			return;
-//		}
-//		else{
-//				for(i=0; i < 128 ;i++)
-//				{
-//					Lenh112[i+3] = bRxDaTa[i];
-//				}
-//			}
-//		Lenh112[131]='#';
-//		phhalHif_Transmit((uint8_t *)&Lenh112,132, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
-//		phUser_Wait(200000);
-//	}
-//}
-
-void xacthucfile5(void){
-	int docf5 =0;
 	status = phalMfdf_AuthenticateAES	(	&salMfdf,
 							PHAL_MFDF_NO_DIVERSIFICATION,
 													0x02,
 													0x00,
-													0x07,
+													0x06,
 													NULL,
 													0x00
 	);
@@ -2371,134 +2318,58 @@ void xacthucfile5(void){
 	{
 		return;
 	}
-	else
-	{
-		uint8_t bReadLen111[3]= {128, 0, 0};
-		uint8_t Offset111[3]={0, 0, 0};
-		for(docf5 = 0; docf5 < 16; docf5++)
+
+	int dautien=0,offs=0,lendoc=0,lendoc1 = 128,jj=0;
+	tmp[0]='!';
+	tmp[1]='^';
+	tmp[2]='7';
+	phhalHif_Transmit((uint8_t *)&tmp,3, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
+	phUser_Wait(5000);
+
+	uint8_t bReadLen111[3]= {0x80, 0x00, 0x00};
+	uint8_t Offset111[3]={0x00, 0x00, 0x00};
+
+	for(lendoc = 0; lendoc < 22; lendoc++){
+		if(lendoc % 2 == 0){
+			Offset111[0]=0;
+			Offset111[1]=jj;
+			jj++;
+
+		}else{
+			Offset111[0]=lendoc1;
+		}
+		status = phalMfdf_ReadData(&salMfdf,
+					PHAL_MFDF_COMMUNICATION_PLAIN,
+									0x06,
+									Offset111,
+									bReadLen111,
+									&bRxDaTa,
+									&wRxLength
+									);
+		if(status != PH_ERR_SUCCESS)
 		{
-//			xacthucfile();
-			Lenh112[0]='!';
-			Lenh112[1]='^';
-			Lenh112[2]='5';
+			batdaughi();
+			return;
+		}
+		else{
 
-			if(docf5 % 2 == 0){
-				Offset111[0] = 0;
-				Offset111[1] = docf5 / 2;
+			offs = dautien * 128;
+			for(i=0; i < 128 ;i++){
+				Lenh112[i + offs] = bRxDaTa[i];
 			}
-			else{
-				Offset111[0] = 128;
-			}
-			status = phalMfdf_ReadData(&salMfdf,
-					PHAL_MFDF_COMMUNICATION_ENC,
-										0x05,
-										Offset111,
-										bReadLen111,
-										&bRxDaTa,
-										&wRxLength
-										);
-			if(status != PH_ERR_SUCCESS)
-			{
-				batdaughi();
-				return;
-			}
-			else
-			{
-				for(i=0; i < 128 ;i++)
-				{
-					Lenh112[i + 3] = bRxDaTa[i];
-				}
-
-				Lenh112[131]='*';
-				Lenh112[132]='*';
-				Lenh112[133]='*';
-				phhalHif_Transmit((uint8_t *)&Lenh112,134, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
+			dautien++;
+			if(dautien == 2){
+				dautien = 0;
+				offs= 0;
+				phhalHif_Transmit((uint8_t *)&Lenh112,f1_6k_max, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
 				phUser_Wait(200000);
 			}
 		}
-
 	}
+	tmp[0]='#';
+	phhalHif_Transmit((uint8_t *)&tmp,1, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
+	phUser_Wait(10000);
 }
-
-
-//
-//void docfile_05(void){
-//	decodekey(k6);
-//	uint16_t wKeyNo = 0x02;
-//	uint16_t wKeyVer = 0x00;
-//	uint16_t wKeyStoreKeyType = PH_KEYSTORE_KEY_TYPE_AES128;
-//	phUser_MemCpy(gkphExMfCrypto_pNewKey, kx,
-//											PH_KEYSTORE_KEY_TYPE_AES128_SIZE);
-//	status = phExMfCrypto_KeySet(wKeyNo, wKeyVer, wKeyStoreKeyType, gkphExMfCrypto_pNewKey);
-//	if(status != PH_ERR_SUCCESS)
-//	{
-//
-//		return;
-//	}
-//	status = phalMfdf_AuthenticateAES	(	&salMfdf,
-//							PHAL_MFDF_NO_DIVERSIFICATION,
-//													0x02,
-//													0x00,
-//													0x06,
-//													NULL,
-//													0x00
-//	);
-//	if(status != PH_ERR_SUCCESS)
-//	{
-//		return;
-//	}
-//
-//	int dautien=0,offs=0,lendoc=0,lendoc1 = 128,jj=0;
-//	tmp[0]='!';
-//	tmp[1]='^';
-//	tmp[2]='7';
-//	phhalHif_Transmit((uint8_t *)&tmp,3, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
-//	phUser_Wait(5000);
-//
-//	uint8_t bReadLen111[3]= {0x80, 0x00, 0x00};
-//	uint8_t Offset111[3]={0x00, 0x00, 0x00};
-//
-//	for(lendoc = 0; lendoc < 22; lendoc++){
-//		if(lendoc % 2 == 0){
-//			Offset111[0]=0;
-//			Offset111[1]=jj;
-//			jj++;
-//
-//		}else{
-//			Offset111[0]=lendoc1;
-//		}
-//		status = phalMfdf_ReadData(&salMfdf,
-//					PHAL_MFDF_COMMUNICATION_PLAIN,
-//									0x06,
-//									Offset111,
-//									bReadLen111,
-//									&bRxDaTa,
-//									&wRxLength
-//									);
-//		if(status != PH_ERR_SUCCESS)
-//		{
-//			batdaughi();
-//			return;
-//		}
-//		else{
-//
-//			offs = dautien * 128;
-//			for(i=0; i < 128 ;i++){
-//				Lenh112[i + offs] = bRxDaTa[i];
-//			}
-//			dautien++;
-//			if(dautien == 2){
-//				dautien = 0;
-//				offs= 0;
-//				phhalHif_Transmit((uint8_t *)&Lenh112,f1_6k_max, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
-//				phUser_Wait(200000);
-//			}
-//		}
-//	}
-//	tmp[0]='#';
-//	phhalHif_Transmit((uint8_t *)&tmp,1, (pphhalHif_Callback_t)&ext_SetTxBufferEmptyInterrupt);
-//	phUser_Wait(10000);
-//}
 void docfile_06(void){
 
 	int dautien=0,offs=0,lendoc=0,lendoc1 = 128,jj=0;
@@ -2725,6 +2596,7 @@ void laygiatriuid(char s[])
 }
 //file 05 khuôn mặt
 #endif
-//ghi van tay vao file7 xong
-//doc van tay ra
-//ban gan nhu wNoOfKeyEntries
+//doc ghi file 7 vân tay
+//điểm danh cả vân tay lẫn thẻ
+//đang làm đọc file 5 và 6
+
