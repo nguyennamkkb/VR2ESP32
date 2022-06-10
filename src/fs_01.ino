@@ -1,4 +1,4 @@
-// strcpy(ssid_name,str_name.c_str());
+ // strcpy(ssid_name,str_name.c_str());
 // String(int,HEX); dec to HEX
 // n=strtol(s.c_str(),NULL,16); HEX to decimal
 #include "vimass.h"
@@ -14,6 +14,8 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include <ESPmDNS.h>
+#include <MD5.h>
+
 WiFiMulti wifiMulti;
 hw_timer_t *timer = NULL;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
@@ -51,9 +53,9 @@ String iplocal[1];
 String fp_save[5];
 int trangthailenhtumaytinh = 0;
 int ghivantay = 0;
-int play_index= -1;
+int play_index = -1;
 // int demghivt = 0;
-String uid_the = "",vid_the ="",ma_tbi="",data_chamcong=""; // uid cua the
+String uid_the = "", vid_the = "", ma_tbi = "", data_chamcong = ""; // uid cua the
 // == ip may chu mang noi bo
 String tbttid[1];
 // ======tham so confirm
@@ -76,7 +78,8 @@ bool Validate = false;
 bool TrangThaiThanhToan = false;
 bool DichVuMayTram = false;
 bool TrangThaiCacheCard = false;
-bool xacthucvantay = 0,xacthuckhuonmat = 0, xacthutiengnoi = 0;
+bool xacthucvantay = 0,xacthuckhuonmat = 0, xacthutiengnoi = 0,ghi_ma_tbi = 1;
+bool auto_docvt = 1;
 // int demghivt =1;
 char ssid_name[32], ssid_pass[32];
 String ds_name[ds_max][sub_ds_max];
@@ -164,15 +167,23 @@ void setup()
 	timeClient.begin();
 	timeClient.setTimeOffset(+7 * 60 * 60);
 	bipok1();
+	//Nam
+	// unsigned char *hash = MD5::make_hash("hello world");
+	// // generate the digest (hex encoding) of our hash
+	// char *md5str = MD5::make_digest(hash, 16);
+	// // print it on our serial monitor
+	// uart0.println(md5str);
+	remove("/matbi.txt");
+	docmatbi();
 }
 void IRAM_ATTR fp_isr()
 {
 }
 void fp_test()
 {
-	if (digitalRead(fp_detect_pin))
+	if (auto_docvt)
 	{
-		if (fp_detect_cnt < 100)
+		if (fp_detect_cnt < 200)
 			fp_detect_cnt++;
 		fp_on_duration++;
 	}
@@ -191,9 +202,9 @@ void fp_test()
 			}
 		}
 	}
-	if (fp_detect_cnt > 50)
+	if (fp_detect_cnt >= 200)
 	{
-		// fp_detect_cnt=0;
+		fp_detect_cnt=0;
 		if (fp_auto_off == 0)
 		{
 			cmd_send(Identify, 0, 0);
@@ -217,7 +228,7 @@ void millis_1()
 	serial_test();
 	serial2_test();
 	serial2_out_test();
-    digitalWrite(door_gate,1);//cua dong
+	digitalWrite(door_gate, 1); // cua dong
 	UDP_receive();
 	ms10 &= 0xf;
 	if (++ms10 > 9) // vong lap 10ms
@@ -375,39 +386,38 @@ void biper2()
 
 void Play_voice(int code)
 {
-	// uart0.println("play void:"+ String(code)+", play_index:"+play_index); 
-	if (play_index !=  code)
+	// uart0.println("play void:"+ String(code)+", play_index:"+play_index);
+	if (play_index != code)
 	{
 		read_buf("/a_" + String(code) + ".wav");
 	}
-	play_index =  code;
+	play_index = code;
 	voice_init();
-	
 }
 
-void dongcua(){
+void dongcua()
+{
 	bipok2();
-	digitalWrite(door_gate,1);
+	digitalWrite(door_gate, 1);
 	Serial.println("cua dong\n");
 	delay(1000);
 }
-void mocua(){
-	// bipok1();
-	digitalWrite(door_gate,0);
-	Serial.println("cua mo\n");
+void mocua()
+{
+	bipok1();
+	digitalWrite(door_gate, 0);
+	// Serial.println("cua mo\n");
 	delay(1000);
 }
 
-void bip4_no_internet(){
-  coi_on;
-  delay(300);
-  coi_off;
-  delay(300);
-  coi_on;
-  delay(300);
-  coi_off;
-  delay(300);
-  coi_on;
-  delay(300);
+void bip4_no_internet()
+{	coi_on;
+	delay(300);
+	coi_off;
+	delay(300);
+	coi_on;
+	delay(300);
+	coi_off;
+	delay(300);
 
 }

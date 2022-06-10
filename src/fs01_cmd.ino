@@ -72,7 +72,7 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
     // case Set_Security:
     // case Get_Security:
     case Identify_Feature:
-        fp_auto_off = 500;
+        fp_auto_off = 250;
         break;
     default:
         break;
@@ -120,7 +120,8 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
         break;
     }
       if (cmd ==  Enroll_1)
-      {delay(1000);
+      {
+        delay(1000);
         Play_voice(Moi_dat_van_tay);
         delay(1000);
       }

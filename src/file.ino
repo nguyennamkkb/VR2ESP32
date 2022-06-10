@@ -137,6 +137,24 @@ void save_TBTTId(String s)
   led_reset = 15;
 }
 
+void ghimatbi(String s){
+  File f = SPIFFS.open("/matbi1.txt", "w");
+  if (f)
+    f.print(s);
+  f.close();
+}
+
+void docmatbi(){
+  File f = SPIFFS.open("/hello.txt", FILE_READ);
+  while (f.available())
+  {   
+    ma_tbi = f.read();
+    f.close();
+    uart0.println("..."+f.read());
+    return;
+  }
+}
+
 void save_iplocal(String s)
 {
   File f = SPIFFS.open("/iplocal.txt", "w");
@@ -199,3 +217,46 @@ void save_cardOpenDoorOffline(String s)
   f.close();
   led_reset = 15;
 }
+
+void writeFile(fs::FS &fs, const char * path, const char * message){
+  //  Serial.printf("Writing file: %s\r\n", path);
+
+   File file = fs.open(path, FILE_WRITE);
+   if(!file){
+      Serial.println("− failed to open file for writing");
+      return;
+   }
+   if(file.print(message)){
+      Serial.println("− file written");
+   }else {
+      Serial.println("− frite failed");
+   }
+}
+
+void readFile(fs::FS &fs, const char * path){
+  //  Serial.printf("Reading file: %s\r\n", path);
+
+   File file = fs.open(path);
+   if(!file || file.isDirectory()){
+      //  Serial.println("− failed to open file for reading");
+       return;
+   }
+ma_tbi = "";
+int n=0;
+  //  Serial.println("− read from file:");
+   while(file.available()){
+     n = file.read() ;
+     ma_tbi += dec_to_string(n-48);
+  // Serial.write(ma_tbi);
+   }
+  add_to_serial(ma_tbi);
+	serial_out();
+  //  uart0.println(ma_tbi);
+}
+
+String dec_to_string(int a){
+  String str = "01234567890000000ABCDEF", s="";
+  s = str.substring(a,a+1);
+  return s;
+}
+

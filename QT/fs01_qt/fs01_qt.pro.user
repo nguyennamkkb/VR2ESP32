@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD
-<!-- Written by QtCreator 4.0.3, 2022-05-26T17:34:50. -->
-=======
-<<<<<<< HEAD
-<!-- Written by QtCreator 4.0.3, 2022-05-27T09:44:19. -->
-=======
-<!-- Written by QtCreator 4.0.3, 2022-05-26T18:18:01. -->
->>>>>>> cd9629c9b60bbac0f57f732f32be99d71c4ae5b0
->>>>>>> d69b533ed4b64ddf3964ef6b072f0390505657a1
+<!-- Written by QtCreator 4.0.3, 2022-06-03T13:22:30. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{47c82271-8ac7-4cdf-9a2a-644ffdf56849}</value>
+  <value type="QByteArray">{b2412037-a52e-4149-b0a6-02c27fbaa720}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -128,7 +120,7 @@
     <value type="bool" key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">D:/A2021/Vimass/FS01/fs01_qt</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">F:/Vimass/namnl/TheVaDauDoc/DauDoc/PhatTrienVR2/VR2ESP32/QT/fs01_qt</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -293,14 +285,14 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">fs01_qt</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">fs01_qt2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/dungo/Desktop/5522/fs01_qt/fs01_qt.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:F:/Vimass/namnl/TheVaDauDoc/DauDoc/PhatTrienVR2/VR2ESP32/QT/fs01_qt/fs01_qt.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">fs01_qt.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">D:/A2021/Vimass/FS01/fs01_qt</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">F:/Vimass/namnl/TheVaDauDoc/DauDoc/PhatTrienVR2/VR2ESP32/QT/fs01_qt</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>

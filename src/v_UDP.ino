@@ -19,7 +19,7 @@
 
 void yeu_cau_nhapmk(){
 
-  biper1();
+  bipok1();
   
   udp_out_ip("105",hangdoi_Front());
 }
@@ -28,7 +28,7 @@ void udp_out_ip(String sout,String ipout)
 {
   // add_to_serial(sout);
   // serial_out();
-  sout = str_idtb(my_id)+"^"+sout+ "_" +bcc_check_step(sout,6);
+  sout = str_idtb(my_id)+"^"+sout+ "_" +bcc_check_step(sout+ "_" ,6);
   udp_time = 0;
   int t[4],i=0;
   for(i = 0; i < 4;i++)

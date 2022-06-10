@@ -320,8 +320,8 @@ void getms(String data){
 		if(WiFi.status()== WL_CONNECTED){
 			httpMC.setReuse(true);
 			data = https_encode(data);
-			httpMC.begin("http://192.168.100.201:8080/doorservices/services/v1/openthedoor?param="+data );
-			Serial.println(data);
+			httpMC.begin("http://210.245.8.7:12317/doorservices/services/v1/openthedoor?param="+data );
+			// Serial.println(data);
 			
 			int httpCode = httpMC.GET();  
 			httpMC.setConnectTimeout(5000);
@@ -330,8 +330,7 @@ void getms(String data){
 			{ //Check the returning code
 				String sout = httpMC.getString();   //Get the request response payload
 				Serial.println("http out:"+sout);
-				if(sout.equals(uid1) == 1){
-					Play_voice(Xin_cam_on);
+				if(sout.equals(uid1) == 1){					
 					mocua();
 				}
 				else
