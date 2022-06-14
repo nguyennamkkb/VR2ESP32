@@ -1,4 +1,4 @@
- // strcpy(ssid_name,str_name.c_str());
+// strcpy(ssid_name,str_name.c_str());
 // String(int,HEX); dec to HEX
 // n=strtol(s.c_str(),NULL,16); HEX to decimal
 #include "vimass.h"
@@ -65,7 +65,7 @@ String dataServices[1];
 uint8 datavantay[500];
 uint8 rx_buf[rx_max];
 // uint8 datavantay[rx_max];
-String serial_in, params_str, serial2_out, serial2_in, vantay = "",khuonmat="";
+String serial_in, params_str, serial2_out, serial2_in, vantay = "", khuonmat = "";
 int16 page_id;
 int16 hd_ok = 0, rx_pkt_len, rx_cnt = 0, pkt_type, check_sum, check_sum_ok;
 uint8 ima_buf[ima_buf_max];
@@ -78,7 +78,7 @@ bool Validate = false;
 bool TrangThaiThanhToan = false;
 bool DichVuMayTram = false;
 bool TrangThaiCacheCard = false;
-bool xacthucvantay = 0,xacthuckhuonmat = 0, xacthutiengnoi = 0,ghi_ma_tbi = 1;
+bool xacthucvantay = 0, xacthuckhuonmat = 0, xacthutiengnoi = 0, ghi_ma_tbi = 1;
 bool auto_docvt = 1;
 // int demghivt =1;
 char ssid_name[32], ssid_pass[32];
@@ -101,7 +101,7 @@ udp_rx_header udp_rx;
 udp_tx_header udp_tx;
 int8 n_time[6];
 
-int16 vtlen = 0,kmlen = 0;
+int16 vtlen = 0, kmlen = 0;
 
 struct struct_max
 {
@@ -167,14 +167,13 @@ void setup()
 	timeClient.begin();
 	timeClient.setTimeOffset(+7 * 60 * 60);
 	bipok1();
-	//Nam
-	// unsigned char *hash = MD5::make_hash("hello world");
-	// // generate the digest (hex encoding) of our hash
-	// char *md5str = MD5::make_digest(hash, 16);
-	// // print it on our serial monitor
-	// uart0.println(md5str);
-	remove("/matbi.txt");
-	docmatbi();
+	// Nam
+	//  unsigned char *hash = MD5::make_hash("hello world");
+	//  // generate the digest (hex encoding) of our hash
+	//  char *md5str = MD5::make_digest(hash, 16);
+	//  // print it on our serial monitor
+	//  uart0.println(md5str);
+	readFile("/hello.txt");
 }
 void IRAM_ATTR fp_isr()
 {
@@ -204,7 +203,7 @@ void fp_test()
 	}
 	if (fp_detect_cnt >= 200)
 	{
-		fp_detect_cnt=0;
+		fp_detect_cnt = 0;
 		if (fp_auto_off == 0)
 		{
 			cmd_send(Identify, 0, 0);
@@ -406,12 +405,13 @@ void mocua()
 {
 	bipok1();
 	digitalWrite(door_gate, 0);
-	// Serial.println("cua mo\n");
+	Serial.println("cua mo\n");
 	delay(1000);
 }
 
 void bip4_no_internet()
-{	coi_on;
+{
+	coi_on;
 	delay(300);
 	coi_off;
 	delay(300);
@@ -419,5 +419,35 @@ void bip4_no_internet()
 	delay(300);
 	coi_off;
 	delay(300);
+}
 
+void readFile(const char *path)
+{
+  //  Serial.printf("Reading file: %s\r\n", path);
+
+  File file = SPIFFS.open(path);
+  if (!file || file.isDirectory())
+  {
+    //  Serial.println("− failed to open file for reading");
+    return;
+  }
+  ma_tbi = "";
+  int n = 0;
+  //  Serial.println("− read from file:");
+  while (file.available())
+  {
+    n = file.read();
+    ma_tbi += dec_to_string(n - 48);
+    // Serial.write(ma_tbi);
+  }
+  add_to_serial(ma_tbi);
+  serial_out();
+  //  uart0.println(ma_tbi);
+}
+
+String dec_to_string(int a)
+{
+  String str = "01234567890000000ABCDEF", s = "";
+  s = str.substring(a, a + 1);
+  return s;
 }

@@ -58,17 +58,17 @@ void serial_test()
 					}
 					if (n_prefix == cmd_response_prefix)
 					{
-						
+
 						if (rx_cnt == 24)
 						{
 							// FS01_RES("FS01_cmd");
 							memcpy(cmd_rx.prefix, rx_buf, sizeof(cmd_rx));
-			
+
 							ret = cmd_rx.data[0];
 							ret_code = cmd_rx.data[1];
-							// uart0.println("cmd_rx.data[0]"+ String(cmd_rx.data[0])); 
-							// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1])); 
-							// uart0.println("cmd_rx.data[2]"+ String(cmd_rx.data[2])); 
+							// uart0.println("cmd_rx.data[0]"+ String(cmd_rx.data[0]));
+							// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1]));
+							// uart0.println("cmd_rx.data[2]"+ String(cmd_rx.data[2]));
 							memcpy(udp_tx.cmd_rx.prefix, cmd_rx.prefix, sizeof(cmd_rx));
 							if (ret == 0)
 							{
@@ -86,30 +86,28 @@ void serial_test()
 									break;
 
 								case Identify:
-									// uart0.println("index FP"+ String(fp_index)); 
-									if (ret_code == -12) break;									
-									if (ret_code>0)
+									// uart0.println("index FP"+ String(fp_index));
+									if (ret_code == -12)
+										break;
+									if (ret_code > 0)
 									{
-										readFile(SPIFFS, "/hello.txt");
-										// docmatbi();
-										// Play_voice(Xin_cam_on);
-										// mocua();
-										String page=String(ret_code);
-										data_chamcong = "010202060532"+ma_tbi+"11"+fix_len(String(page.length()),2)+page;
-										Play_voice(Xin_cam_on);										
-										// uart0.println("pageid:"+fix_len(String(page.length()),2)+page);
-
-										getms(data_chamcong);//chamcong, đang tạm cmt
+										Play_voice(Xin_cam_on);
+										mocua();
+										// readFile(SPIFFS, "/hello.txt");
+										String page = String(ret_code);
+										data_chamcong = "010202060532" + ma_tbi + "11" + fix_len(String(page.length()), 2) + page;
+										get_vantay(data_chamcong);
 									}
 									break;
 								case Enroll_RAM:
 									// ghivantay=1;//du them
 									// uart0.println("layvantay");
-									// uart0.println("cmd_rx.data[0]"+ String(cmd_rx.data[0])); 
-									// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1])); 
-									// uart0.println("cmd_rx.data[2]"+ String(cmd_rx.data[2])); 
-									
-									if (ret_code == -15 || ret_code == -13) {
+									// uart0.println("cmd_rx.data[0]"+ String(cmd_rx.data[0]));
+									// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1]));
+									// uart0.println("cmd_rx.data[2]"+ String(cmd_rx.data[2]));
+
+									if (ret_code == -15 || ret_code == -13)
+									{
 										delay(1000);
 										Play_voice(Moi_dat_van_tay);
 									}
@@ -122,8 +120,9 @@ void serial_test()
 									}
 									break;
 								case Enroll_1:
-									if (ret_code == -12) break;	
-									// delay(500);	
+									if (ret_code == -12)
+										break;
+									// delay(500);
 									Play_voice(Thanh_cong);
 									break;
 								}
@@ -131,31 +130,31 @@ void serial_test()
 							else
 							{
 
-								// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1])); 	
+								// uart0.println("cmd_rx.data[1]"+ String(cmd_rx.data[1]));
 								switch (cmd_rx.rcm)
 								{
 								case Test_Connection:
 									fs01_on = 1;
 									break;
 								case Verify_Feature:
-									
+
 									break;
 								case Read_Page:
 									break;
 
 								case Identify:
-									
+
 									break;
 								case Enroll_RAM:
-									
+
 									break;
-								
+
 								case Enroll_1:
-									if (cmd_rx.data[1] > 1) break;
+									if (cmd_rx.data[1] > 1)
+										break;
 									Play_voice(Khong_thanh_cong);
 									break;
 								}
-        						
 							}
 							hd_ok = rx_cnt = 0;
 							udp_tx.pkt_type = FS01_CMD;
@@ -164,7 +163,7 @@ void serial_test()
 					}
 					else if (n_prefix == data_response_prefix)
 					{
-						
+
 						if (rx_cnt == (6 + rx_pkt_len + 2))
 						{
 							// FS01_RES("FS01_data");
@@ -187,12 +186,9 @@ void serial_test()
 									n = n8 & 0xf;
 									sss += s_hex.substring(n, n + 1);
 								}
-								// uart0.println("bat dau ghi vt:"); // Thông báo đặt thẻ ghi vân tay
-								// hamghivantayvaothe
-
 								ghivantay = 1;
 								// Play_voice(Moi_dat_the);
-								ghivantayvaothe(sss);
+								ghivantayvaothe(sss); // hamghivantayvaothe
 							}
 							else
 							{
@@ -227,7 +223,7 @@ void serial2_test()
 				{
 					if (serial2_in.endsWith("!"))
 					{
-						if (serial2_in.startsWith("^5") ||serial2_in.startsWith("^6") ||serial2_in.startsWith("^7"))
+						if (serial2_in.startsWith("^5") || serial2_in.startsWith("^6") || serial2_in.startsWith("^7"))
 						{
 							serial2_in = serial2_in;
 						}
@@ -262,21 +258,7 @@ void serial2_test()
 						}
 						else if (serial2_in.startsWith("^5") && xacthuckhuonmat == 1)
 						{
-							serial2_in.remove(0, 2);
-							kmlen += serial2_in.length();
-							khuonmat += serial2_in;
-							serial2_in = "";
-							// if (kmlen == 512)
-							// {
-							// 	khuonmat.remove(khuonmat.length() - 2, 2);
-							// 	khuonmat = "";
-							// 	xacthuckhuonmat = 0;
-							// 	kmlen = 0;
-							// 	// ghivantay = 0;
-							// }
 						}
-						
-
 					}
 				}
 				else
@@ -290,8 +272,8 @@ void serial2_test()
 					{
 
 						serial2_in.remove(serial2_in.length() - 1, 1); // remove #
-						// add_to_serial("7462 out: " + serial2_in);
-						// serial_out();
+						add_to_serial("7462 out: " + serial2_in);
+						serial_out();
 						// add_to_serial("7462 nhan#" + hextostr(serial2_in));
 						// serial_out();
 						if (serial2_in.startsWith("^1"))
@@ -304,21 +286,36 @@ void serial2_test()
 							{
 								uid_the = serial2_in.substring(5, 19);
 								vid_the = serial2_in.substring(76, 83);
-								
-								
-								if(ghi_ma_tbi == 1){
+								if (ghi_ma_tbi == 1)
+								{
 									ma_tbi = serial2_in.substring(20, 53);
-								add_to_serial("ma_tbi:" + ma_tbi);
-								serial_out();
-								writeFile(SPIFFS, "/hello.txt","0000000000017C0A5907952A4C360610");
-									// ghimatbi(ma_tbi);
+									add_to_serial("ma_tbi:" + ma_tbi);
+									serial_out();
+									ghimatbi(ma_tbi);
 									ghi_ma_tbi = 0;
 								}
-								data_chamcong = "010202010307"+vid_the+"0414"+uid_the+"0532"+ma_tbi;
-								getms(data_chamcong);//chamcong, đang tạm cmt
-								// add_to_serial("ma_tbi:" + ma_tbi);
-								// serial_out();
+								data_chamcong = "010202010307" + vid_the + "0414" + uid_the + "0532" + ma_tbi;
+								getms(data_chamcong); // chamcong, đang tạm cmt
+
 							}
+
+							// if (serial2_in.startsWith("^135"))
+							// {
+							// 	serial2_in.remove(0, 4);
+							// 	data_chamcong = serial2_in;
+							// 	if (ghi_ma_tbi == 1)
+							// 	{
+							// 		ma_tbi = serial2_in.substring(41, 73);
+							// 		add_to_serial("ma_tbi:" + ma_tbi);
+							// 		serial_out();
+							// 		// writeFile(SPIFFS, "/hello.txt", "0000000000017C0A5907952A4C360610");
+							// 		ghimatbi(ma_tbi);
+							// 		ghi_ma_tbi = 0;
+							// 	}
+
+							// 	getms(data_chamcong); // chamcong, đang tạm cmt
+							// 	data_chamcong = "";
+							// }
 							TrangThaiThanhToan = false;
 							magiaodich = "";
 							String s = serial2_in;
@@ -345,8 +342,8 @@ void serial2_test()
 						}
 						else if (serial2_in.startsWith("^5"))
 						{
-						// add_to_serial("7462 nhan" + hextostr(serial2_in));
-						// serial_out();
+							// add_to_serial("7462 nhan" + hextostr(serial2_in));
+							// serial_out();
 						}
 						else if (serial2_in.startsWith("^6"))
 						{
