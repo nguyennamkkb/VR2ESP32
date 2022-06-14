@@ -669,7 +669,7 @@ debug/moc_fs01_qt.cpp: n_serial.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets/QComboBox \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QMetaEnum \
 		fs01_qt.h
-	C:\Qt\Qt5.6.3\5.6.3\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/mkspecs/win32-g++ -IF:/Vimass/namnl/TheVaDauDoc/DauDoc/PhatTrienVR2/VR2ESP32/QT/fs01_qt -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtSerialPort -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore fs01_qt.h -o debug\moc_fs01_qt.cpp
+	C:\Qt\Qt5.6.3\5.6.3\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/mkspecs/win32-g++ -ID:/1.Work/5_2022/5522/fs01_qt -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtSerialPort -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore fs01_qt.h -o debug\moc_fs01_qt.cpp
 
 debug/moc_n_serial.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QObject \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qobject.h \
@@ -897,7 +897,7 @@ debug/moc_n_serial.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QObject \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qxmlstream.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qtcoreversion.h \
 		n_serial.h
-	C:\Qt\Qt5.6.3\5.6.3\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/mkspecs/win32-g++ -IF:/Vimass/namnl/TheVaDauDoc/DauDoc/PhatTrienVR2/VR2ESP32/QT/fs01_qt -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtSerialPort -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore n_serial.h -o debug\moc_n_serial.cpp
+	C:\Qt\Qt5.6.3\5.6.3\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/mkspecs/win32-g++ -ID:/1.Work/5_2022/5522/fs01_qt -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtSerialPort -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore n_serial.h -o debug\moc_n_serial.cpp
 
 debug/moc_fs_01.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QObject \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qobject.h \
@@ -1119,7 +1119,7 @@ debug/moc_fs_01.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QObject \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QString \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QByteArray \
 		fs_01.h
-	C:\Qt\Qt5.6.3\5.6.3\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/mkspecs/win32-g++ -IF:/Vimass/namnl/TheVaDauDoc/DauDoc/PhatTrienVR2/VR2ESP32/QT/fs01_qt -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtSerialPort -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore fs_01.h -o debug\moc_fs_01.cpp
+	C:\Qt\Qt5.6.3\5.6.3\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/mkspecs/win32-g++ -ID:/1.Work/5_2022/5522/fs01_qt -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtSerialPort -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore fs_01.h -o debug\moc_fs_01.cpp
 
 debug/moc_udp_thread.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QObject \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/qobject.h \
@@ -1411,7 +1411,7 @@ debug/moc_udp_thread.cpp: C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QObject 
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui/qtouchdevice.h \
 		C:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore/QTime \
 		udp_thread.h
-	C:\Qt\Qt5.6.3\5.6.3\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/mkspecs/win32-g++ -IF:/Vimass/namnl/TheVaDauDoc/DauDoc/PhatTrienVR2/VR2ESP32/QT/fs01_qt -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtSerialPort -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore udp_thread.h -o debug\moc_udp_thread.cpp
+	C:\Qt\Qt5.6.3\5.6.3\mingw49_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/mkspecs/win32-g++ -ID:/1.Work/5_2022/5522/fs01_qt -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtWidgets -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtGui -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtANGLE -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtSerialPort -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtNetwork -IC:/Qt/Qt5.6.3/5.6.3/mingw49_32/include/QtCore udp_thread.h -o debug\moc_udp_thread.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:

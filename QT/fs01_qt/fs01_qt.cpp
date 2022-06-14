@@ -309,10 +309,10 @@ QString s;
         case fs01->Enroll_3:
         case fs01->Delete_Page:
         case fs01->Read_Page:
-            k_input(QInputDialog::IntInput,"Nhập Page Id");
-            if (dlg_struct.ok){
-                ser->page_id=page_id=dlg_struct.sel_int;
-            }
+        k_input(QInputDialog::TextInput,"Nhập Page Id");
+                    if (dlg_struct.ok){
+                        ser->page_id=page_id=dlg_struct.sel_str.toInt();
+                    }
         break;
     }
     ba=fs01->ba_to_send(cmd,len,page_id);
@@ -516,7 +516,7 @@ quint8 buf8[1024];
     ba.resize(sizeof(u->udp_tx));
     memcpy(ba.data(),&u->udp_tx.bcc,ba.size());
     u->socket_send(ba);
-    txt_append(ba.data());
+//    txt_append(ba.data());
     qDebug() << "wav sending " << len << seg << voice_ba.size();
 
 }
