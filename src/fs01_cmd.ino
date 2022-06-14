@@ -119,7 +119,7 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
         get_tx_cks(len);
         break;
     }
-      if (cmd ==  Enroll_1)
+      if (cmd ==  Enroll_1 || cmd == Enroll_3)
       {
         delay(1000);
         Play_voice(Moi_dat_van_tay);

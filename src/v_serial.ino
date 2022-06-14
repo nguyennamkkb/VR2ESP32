@@ -124,6 +124,18 @@ void serial_test()
 										break;
 									// delay(500);
 									Play_voice(Thanh_cong);
+								case Enroll_3:
+									if (ret_code == -13)
+									{
+										delay(1000);
+										Play_voice(Moi_dat_van_tay);
+									}
+									if (ret_code > 0)
+									{
+										delay(1000);
+										Play_voice(Thanh_cong);
+									}
+
 									break;
 								}
 							}
