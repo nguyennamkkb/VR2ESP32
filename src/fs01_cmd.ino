@@ -93,7 +93,7 @@ void cmd_send(int16 cmd, int16 len, int16 page_id)
         }
         else if (cmd == Set_Security)
         {
-            cmd_tx.data[0] = 1;
+            cmd_tx.data[0] = 2;
             cmd_tx.data[1] = 0;
             // memset(cmd_tx.data, 0, sizeof(cmd_tx.data));
         }
