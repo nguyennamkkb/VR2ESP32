@@ -367,9 +367,9 @@ qint16 n=0;
             }
             break;
         case Delete:
-            k_input(QInputDialog::IntInput,"Nhập Page Id cần xóa 0-999");
+            k_input(QInputDialog::TextInput,"Nhập Page Id cần xóa 0-999");
             if (dlg_struct.ok){
-                page_id=dlg_struct.sel_int;
+                page_id=dlg_struct.sel_str.toInt();
                 cmd_send(fs01->Delete_Page);
             }
             break;

@@ -95,7 +95,8 @@ void serial_test()
 										mocua();
 										// readFile(SPIFFS, "/hello.txt");
 										String page = String(ret_code);
-										data_chamcong = "010202060532" + ma_tbi + "11" + fix_len(String(page.length()), 2) + page;
+										data_chamcong = "getAccessDoor?fpIndex=" + page + "&&readercode=" + ma_tbi;
+										// data_chamcong = "010202060532" + ma_tbi + "11" + fix_len(String(page.length()), 2) + page;
 										get_vantay(data_chamcong);
 									}
 									break;
@@ -120,10 +121,15 @@ void serial_test()
 									}
 									break;
 								case Enroll_1:
-									if (ret_code == -12)
-										break;
+									// uart0.println("cmd_rx.data[0]" + String(cmd_rx.data[0]));
+									// uart0.println("cmd_rx.data[1]" + String(cmd_rx.data[1]));
+									if (ret_code > 0)
+									{
+										Play_voice(Thanh_cong);
+									}
+									break;
 									// delay(500);
-									Play_voice(Thanh_cong);
+
 								case Enroll_3:
 									if (ret_code == -13)
 									{
@@ -284,8 +290,8 @@ void serial2_test()
 					{
 
 						serial2_in.remove(serial2_in.length() - 1, 1); // remove #
-						add_to_serial("7462 out: " + serial2_in);
-						serial_out();
+						// add_to_serial("7462 out: " + serial2_in);
+						// serial_out();
 						// add_to_serial("7462 nhan#" + hextostr(serial2_in));
 						// serial_out();
 						if (serial2_in.startsWith("^1"))
@@ -298,6 +304,8 @@ void serial2_test()
 							{
 								uid_the = serial2_in.substring(5, 19);
 								vid_the = serial2_in.substring(76, 83);
+								vid_the.replace(" ", "");
+								// uart0.println(vid_the);
 								if (ghi_ma_tbi == 1)
 								{
 									ma_tbi = serial2_in.substring(20, 53);
@@ -306,9 +314,8 @@ void serial2_test()
 									ghimatbi(ma_tbi);
 									ghi_ma_tbi = 0;
 								}
-								data_chamcong = "010202010307" + vid_the + "0414" + uid_the + "0532" + ma_tbi;
+								data_chamcong = "getAccessDoorByCard?vid=" + vid_the + "&readercode=" + ma_tbi;
 								getms(data_chamcong); // chamcong, đang tạm cmt
-
 							}
 
 							// if (serial2_in.startsWith("^135"))

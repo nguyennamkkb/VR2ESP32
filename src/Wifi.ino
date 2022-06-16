@@ -16,8 +16,8 @@ void wifi_setup()
       wifiMulti.addAP(ssid_name, ssid_pass);
     }
   }
-    wifiMulti.addAP("The_Daudoc","hoianhnam");
-  wifiMulti.addAP("VimassPhanCung1", "VMPC6996");
+  //   wifiMulti.addAP("The_Daudoc","hoianhnam");
+  // wifiMulti.addAP("ViMASS_PC", "VMPC6996");
   wifiMulti.addAP("FPT_Telecom", "bat4gdiban");
 
 

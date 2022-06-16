@@ -323,8 +323,7 @@ void get_vantay(String data)
 	if (WiFi.status() == WL_CONNECTED)
 	{
 		httpMC.setReuse(true);
-		data = https_encode(data);
-		httpMC.begin("http://210.245.8.7:12317/doorservices/services/v1/openthedoor?param=" + data);
+		httpMC.begin("http://210.245.8.7:12317/api/"+ data);
 		// Serial.println(data);
 		int httpCode = httpMC.GET();
 		httpMC.setConnectTimeout(5000);
@@ -357,11 +356,12 @@ void getms(String data)
 	if (WiFi.status() == WL_CONNECTED)
 	{
 		httpMC.setReuse(true);
-		data = https_encode(data);
-		httpMC.begin("http://210.245.8.7:12317/doorservices/services/v1/openthedoor?param=" + data);
-		Serial.println(data);
+		// data = https_encode(data);
+		httpMC.begin("http://210.245.8.7:12317/api/"+ data);
+		// Serial.println(data);
 		int httpCode = httpMC.GET();
 		httpMC.setConnectTimeout(5000);
+		uart0.println(httpCode);
 		if (httpCode > 0)
 		{									  // Check the returning code
 			String sout = httpMC.getString(); // Get the request response payload
