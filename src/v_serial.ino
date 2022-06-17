@@ -123,10 +123,10 @@ void serial_test()
 								case Enroll_1:
 									// uart0.println("cmd_rx.data[0]" + String(cmd_rx.data[0]));
 									// uart0.println("cmd_rx.data[1]" + String(cmd_rx.data[1]));
-									if (ret_code > 0)
-									{
-										Play_voice(Thanh_cong);
-									}
+									// if (ret_code > 0)
+									// {
+									// 	Play_voice(Thanh_cong);
+									// }
 									break;
 									// delay(500);
 

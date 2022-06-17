@@ -19,8 +19,11 @@ void wifi_setup()
     wifiMulti.addAP("The_Daudoc","hoianhnam");
   wifiMulti.addAP("ViMASS_PC", "VMPC6996");
   // wifiMulti.addAP("FPT_Telecom", "bat4gdiban");
-
-
+  // wifiMulti.addAP("VIMASS CNHP", "0123456789");
+// wifiMulti.addAP("ViMASS TH", "88888888");
+// wifiMulti.addAP("ViMASS TH1", "86868686");
+//   wifiMulti.addAP("VIMASS_TEST", "123456789");
+// wifiMulti.addAP("ViMASS - HUE", "28lythuongkiet");
   WiFi.setAutoReconnect(true);
   uint8 sec_cnt = 0;
   wifi_on = 0;
