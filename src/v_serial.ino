@@ -95,6 +95,7 @@ void serial_test()
 										mocua();
 										// readFile(SPIFFS, "/hello.txt");
 										String page = String(ret_code);
+										uart0.println("ma_vt"+ page);
 										data_chamcong = "getAccessDoor?fpIndex=" + page + "&&readercode=" + ma_tbi;
 										// data_chamcong = "010202060532" + ma_tbi + "11" + fix_len(String(page.length()), 2) + page;
 										get_vantay(data_chamcong);
@@ -354,9 +355,9 @@ void serial2_test()
 								// xacthuckhuonmat = 1;
 								// reset_7462("2x7");//lenh ghi vào7
 								// gốc
-								// reset_7462("2x3");
-								// delay(1000);
-								// 	if (wifi_on) send_https(s);
+								reset_7462("2x3");
+								delay(1000);
+									if (wifi_on) send_https(s);
 							}
 						}
 						else if (serial2_in.startsWith("^5"))

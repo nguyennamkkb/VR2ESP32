@@ -16,9 +16,9 @@ void wifi_setup()
       wifiMulti.addAP(ssid_name, ssid_pass);
     }
   }
-    wifiMulti.addAP("The_Daudoc","hoianhnam");
+  //   wifiMulti.addAP("The_Daudoc","hoianhnam");
   wifiMulti.addAP("ViMASS_PC", "VMPC6996");
-  // wifiMulti.addAP("FPT_Telecom", "bat4gdiban");
+  // // wifiMulti.addAP("FPT_Telecom", "bat4gdiban");
   // wifiMulti.addAP("VIMASS CNHP", "0123456789");
 // wifiMulti.addAP("ViMASS TH", "88888888");
 // wifiMulti.addAP("ViMASS TH1", "86868686");
