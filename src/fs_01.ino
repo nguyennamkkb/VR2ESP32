@@ -22,7 +22,7 @@ portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 // WiFiUDP myUDP;
 // WiFiUDP ntpUDP;
 
-IPAddress apIP(192, 168, 2, 2), ap_gateway(192, 168, 2, 1), bcast_ip(192, 168, 2, 255), my_ip, pc_ip, esp2_ip;
+IPAddress apIP(192, 168, 2, 2), ap_gateway(192, 168, 2, 1), bcast_ip(192, 168, 2, 255), my_ip, pc_ip, esp2_ip,myIP,pc_IP,bcast_IP,tmp_IP;;
 WiFiUDP myUDP;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
@@ -51,6 +51,7 @@ String idDelaySend[1]; // mã giao dịch kèm theo mật khẩu
 String my_mac, serial_rs485, dulieughixacthuc = "", dau_dlxacthuc = "";
 String iplocal[1];
 String fp_save[5];
+String strip="";
 int trangthailenhtumaytinh = 0;
 int ghivantay = 0;
 int play_index = -1;
@@ -174,6 +175,10 @@ void setup()
 	//  // print it on our serial monitor
 	//  uart0.println(md5str);
 	readFile("/hello.txt");
+	myUDP.begin(5000);
+	my_id = 10000;
+	save_id();
+	
 }
 void IRAM_ATTR fp_isr()
 {
@@ -266,26 +271,26 @@ void millis_1()
 	if (++ms1000 > 1000)
 	{
 		ms1000 = 0;
-		bcast_out();
+		// bcast_out();
 	}
 }
 void bcast_out()
 {
-	String s = s_log + " " + String(fp_on_max) + " " + String(fp_detect_cnt) + " " + String(fp_auto_off);
-	uint8 buf[s.length()];
-	udp_tx.pkt_type = FS01_BCAST;
-	udp_tx.data_rx.rcm = WiFi.RSSI();
-	udp_tx.data_rx.len = s.length();
-	udp_tx.cmd_rx.data[0] = my_ip[3];
-	udp_tx.cmd_rx.data[0] <<= 8;
-	udp_tx.cmd_rx.data[0] |= my_ip[3];
-	udp_tx.cmd_rx.data[1] = digitalRead(master_in);
-	for (int i = 0; i < udp_tx.data_rx.len; i++)
-	{
-		buf[i] = s.charAt(i);
-	}
-	memcpy(udp_tx.data_rx.data, buf, sizeof(buf));
-	bcast_send(&udp_tx.bcc, sizeof(udp_tx));
+	// String s = s_log + " " + String(fp_on_max) + " " + String(fp_detect_cnt) + " " + String(fp_auto_off);
+	// uint8 buf[s.length()];
+	// udp_tx.pkt_type = FS01_BCAST;
+	// udp_tx.data_rx.rcm = WiFi.RSSI();
+	// udp_tx.data_rx.len = s.length();
+	// udp_tx.cmd_rx.data[0] = my_ip[3];
+	// udp_tx.cmd_rx.data[0] <<= 8;
+	// udp_tx.cmd_rx.data[0] |= my_ip[3];
+	// udp_tx.cmd_rx.data[1] = digitalRead(master_in);
+	// for (int i = 0; i < udp_tx.data_rx.len; i++)
+	// {
+	// 	buf[i] = s.charAt(i);
+	// }
+	// memcpy(udp_tx.data_rx.data, buf, sizeof(buf));
+	// bcast_send(&udp_tx.bcc, sizeof(udp_tx));
 }
 void led_test()
 {

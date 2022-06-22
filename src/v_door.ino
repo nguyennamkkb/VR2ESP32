@@ -128,4 +128,3 @@ void checkOfflineCardOpenDoor(String s)
 		}
 	}
 }
-
