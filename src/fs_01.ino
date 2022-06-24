@@ -167,6 +167,7 @@ void setup()
 	timeClient.begin();
 	timeClient.setTimeOffset(+7 * 60 * 60);
 	bipok1();
+	// remove("/vantay.txt");
 	readFile("/vantay.txt");
 	readFile("/hello.txt");
 }
