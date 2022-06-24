@@ -117,17 +117,3 @@ String tinhCKS(String s)
 	}
 	return fix_len(String(bcc),3);
 }
-
-String fix_len_n_str(String s,int16 len) // số không đặt cuối
-{	
-	if (s.length() > len)	s=s.substring(s.length()-len,s.length());
-	while (s.length() < len)	{	s = s+"0";}
-	return s;
-}
-bool check_limit(int a,int low,int hi){
-	if( a > hi && a < low){
-		return true;
-	}else{
-		return false;
-	}
-}

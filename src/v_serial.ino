@@ -98,7 +98,7 @@ void serial_test()
 										uart0.println("ma_vt"+ page);
 										data_chamcong = "getAccessDoor?fpIndex=" + page + "&&readercode=" + ma_tbi;
 										// data_chamcong = "010202060532" + ma_tbi + "11" + fix_len(String(page.length()), 2) + page;
-										// get_vantay(data_chamcong);
+										get_vantay(data_chamcong);
 									}
 									break;
 								case Enroll_RAM:
@@ -207,7 +207,8 @@ void serial_test()
 								}
 								ghivantay = 1;
 								// Play_voice(Moi_dat_the);
-								ghivantayvaothe(sss); // hamghivantayvaothe
+								// ghivantayvaothe(sss); // hamghivantayvaothe
+								ghivantayvaoESP32(sss);
 							}
 							else
 							{
@@ -291,8 +292,8 @@ void serial2_test()
 					{
 
 						serial2_in.remove(serial2_in.length() - 1, 1); // remove #
-						add_to_serial("7462 out: " + serial2_in);
-						serial_out();
+						// add_to_serial("7462 out: " + serial2_in);
+						// serial_out();
 						// add_to_serial("7462 nhan#" + hextostr(serial2_in));
 						// serial_out();
 						if (serial2_in.startsWith("^1"))
@@ -319,6 +320,23 @@ void serial2_test()
 								// getms(data_chamcong); // chamcong, đang tạm cmt
 							}
 
+							// if (serial2_in.startsWith("^135"))
+							// {
+							// 	serial2_in.remove(0, 4);
+							// 	data_chamcong = serial2_in;
+							// 	if (ghi_ma_tbi == 1)
+							// 	{
+							// 		ma_tbi = serial2_in.substring(41, 73);
+							// 		add_to_serial("ma_tbi:" + ma_tbi);
+							// 		serial_out();
+							// 		// writeFile(SPIFFS, "/hello.txt", "0000000000017C0A5907952A4C360610");
+							// 		ghimatbi(ma_tbi);
+							// 		ghi_ma_tbi = 0;
+							// 	}
+
+							// 	getms(data_chamcong); // chamcong, đang tạm cmt
+							// 	data_chamcong = "";
+							// }
 							TrangThaiThanhToan = false;
 							magiaodich = "";
 							String s = serial2_in;
@@ -529,7 +547,10 @@ void ghivantayvaothe(String vantay)
 	}
 	demghi = 1;
 }
-
+void ghivantayvaoESP32(String vantay){
+	String s = "*"+vid_the + vantay;
+	ghivantay2(s);	
+}
 void FS01_RES(String s1)
 {
 	String sss = "";

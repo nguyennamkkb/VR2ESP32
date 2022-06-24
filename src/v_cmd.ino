@@ -188,12 +188,3 @@ void khoitao_ghixacthuc(String s){
 	trangthailenhtumaytinh = 1;
 	// reset_7462("2x7");// bat dau ghi xac thuc	
 }
-
-void Docxacthuc5(){ // doc xac thuc fi5
-	 bipok1();
-	reset_7462("2xx1");
-}
-void Docxacthuc6(){// doc xac thuc fi6
-	 bipok1();
-	reset_7462("2xx2");
-}

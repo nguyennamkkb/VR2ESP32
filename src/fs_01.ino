@@ -22,7 +22,7 @@ portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 // WiFiUDP myUDP;
 // WiFiUDP ntpUDP;
 
-IPAddress apIP(192, 168, 2, 2), ap_gateway(192, 168, 2, 1), bcast_ip(192, 168, 2, 255), my_ip, pc_ip, esp2_ip,myIP,pc_IP,bcast_IP,tmp_IP;;
+IPAddress apIP(192, 168, 2, 2), ap_gateway(192, 168, 2, 1), bcast_ip(192, 168, 2, 255), my_ip, pc_ip, esp2_ip;
 WiFiUDP myUDP;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
@@ -51,7 +51,6 @@ String idDelaySend[1]; // mã giao dịch kèm theo mật khẩu
 String my_mac, serial_rs485, dulieughixacthuc = "", dau_dlxacthuc = "";
 String iplocal[1];
 String fp_save[5];
-String strip="";
 int trangthailenhtumaytinh = 0;
 int ghivantay = 0;
 int play_index = -1;
@@ -168,17 +167,8 @@ void setup()
 	timeClient.begin();
 	timeClient.setTimeOffset(+7 * 60 * 60);
 	bipok1();
-	// Nam
-	//  unsigned char *hash = MD5::make_hash("hello world");
-	//  // generate the digest (hex encoding) of our hash
-	//  char *md5str = MD5::make_digest(hash, 16);
-	//  // print it on our serial monitor
-	//  uart0.println(md5str);
+	readFile("/vantay.txt");
 	readFile("/hello.txt");
-	myUDP.begin(5000);
-	my_id = 10000;
-	save_id();
-	
 }
 void IRAM_ATTR fp_isr()
 {
@@ -271,26 +261,26 @@ void millis_1()
 	if (++ms1000 > 1000)
 	{
 		ms1000 = 0;
-		// bcast_out();
+		bcast_out();
 	}
 }
 void bcast_out()
 {
-	// String s = s_log + " " + String(fp_on_max) + " " + String(fp_detect_cnt) + " " + String(fp_auto_off);
-	// uint8 buf[s.length()];
-	// udp_tx.pkt_type = FS01_BCAST;
-	// udp_tx.data_rx.rcm = WiFi.RSSI();
-	// udp_tx.data_rx.len = s.length();
-	// udp_tx.cmd_rx.data[0] = my_ip[3];
-	// udp_tx.cmd_rx.data[0] <<= 8;
-	// udp_tx.cmd_rx.data[0] |= my_ip[3];
-	// udp_tx.cmd_rx.data[1] = digitalRead(master_in);
-	// for (int i = 0; i < udp_tx.data_rx.len; i++)
-	// {
-	// 	buf[i] = s.charAt(i);
-	// }
-	// memcpy(udp_tx.data_rx.data, buf, sizeof(buf));
-	// bcast_send(&udp_tx.bcc, sizeof(udp_tx));
+	String s = s_log + " " + String(fp_on_max) + " " + String(fp_detect_cnt) + " " + String(fp_auto_off);
+	uint8 buf[s.length()];
+	udp_tx.pkt_type = FS01_BCAST;
+	udp_tx.data_rx.rcm = WiFi.RSSI();
+	udp_tx.data_rx.len = s.length();
+	udp_tx.cmd_rx.data[0] = my_ip[3];
+	udp_tx.cmd_rx.data[0] <<= 8;
+	udp_tx.cmd_rx.data[0] |= my_ip[3];
+	udp_tx.cmd_rx.data[1] = digitalRead(master_in);
+	for (int i = 0; i < udp_tx.data_rx.len; i++)
+	{
+		buf[i] = s.charAt(i);
+	}
+	memcpy(udp_tx.data_rx.data, buf, sizeof(buf));
+	bcast_send(&udp_tx.bcc, sizeof(udp_tx));
 }
 void led_test()
 {
@@ -428,31 +418,31 @@ void bip4_no_internet()
 
 void readFile(const char *path)
 {
-  //  Serial.printf("Reading file: %s\r\n", path);
+	//  Serial.printf("Reading file: %s\r\n", path);
 
-  File file = SPIFFS.open(path);
-  if (!file || file.isDirectory())
-  {
-    //  Serial.println("− failed to open file for reading");
-    return;
-  }
-  ma_tbi = "";
-  int n = 0;
-  //  Serial.println("− read from file:");
-  while (file.available())
-  {
-    n = file.read();
-    ma_tbi += dec_to_string(n - 48);
-    // Serial.write(ma_tbi);
-  }
-  add_to_serial(ma_tbi);
-  serial_out();
-  //  uart0.println(ma_tbi);
+	File file = SPIFFS.open(path);
+	if (!file || file.isDirectory())
+	{
+		//  Serial.println("− failed to open file for reading");
+		return;
+	}
+	ma_tbi = "";
+	int n = 0;
+	//  Serial.println("− read from file:");
+	while (file.available())
+	{
+		n = file.read();
+		ma_tbi += dec_to_string(n - 48);
+		// Serial.write(ma_tbi);
+	}
+	add_to_serial(ma_tbi);
+	serial_out();
+	//  uart0.println(ma_tbi);
 }
 
 String dec_to_string(int a)
 {
-  String str = "01234567890000000ABCDEF", s = "";
-  s = str.substring(a, a + 1);
-  return s;
+	String str = "01234567890000000ABCDEF", s = "";
+	s = str.substring(a, a + 1);
+	return s;
 }

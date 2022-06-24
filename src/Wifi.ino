@@ -16,8 +16,14 @@ void wifi_setup()
       wifiMulti.addAP(ssid_name, ssid_pass);
     }
   }
-    wifiMulti.addAP("FPT_Telecom","bat4gdiban");
-  
+  //   wifiMulti.addAP("The_Daudoc","hoianhnam");
+  wifiMulti.addAP("ViMASS_PC", "VMPC6996");
+  // // wifiMulti.addAP("FPT_Telecom", "bat4gdiban");
+  // wifiMulti.addAP("VIMASS CNHP", "0123456789");
+  // wifiMulti.addAP("ViMASS TH", "88888888");
+  // wifiMulti.addAP("ViMASS TH1", "86868686");
+  //   wifiMulti.addAP("VIMASS_TEST", "123456789");
+  // wifiMulti.addAP("ViMASS - HUE", "28lythuongkiet");
   WiFi.setAutoReconnect(true);
   uint8 sec_cnt = 0;
   wifi_on = 0;
@@ -60,20 +66,33 @@ void UDP_receive()
   String s = "";
   if (n)
   {
-    myUDP.read(udp_in_buf,sizeof(udp_in_buf));
-    for (int i=0;i<n;i++)
-    { s += (char)udp_in_buf[i];  
+    myUDP.read(udp_in_buf, sizeof(udp_in_buf));
+    if (n != sizeof(udp_rx))
+      return;
+    if (get_bcc(udp_in_buf, n) != 0x55)
+      return;
+    memcpy(&udp_rx.bcc, udp_in_buf, sizeof(udp_rx));
+    if (udp_rx.pkt_type == PC_BCAST)
+    {
+      r_port = myUDP.remotePort();
+      pc_ip = myUDP.remoteIP();
+      pc_ip_cnt = 500;
+      return;
     }
-    if(s.endsWith("#"))
-    { s = s.substring(0,s.length()-1);
-
-     UDP_msg(s);
-      add_to_serial("UDP in:" + s+"\n");
-    serial_out();
-
+    String sss = "";
+    uint8 n8, n;
+    for (int i = 0; i < sizeof(udp_in_buf); i++)
+    {
+      // datavantay[i] = rx_buf[i + 8];
+      n8 = udp_in_buf[i];
+      n = (n8 >> 4) & 0xf;
+      sss += s_hex.substring(n, n + 1);
+      n = n8 & 0xf;
+      sss += s_hex.substring(n, n + 1);
     }
 
-    
+    // add_to_serial("UDP res:" + sss+"\n");
+    // serial_out();
 
     // uart0.println("udp_rx.bcc:" + String(udp_rx.bcc));
     // uart0.println("udp_rx.pkt_type:" + String(udp_rx.pkt_type));
@@ -83,8 +102,8 @@ void UDP_receive()
     // uart0.println("udp_rx.len:" + String(udp_rx.len));
     // uart0.println("udp_rx.pageid:" + String(udp_rx.page_id));
 
-    // if (udp_rx.pkt_type == PC_01)
-    //   cmd_switch(); // du lieu tach ntn để xử lí
+    if (udp_rx.pkt_type == PC_01)
+      cmd_switch(); // du lieu tach ntn để xử lí
   }
 }
 
@@ -113,17 +132,17 @@ uint8 get_bcc(uint8 *buf, int len)
 
 void bcast_send(uint8 *buf, int len)
 {
-  // buf[0] = 0x55;
-  // buf[0] = get_bcc(buf, len);
-  // myUDP.beginPacket(bcast_ip, r_port);
-  // myUDP.write(buf, len);
-  // myUDP.endPacket();
+  buf[0] = 0x55;
+  buf[0] = get_bcc(buf, len);
+  myUDP.beginPacket(bcast_ip, r_port);
+  myUDP.write(buf, len);
+  myUDP.endPacket();
 }
 void uni_send(uint8 *buf, int len)
 {
-  // buf[0] = 0x55;
-  // buf[0] = get_bcc(buf, len);
-  // myUDP.beginPacket(pc_ip, r_port);
-  // myUDP.write(buf, len);
-  // myUDP.endPacket();
+  buf[0] = 0x55;
+  buf[0] = get_bcc(buf, len);
+  myUDP.beginPacket(pc_ip, r_port);
+  myUDP.write(buf, len);
+  myUDP.endPacket();
 }

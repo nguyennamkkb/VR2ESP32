@@ -156,7 +156,13 @@ void docmatbi()
     return;
   }
 }
-
+void ghivantay2(String s)
+{
+  File f = SPIFFS.open("/vantay.txt", "a");
+  if (f)
+    f.print(s);
+  f.close();
+}
 void save_iplocal(String s)
 {
   File f = SPIFFS.open("/iplocal.txt", "w");
