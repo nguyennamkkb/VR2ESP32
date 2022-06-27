@@ -73,6 +73,7 @@ int16 voice_len, pwm_val, pwm_on = 0, ima_buf_cnt = 0, sin_cnt = 0, ima_haft = 0
 uint8 pwm_tmp;
 int16 n_prefix, response, ret, ret_code, door_cnt, fp_index = 0;
 int16 bip_on = 0, fs01_on = 0, fp_auto_off, fp_on_duration, fp_on_max;
+String data_khuonmat = "";
 // bool TrangThaiThanhToanDich
 bool Validate = false;
 bool TrangThaiThanhToan = false;
@@ -168,7 +169,7 @@ void setup()
 	timeClient.setTimeOffset(+7 * 60 * 60);
 	bipok1();
 	// remove("/vantay.txt");
-	readFile("/vantay.txt");
+	// readFile("/vantay.txt");
 	readFile("/hello.txt");
 }
 void IRAM_ATTR fp_isr()

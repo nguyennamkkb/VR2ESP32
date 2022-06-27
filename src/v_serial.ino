@@ -95,7 +95,7 @@ void serial_test()
 										mocua();
 										// readFile(SPIFFS, "/hello.txt");
 										String page = String(ret_code);
-										uart0.println("ma_vt"+ page);
+										uart0.println("ma_vt" + page);
 										data_chamcong = "getAccessDoor?fpIndex=" + page + "&&readercode=" + ma_tbi;
 										// data_chamcong = "010202060532" + ma_tbi + "11" + fix_len(String(page.length()), 2) + page;
 										get_vantay(data_chamcong);
@@ -258,8 +258,18 @@ void serial2_test()
 						serial2_in.remove(serial2_in.length() - 3, 3); // remove #
 						if (serial2_in.substring(0, 1) == "!")
 							serial2_in.remove(0, 1);
-						add_to_serial("7462 nhan" + hextostr(serial2_in));
-						serial_out();
+
+						// add_to_serial("7462 nhan1" + hextostr(serial2_in));
+						// serial_out();
+
+						if (serial2_in.startsWith("^5"))
+						{
+							
+							uart0.println("thanh cong");
+							setbip(Thanh_Cong);
+							uart0.println("data tieng noi"+hextostr(data_khuonmat));
+							
+						}
 						if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 						{
 							serial2_in.remove(0, 2);
@@ -268,16 +278,22 @@ void serial2_test()
 							serial2_in = "";
 							if (vtlen == 500)
 							{
-								vantay.remove(vantay.length() - 2, 2);
-								XTvanTay(vantay);
-								vantay = "";
-								xacthucvantay = 0;
-								vtlen = 0;
+								setbip(Thanh_Cong);
+								// vantay.remove(vantay.length() - 2, 2);
+								// XTvanTay(vantay);
+								// vantay = "";
+								// xacthucvantay = 0;
+								// vtlen = 0;
 								// ghivantay = 0;
 							}
 						}
 						else if (serial2_in.startsWith("^5") && xacthuckhuonmat == 1)
 						{
+						}
+						else if (serial2_in.startsWith("^6") && xacthutiengnoi == 1)
+						{
+							serial2_in.remove(0, 2);
+							data_khuonmat += serial2_in;
 						}
 					}
 				}
@@ -319,24 +335,6 @@ void serial2_test()
 								data_chamcong = "getAccessDoorByCard?vid=" + vid_the + "&readercode=" + ma_tbi;
 								// getms(data_chamcong); // chamcong, đang tạm cmt
 							}
-
-							// if (serial2_in.startsWith("^135"))
-							// {
-							// 	serial2_in.remove(0, 4);
-							// 	data_chamcong = serial2_in;
-							// 	if (ghi_ma_tbi == 1)
-							// 	{
-							// 		ma_tbi = serial2_in.substring(41, 73);
-							// 		add_to_serial("ma_tbi:" + ma_tbi);
-							// 		serial_out();
-							// 		// writeFile(SPIFFS, "/hello.txt", "0000000000017C0A5907952A4C360610");
-							// 		ghimatbi(ma_tbi);
-							// 		ghi_ma_tbi = 0;
-							// 	}
-
-							// 	getms(data_chamcong); // chamcong, đang tạm cmt
-							// 	data_chamcong = "";
-							// }
 							TrangThaiThanhToan = false;
 							magiaodich = "";
 							String s = serial2_in;
@@ -352,13 +350,15 @@ void serial2_test()
 							}
 							else
 							{
-								// reset_7462("2xx1"); // du dang lam
+								reset_7462("2xx2"); // du dang lam
 								// xacthuckhuonmat = 1;
+								// xacthucvantay = 1;
+								xacthutiengnoi = 1;
 								// reset_7462("2x7");//lenh ghi vào7
 								// gốc
-								reset_7462("2x3");
-								delay(1000);
-									if (wifi_on) send_https(s);
+								// reset_7462("2x3");
+								// delay(1000);
+								// 	if (wifi_on) send_https(s);
 							}
 						}
 						else if (serial2_in.startsWith("^5"))
@@ -547,9 +547,10 @@ void ghivantayvaothe(String vantay)
 	}
 	demghi = 1;
 }
-void ghivantayvaoESP32(String vantay){
-	String s = "*"+vid_the + vantay;
-	ghivantay2(s);	
+void ghivantayvaoESP32(String vantay)
+{
+	String s = "*" + vid_the + vantay;
+	ghivantay2(s);
 }
 void FS01_RES(String s1)
 {
