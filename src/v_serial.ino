@@ -259,41 +259,39 @@ void serial2_test()
 						if (serial2_in.substring(0, 1) == "!")
 							serial2_in.remove(0, 1);
 
-						// add_to_serial("7462 nhan1" + hextostr(serial2_in));
-						// serial_out();
-
+						add_to_serial("7462 nhan1" + hextostr(serial2_in));
+						serial_out();
+						serial2_in = "";
 						if (serial2_in.startsWith("^5"))
 						{
-							
 							uart0.println("thanh cong");
 							setbip(Thanh_Cong);
-							uart0.println("data tieng noi"+hextostr(data_khuonmat));
-							
+							uart0.println("data tieng noi" + hextostr(data_khuonmat));
 						}
 						if (serial2_in.startsWith("^7") && xacthucvantay == 1)
 						{
-							serial2_in.remove(0, 2);
-							vtlen += serial2_in.length();
-							vantay += serial2_in;
-							serial2_in = "";
-							if (vtlen == 500)
-							{
-								setbip(Thanh_Cong);
-								// vantay.remove(vantay.length() - 2, 2);
-								// XTvanTay(vantay);
-								// vantay = "";
-								// xacthucvantay = 0;
-								// vtlen = 0;
-								// ghivantay = 0;
-							}
+							// serial2_in.remove(0, 2);
+							// vtlen += serial2_in.length();
+							// vantay += serial2_in;
+							// serial2_in = "";
+							// if (vtlen == 500)
+							// {
+							// 	setbip(Thanh_Cong);
+							// 	// vantay.remove(vantay.length() - 2, 2);
+							// 	// XTvanTay(vantay);
+							// 	// vantay = "";
+							// 	// xacthucvantay = 0;
+							// 	// vtlen = 0;
+							// 	// ghivantay = 0;
+							// }
 						}
 						else if (serial2_in.startsWith("^5") && xacthuckhuonmat == 1)
 						{
 						}
 						else if (serial2_in.startsWith("^6") && xacthutiengnoi == 1)
 						{
-							serial2_in.remove(0, 2);
-							data_khuonmat += serial2_in;
+							// serial2_in.remove(0, 2);
+							// data_khuonmat += serial2_in;
 						}
 					}
 				}
